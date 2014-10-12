@@ -7,3 +7,5 @@ Build using libGDX for the Hackzurich 2014.
 http://www.hackzurich.com/
 
 ![Title Screen](https://github.com/tizian/Cendric/blob/master/gargoyle-core/assets/titleScreen.png)
+
+![Screenshot](https://github.com/tizian/Cendric/blob/master/screenshot.png)
