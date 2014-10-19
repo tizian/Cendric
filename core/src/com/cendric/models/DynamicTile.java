@@ -12,10 +12,6 @@ import com.cendric.models.Spell.SpellId;
  * by casting spells
  */
 public abstract class DynamicTile {
-	/**
-	 * How many times has the tile already been hit?
-	 */
-	protected int hitCount;
 
 	// location
 	protected int column;
@@ -38,7 +34,6 @@ public abstract class DynamicTile {
 	 * make sure the collider rect is set
 	 */
 	public DynamicTile(int column, int row, Level level) {
-		hitCount = 0;
 		this.column = column;
 		this.row = row;
 		this.level = level;

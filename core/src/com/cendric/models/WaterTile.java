@@ -11,24 +11,19 @@ import com.cendric.models.Spell.SpellId;
  */
 public class WaterTile extends DynamicTile {
 	
-	private final int maxHitCount = 1;
-
 	public WaterTile(int column, int row, Level level) {
 		super(column, row, level);
 	}
 	
 	public void hit(SpellId spell) {
 		if (spell != SpellId.ICE) return;
-		hitCount++;
-		if (hitCount == maxHitCount) {
-			TiledMapTileLayer layer = (TiledMapTileLayer) level.tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
-			if (layer.getCell(column, row) == null) {
+		TiledMapTileLayer layer = (TiledMapTileLayer) level.tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
+		if (layer.getCell(column, row) == null) {
 				layer.setCell(column, row, new Cell());
-			}
-			layer.getCell(column, row).setTile(level.tiledMap.getTileSets().getTile(Constants.TILE_FROZEN_WATER_ID));
-			level.computeCollidableTiles();
-			level.loadDynamicTiles();
 		}
+		layer.getCell(column, row).setTile(level.tiledMap.getTileSets().getTile(Constants.TILE_FROZEN_WATER_ID));
+		level.computeCollidableTiles();
+		level.loadDynamicTiles();
 	}
 
 	/**

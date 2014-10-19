@@ -16,7 +16,8 @@ public class Constants {
 	public static final int LAYER_MIN_COUNT = 5;
 	
 	// Tiles
-	public static final int TILE_ICE_ID = 2;
-	public static final int TILE_FROZEN_WATER_ID = 9;
-	public static final int TILE_WATER_ID = 10;
+	public static final int TILE_ICE_1_ID = 2;
+	public static final int TILE_ICE_2_ID = 5;
+	public static final int TILE_FROZEN_WATER_ID = 3;
+	public static final int TILE_WATER_ID = 4;
 }

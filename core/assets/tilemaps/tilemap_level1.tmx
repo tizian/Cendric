@@ -5,12 +5,12 @@
  </tileset>
  <layer name="Background" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJztk1ELwjAMhAu6KrpZ//+vtYKBcOSStO6xD0fpuly+XLdaSqlLS0tLSi3QjN8ZDNbZv708H+bl8UR54dkbuC1vNh+rqco3wxfNOXvvmcy8WSLekayj77KRlZ2zd874XzL/EMsrwxPdhZfDV5tSdN+oS9c12QdrWU/tyfK2mK0sbl13ki27e2ETDjmTPfbO8CKz1Gq+bObbb8Va2ePMuEdmK3crP/bt4oziI7WtcD7WQ55pJu894bJmQGbG8eza1XoMyqqb8WIcL6KHI1Yz6pPx+gA5tRnt
+   eJzjZGBg4BzFo3gUj+JRPIrJwFzD2O6B9Bs1MTsQc9BBH7n2cAMxDx31DRb3oYcXtezBFw/Icsj6kMVhbHRzCfHR7SXWHFx+IcSG0eS6l1hzcPmFH4gFgJgXjc2LQ4xUPqnq0OVwpRcWPBhfOsOnj1SzQBgAbLcc4w==
   </data>
  </layer>
  <layer name="Collidable" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJztk0EKACAIBCXw2v+fG90iyFolEtoBj05DkQghhJDfKMmd7Mvjmp06TNSFsDvTcqLNaJ/l9d6XynoX6Yu8k5fTvhdtnRv/Ixt1MZ4d1HPiah3iAdU=
+   eJxjYBgFo2AUjIJRMNIA0yA3c9R9g8csdDPZkDClZpECCNmJz0xS3Uyq+/CZS254sTHg1kuK+yiJJ3IBse4bCLeBAC3yx2ADfDgwOXpINYcYswBZZgHn
   </data>
  </layer>
  <layer name="Evil" width="40" height="20">
