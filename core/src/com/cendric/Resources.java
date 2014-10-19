@@ -1,5 +1,8 @@
 package com.cendric;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -59,13 +62,20 @@ public class Resources {
 	private static final float STAFF_ICE_ANIMATION_DURATION = 0.15f;
 	
 	// tiled maps
+	public static Map<Integer, TiledMap> levelMap;
 	public static TiledMap tiledMapLevel1;
 	public static TiledMap tiledMapLevel2;
+	public static int levelCount;
 	
 	public static void loadTiledMaps() {
 		// load tiled maps
 		tiledMapLevel1 = new TmxMapLoader().load("tilemaps/tilemap_level1.tmx");
 		tiledMapLevel2 = new TmxMapLoader().load("tilemaps/tilemap_level2.tmx");
+		
+		levelMap = new HashMap<Integer, TiledMap>();
+		levelMap.put(1, tiledMapLevel1);
+		levelMap.put(2, tiledMapLevel2);
+		levelCount = levelMap.size();
 	}
 	
 	// Gargoyle
@@ -156,6 +166,10 @@ public class Resources {
 		// load gargoyle
 		gargoyle = new Texture(Gdx.files.internal("sprites/gargoyle.png"));
 	}
+	
+	public static TiledMap getMapForLevel(int levelID) {
+		return levelMap.get(levelID);
+	}
 
 	public static void dispose() {
 		
@@ -175,7 +189,11 @@ public class Resources {
 		
 		gargoyle.dispose();
 		
-		tiledMapLevel1.dispose();
-		tiledMapLevel2.dispose();
+		if (tiledMapLevel1 != null) {
+			tiledMapLevel1.dispose();
+		}
+		if (tiledMapLevel2 != null) {
+			tiledMapLevel2.dispose();
+		}
 	}
 }

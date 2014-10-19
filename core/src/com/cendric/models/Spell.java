@@ -2,13 +2,16 @@ package com.cendric.models;
 
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.Resources;
-import com.cendric.models.MainCharacter.ActiveSpell;
 
 public class Spell extends GameObject {
 	
-	public ActiveSpell spell;
+	public static enum SpellId {
+		FIRE, ICE;
+	}
 	
-	public Spell(Vector2 origin, Vector2 direction, ActiveSpell spell) {
+	public SpellId spell;
+	
+	public Spell(Vector2 origin, Vector2 direction, SpellId spell) {
 		super(origin);
 		GRAVITY_ACCELERATION = 0.0f;
 		velocity = direction;
@@ -22,9 +25,9 @@ public class Spell extends GameObject {
 		position.x += velocity.x * delta;
 		position.y += velocity.y * delta;
 		
-		if (spell.equals(ActiveSpell.FIRE)) {
+		if (spell.equals(SpellId.FIRE)) {
 			textureRegion = Resources.spellFire.getKeyFrame(stateTime, true);
-		} else if (spell.equals(ActiveSpell.ICE)) {
+		} else if (spell.equals(SpellId.ICE)) {
 			textureRegion = Resources.spellIce.getKeyFrame(stateTime, true);
 		}
 	}

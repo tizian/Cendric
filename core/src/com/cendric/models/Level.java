@@ -1,119 +1,145 @@
 package com.cendric.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.Constants;
+import com.cendric.Resources;
 
+/**
+ * @author tiz, iro
+ * Model class for a level
+ */
 public class Level {
+	public int ID;
 	
-	public TiledMap tiledMap;
+	protected boolean isComplete;
 	
-	public MainCharacter mainCharacter;
-	public Gargoyle gargoyle;
+	protected TiledMap tiledMap;
 	
-	public Rectangle levelRect;
+	protected MainCharacter mainCharacter;
+	protected Gargoyle gargoyle;
 	
-	private ArrayList<Rectangle> collidableTiles;
-	private ArrayList<Rectangle> evilTiles;
+	protected Rectangle levelRect;
 	
-	public ArrayList<IceTile> iceTiles; 
-	public ArrayList<WaterTile> waterTiles; 
+	protected List<Rectangle> collidableTiles;
+	protected List<Rectangle> evilTiles;
 	
+	protected List<DynamicTile> dynamicTiles; 
 	
-	public Level(TiledMap tiledMap) {
-		this.tiledMap = tiledMap;
+	public Level(int id) {
+		this.ID = id;
+		tiledMap = Resources.getMapForLevel(id);
 		if (tiledMap.getLayers().getCount() != Constants.LAYER_MIN_COUNT) 
 		{
-			System.err.println("tiledMap for level must have at minimum "+ Constants.LAYER_MIN_COUNT + " layers!");
+			System.err.println("tiledMap for level " + ID + " must have at minimum "+ Constants.LAYER_MIN_COUNT + " layers!");
 		}
-		collidableTiles = new ArrayList<Rectangle>();
 		evilTiles = new ArrayList<Rectangle>();
+		collidableTiles = new ArrayList<Rectangle>();
 		computeCollidableTiles();
 		computeEvilTiles();
 		computeLevelRect();
-		loadIceTiles();
-		loadWaterTiles();
+		loadDynamicTiles();
 		
-		mainCharacter = new MainCharacter(computeStartPosition());
+		mainCharacter = new MainCharacter(computePosition(Constants.LAYER_START_POS));
 		mainCharacter.setCollisionBox(new Vector2(5, 0), 54, 100);
 		
-		gargoyle = new Gargoyle(computeEndPosition());
+		gargoyle = new Gargoyle(computePosition(Constants.LAYER_END_POS));
 		gargoyle.setCollisionBox(new Vector2(8, 0), 64, 64);
+		
+		isComplete = false;
 	}
 	
-	public ArrayList<IceTile> getIceTiles() {
-		return iceTiles;
+	public TiledMap getTiledMap() {
+		return tiledMap;
 	}
 	
-	public ArrayList<WaterTile> getWaterTiles() {
-		return waterTiles;
+	public MainCharacter getMainCharacter() {
+		return mainCharacter;
 	}
 	
-	public ArrayList<Rectangle> getEvilTiles() {
+	public Rectangle getLevelRect() {
+		return levelRect;
+	}
+	
+	public Gargoyle getGargoyle() {
+		return gargoyle;
+	}
+	
+	public List<DynamicTile> getDynamicTiles() {
+		return dynamicTiles;
+	}
+	
+	public List<Rectangle> getEvilTiles() {
 		return evilTiles;
 	}
 	
-	public void loadIceTiles() {
-		iceTiles = new ArrayList<IceTile>();
-		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
-		for (int column = 0; column < layer.getWidth(); column++) {
-			for (int row = 0; row < layer.getHeight(); row++) {
-				Cell cell = layer.getCell(column, row);
-				if (cell != null && cell.getTile() != null && (cell.getTile().getId() == IceTile.ID || cell.getTile().getId() == IceTile.ICED_ID)) {
-					iceTiles.add(new IceTile(cell, column, row, this));
-				}
-			}
-		}
-	}
-	
-	public void loadWaterTiles() {
-		waterTiles = new ArrayList<WaterTile>();
-		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(Constants.LAYER_BACKGROUND);
-		for (int column = 0; column < layer.getWidth(); column++) {
-			for (int row = 0; row < layer.getHeight(); row++) {
-				Cell cell = layer.getCell(column, row);
-				if (cell != null && cell.getTile() != null && cell.getTile().getId() == WaterTile.ID) {
-					waterTiles.add(new WaterTile(column, row, this));
-				}
-			}
-		}
-	}
-	
-	public Vector2 computeStartPosition() {
-		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(Constants.LAYER_START_POS);
-		for (int column = 0; column < layer.getWidth(); column++) {
-			for (int row = 0; row < layer.getHeight(); row++) {
-				Cell cell = layer.getCell(column, row);
-				if (cell != null && cell.getTile() != null) {
-					return new Vector2 (column * Constants.TILE_SIZE, row * Constants.TILE_SIZE);
-				}
-			}
-		}
-		System.err.println("No start position in level found.");
-		return new Vector2 (0, 0);
-	}
-	
-	public Vector2 computeEndPosition() {
-		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(Constants.LAYER_END_POS);
-		for (int column = 0; column < layer.getWidth(); column++) {
-			for (int row = 0; row < layer.getHeight(); row++) {
-				Cell cell = layer.getCell(column, row);
-				if (cell != null && cell.getTile() != null) {
-					return new Vector2 (column * Constants.TILE_SIZE, row * Constants.TILE_SIZE);
-				}
-			}
-		}
-		System.err.println("No end position in level found.");
-		return new Vector2 (0, 0);
-	}
-
-	public ArrayList<Rectangle> getCollidableTiles() {
+	public List<Rectangle> getCollidableTiles() {
 		return collidableTiles;
+	}
+	
+	public boolean isComplete() {
+		return isComplete;
+	}
+	
+	/**
+	 * called when the player finishes
+	 * the level
+	 */
+	public void finish() {
+		isComplete = true;
+	}
+	
+	// TODO [iro] refactor this ugly shit
+	public void loadDynamicTiles() {
+		dynamicTiles = new ArrayList<DynamicTile>();
+		for (MapLayer layer_ : tiledMap.getLayers()) {
+			TiledMapTileLayer layer = (TiledMapTileLayer) layer_;
+			for (int column = 0; column < layer.getWidth(); column++) {
+				for (int row = 0; row < layer.getHeight(); row++) {
+					Cell cell = layer.getCell(column, row);
+					addDynamicTile(cell, column, row);
+				}
+			}
+		}
+	}
+	
+	public void addDynamicTile(Cell cell, int column, int row) {
+		if (cell == null || cell.getTile() == null) return;
+		for (int i : IceTile.getIDs()) {
+			if (i == cell.getTile().getId()) {
+				dynamicTiles.add(new IceTile(column, row, this));
+			}
+		}
+		for (int i : WaterTile.getIDs()) {
+			if (i == cell.getTile().getId()) {
+				dynamicTiles.add(new WaterTile(column, row, this));
+			}
+		}
+	}
+	
+	/**
+	 * @param layerID the ID of the layer where to search
+	 * @return the position of the first tile found in this layer
+	 */
+	public Vector2 computePosition(int layerID) {
+		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(layerID);
+		for (int column = 0; column < layer.getWidth(); column++) {
+			for (int row = 0; row < layer.getHeight(); row++) {
+				Cell cell = layer.getCell(column, row);
+				if (cell != null && cell.getTile() != null) {
+					return new Vector2 (column * Constants.TILE_SIZE, row * Constants.TILE_SIZE);
+				}
+			}
+		}
+		System.err.println("No tile found in layer " + layerID);
+		return new Vector2 (0, 0);
 	}
 	
 	private void computeLevelRect() {
@@ -121,29 +147,24 @@ public class Level {
 		levelRect = new Rectangle(0, 0, levelLayer.getWidth() * Constants.TILE_SIZE, levelLayer.getHeight() * Constants.TILE_SIZE);
 	}
 	
-	public void computeCollidableTiles() {
-		collidableTiles.clear();
-		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
+	private void computeRectsOnLayer(List<Rectangle> rects, int layerID) {
+		rects.clear();
+		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(layerID);
 		for (int column = 0; column < layer.getWidth(); column++) {
 			for (int row = 0; row < layer.getHeight(); row++) {
 				Cell cell = layer.getCell(column, row);
 				if (cell != null && cell.getTile() != null) {
-					collidableTiles.add(new Rectangle(column * Constants.TILE_SIZE, row * Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE));
+					rects.add(new Rectangle(column * Constants.TILE_SIZE, row * Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE));
 				}
 			}
 		}
 	}
 	
+	public void computeCollidableTiles() {
+		computeRectsOnLayer(collidableTiles, Constants.LAYER_COLLIDABLE);
+	}
+	
 	public void computeEvilTiles() {
-		evilTiles.clear();
-		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(Constants.LAYER_EVIL);
-		for (int column = 0; column < layer.getWidth(); column++) {
-			for (int row = 0; row < layer.getHeight(); row++) {
-				Cell cell = layer.getCell(column, row);
-				if (cell != null && cell.getTile() != null) {
-					evilTiles.add(new Rectangle(column * Constants.TILE_SIZE, row * Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE));
-				}
-			}
-		}
+		computeRectsOnLayer(evilTiles, Constants.LAYER_EVIL);
 	}
 }

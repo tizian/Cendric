@@ -3,19 +3,16 @@ package com.cendric.models;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.Resources;
+import com.cendric.models.Spell.SpellId;
 
 
 public class MainCharacter extends GameObject {
 	
 	public State state;
-	public ActiveSpell spell;
+	public SpellId spell;
 	
 	private TextureRegion staffEffect;
 
-	public static enum ActiveSpell {
-		FIRE, ICE;
-	}
-	
 	public static enum State {
 		IDLE, WALKING, JUMPING
 	}
@@ -27,7 +24,7 @@ public class MainCharacter extends GameObject {
 	public MainCharacter(Vector2 startPos) {
 		super(startPos);
 		this.state = State.IDLE;
-		this.spell = ActiveSpell.FIRE;
+		this.spell = SpellId.FIRE;
 	}
 	
 	@Override
@@ -42,14 +39,11 @@ public class MainCharacter extends GameObject {
 			textureRegion = isFacingLeft ? Resources.cendricJumpingLeftFrame : Resources.cendricJumpingRightFrame;
 		}
 		
-		if (spell.equals(ActiveSpell.FIRE)) {
+		if (spell.equals(SpellId.FIRE)) {
 			staffEffect = isFacingLeft ? Resources.staffFireLeft.getKeyFrame(stateTime, true) : Resources.staffFireRight.getKeyFrame(stateTime, true);
-		} else if (spell.equals(ActiveSpell.ICE)) {
+		} else if (spell.equals(SpellId.ICE)) {
 			staffEffect = isFacingLeft ? Resources.staffIceLeft.getKeyFrame(stateTime, true) : Resources.staffIceRight.getKeyFrame(stateTime, true);
 		}
-		
-		
-		
 
 		velocity = nextVelocity(delta);
 		if (Math.abs(velocity.x) < 20) state = State.IDLE;

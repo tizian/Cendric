@@ -15,14 +15,14 @@ public class SuccessScreen extends SplashScreen {
 	public Texture getTexture() {
 		return Resources.successScreen;
 	}
-	
+
 	@Override
 	public Screen nextScreen() {
-		if (!game.level2Complete) {
-			return new GameScreen(game);
-		}
-		else {
+		if (game.getCurrentLevel() > Resources.levelCount) {
+			game.setCurrentLevel(1);
 			return new TitleScreen(game);
+		} else {
+			return new GameScreen(game);
 		}
 	}
 }

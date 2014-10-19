@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="level1_tileset" tilewidth="64" tileheight="64">
   <image source="level1_tileset.png" width="256" height="256"/>
  </tileset>
- <layer name="Hintergrund" width="40" height="20">
+ <layer name="Background" width="40" height="20">
   <data encoding="base64" compression="zlib">
    eJztk1ELwjAMhAu6KrpZ//+vtYKBcOSStO6xD0fpuly+XLdaSqlLS0tLSi3QjN8ZDNbZv708H+bl8UR54dkbuC1vNh+rqco3wxfNOXvvmcy8WSLekayj77KRlZ2zd874XzL/EMsrwxPdhZfDV5tSdN+oS9c12QdrWU/tyfK2mK0sbl13ki27e2ETDjmTPfbO8CKz1Gq+bObbb8Va2ePMuEdmK3crP/bt4oziI7WtcD7WQ55pJu894bJmQGbG8eza1XoMyqqb8WIcL6KHI1Yz6pPx+gA5tRnt
   </data>
@@ -13,19 +13,19 @@
    eJztk0EKACAIBCXw2v+fG90iyFolEtoBj05DkQghhJDfKMmd7Mvjmp06TNSFsDvTcqLNaJ/l9d6XynoX6Yu8k5fTvhdtnRv/Ixt1MZ4d1HPiah3iAdU=
   </data>
  </layer>
- <layer name="StartPos" width="40" height="20" opacity="0">
+ <layer name="Evil" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20LL6AAAAA+BgyAAAE=
+  </data>
+ </layer>
+ <layer name="StartPos" width="40" height="20" visible="0">
   <data encoding="base64" compression="zlib">
    eJztzkERAAAIA6DZv7QpdvqABCQAAPDHXAeoWg5gAAI=
   </data>
  </layer>
- <layer name="EndPos" width="40" height="20" opacity="0">
+ <layer name="EndPos" width="40" height="20" visible="0">
   <data encoding="base64" compression="zlib">
    eJztzjEBAAAIwKDZv7QxPIQEFABAzXUAeGEBEOwAAg==
-  </data>
- </layer>
- <layer name="Evil" width="40" height="20">
-  <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20LL6AAAAA+BgyAAAE=
   </data>
  </layer>
 </map>

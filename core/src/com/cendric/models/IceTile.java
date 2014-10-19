@@ -1,34 +1,40 @@
 package com.cendric.models;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.cendric.Constants;
+import com.cendric.models.Spell.SpellId;
 
-public class IceTile {
-	public static final int MAX_HIT_COUNT = 4;
-	public static final int ID = 2;
-	public static final int ICED_ID = 9;
-	public int hitCount;
-	private Rectangle rect;
-	private Cell cell;
-	private Level level;
-
-	public IceTile(Cell cell, int column, int row, Level level) {
-		hitCount = 0;
-		this.cell = cell;
-		this.level = level;
-		rect = new Rectangle(column * Constants.TILE_SIZE, row * Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE);
-	}
+/**
+ * @author tiz, iro
+ * Model class of a tile that behaves like an ice tile
+ */
+public class IceTile extends DynamicTile {
 	
+	private final int maxHitCount = 1;
+	
+	public IceTile(int column, int row, Level level) {
+		super(column, row, level);
+	}
+
 	public Rectangle getRect() {
 		return rect;
 	}
 	
-	public void hit() {
+	public void hit(SpellId spell) {
+		if (spell != SpellId.FIRE) return;
 		hitCount++;
-		if (hitCount == MAX_HIT_COUNT) {
-			cell.setTile(null);
+		if (hitCount == maxHitCount) {
+			TiledMapTileLayer layer = (TiledMapTileLayer) level.tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
+			layer.getCell(column, row).setTile(null);
 			level.computeCollidableTiles();
 		}
+	}
+
+	/**
+	 * @return the id of all tiles that have this behaviour
+	 */
+	public static int[] getIDs() {
+		return new int[] {Constants.TILE_ICE_ID, Constants.TILE_FROZEN_WATER_ID};
 	}
 }

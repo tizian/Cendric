@@ -13,6 +13,7 @@ import com.cendric.Constants;
 import com.cendric.Resources;
 import com.cendric.controllers.InputController;
 import com.cendric.controllers.WorldController;
+import com.cendric.controllers.WorldView;
 import com.cendric.models.Level;
 
 public class GameScreen implements Screen {
@@ -21,6 +22,7 @@ public class GameScreen implements Screen {
 	private TiledMapRenderer tiledMapRenderer;
 	private WorldController worldController;
 	private InputController inputController;
+	private WorldView worldView;
 	
 	private Texture helpOverlay;
 
@@ -28,26 +30,16 @@ public class GameScreen implements Screen {
 		this.game = game;
         
 		Resources.loadTiledMaps();
-		
-		Level level = null;
-		if (!game.level1Complete) {
-			level = new Level(Resources.tiledMapLevel1);
-		}
-		else if (!game.level2Complete) {
-			level = new Level(Resources.tiledMapLevel2);
-		}
-		else {
-			game.level1Complete = false;
-			game.level2Complete = false;
-			level = new Level(Resources.tiledMapLevel1);
-		}
-		this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.tiledMap);
+		Level level = new Level(game.getCurrentLevel());
+		this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap());
 		
         game.camera.setToOrtho(false,Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        // TODO [tiz] change tile size to 1x1
         game.camera.update();
 		
 		worldController = new WorldController(game, level);
 		inputController = new InputController(worldController);
+		worldView = new WorldView(level, worldController);
 		
 		helpOverlay = Resources.helpOverlay;
 	}
@@ -63,6 +55,10 @@ public class GameScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
 			game.setScreen(new TutorialScreen(game, this));
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+			game.setScreen(new GameScreen(game));
+		}
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -71,11 +67,11 @@ public class GameScreen implements Screen {
 		
 		game.batch.begin();
 		game.batch.draw(helpOverlay, game.camera.position.x - Constants.WINDOW_WIDTH/2, game.camera.position.y - Constants.WINDOW_HEIGHT/2);
-		worldController.draw(game.batch);
+		worldView.draw(game.batch);
 		game.batch.end();
 		
 		game.shapeRenderer.begin(ShapeType.Line);
-		worldController.draw(game.shapeRenderer);
+		worldView.draw(game.shapeRenderer);
 		game.shapeRenderer.end();
 	}
 
