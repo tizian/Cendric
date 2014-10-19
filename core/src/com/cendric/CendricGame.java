@@ -8,6 +8,8 @@ import com.cendric.screens.TitleScreen;
 
 public class CendricGame extends Game {
 	
+	// Branch test 1
+	
 	// One SpriteBatch for the whole game. Passed on to all Screens.
 	public SpriteBatch batch;
 	public ShapeRenderer shapeRenderer;
