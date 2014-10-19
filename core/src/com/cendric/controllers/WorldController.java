@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
 import com.cendric.models.DynamicTile;
@@ -36,6 +38,13 @@ public class WorldController {
 		this.game = game;
 		currentLevel = level;
 		character = level.getMainCharacter();
+		
+		// TODO: maybe find a better place for this?
+		System.out.println(character.getPosition());
+		Vector3 mouseStartWorld = new Vector3(character.getPosition().x + 2*Constants.TILE_SIZE, character.getPosition().y + Constants.TILE_SIZE, 0);
+		System.out.println(mouseStartWorld);
+		Vector3 mousStartScreen = game.camera.unproject(mouseStartWorld);
+		Gdx.input.setCursorPosition(Math.round(mousStartScreen.x), Math.round(mousStartScreen.y));
 
 		spells = new ArrayList<Spell>();
 	}

@@ -5,7 +5,7 @@
  </tileset>
  <layer name="Background" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJzjZGBg4BzFo3gUj+JRPIrJwFzD2O6B9Bs1MTsQc9BBH7n2cAMxDx31DRb3oYcXtezBFw/Icsj6kMVhbHRzCfHR7SXWHFx+IcSG0eS6l1hzcPmFH4gFgJgXjc2LQ4xUPqnq0OVwpRcWPBhfOsOnj1SzQBgAbLcc4w==
+   eJzjZGBg4BzFo3gUj+JRPIrJwFzD2O6B9Bs1MTsQc9BBH7n2cAMxDx31DRb3oYcXtezBFw/Icsj6kMVhbHRzCfHR7SXWHFx+IcSG0eS6l1hzcPmFH4gFgJgXjc2LQ4xUPqnq0OVwpRcWPJiUdIfPHGLMAgByfxz3
   </data>
  </layer>
  <layer name="Collidable" width="40" height="20">

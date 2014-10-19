@@ -47,6 +47,9 @@ public class Resources {
 	public static Animation cendricWalkingRight;
 	private static final float CENDRIC_WALKING_ANIMATION_DURATION = 0.15f;
 	
+	// Cursor
+	public static Texture aimCursor;
+	
 	// staff overlay
 	public static Texture staffFire1;
 	public static Texture staffFire2;
@@ -130,6 +133,9 @@ public class Resources {
 		cendricIdleRightFrame = walkingRightRegion[0];
 		cendricJumpingRightFrame = walkingRightRegion[3];
 		cendricWalkingRight = new Animation(CENDRIC_WALKING_ANIMATION_DURATION, walkingRightRegion);
+		
+		// load aim cursor
+		aimCursor = new Texture(Gdx.files.internal("cursor.png"));
 		
 		// load textures staff
 		staffFire1 = new Texture(Gdx.files.internal("sprites/cendric/staff_fire_1.png"));

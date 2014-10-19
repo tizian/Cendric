@@ -3,6 +3,7 @@ package com.cendric.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.Constants;
 import com.cendric.controllers.WorldController.Key;

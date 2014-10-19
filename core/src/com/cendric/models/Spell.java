@@ -5,6 +5,8 @@ import com.cendric.Resources;
 
 public class Spell extends GameObject {
 	
+	protected float SPELL_VELOCITY = 500.0f;
+	
 	public static enum SpellId {
 		FIRE, ICE;
 	}
@@ -14,7 +16,7 @@ public class Spell extends GameObject {
 	public Spell(Vector2 origin, Vector2 direction, SpellId spell) {
 		super(origin);
 		GRAVITY_ACCELERATION = 0.0f;
-		velocity = direction;
+		velocity = direction.nor().scl(SPELL_VELOCITY);
 		this.spell = spell;
 		setCollisionBox(new Vector2(5, 5), 20, 20);
 	}
