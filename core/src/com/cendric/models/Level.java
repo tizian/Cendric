@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.Constants;
 import com.cendric.Resources;
+import com.cendric.ecs.Entity;
 
 /**
  * @author tiz, iro
@@ -23,23 +24,25 @@ public class Level {
 	
 	protected TiledMap tiledMap;
 	
-	protected MainCharacter mainCharacter;
-	protected Gargoyle gargoyle;
-	
 	protected Rectangle levelRect;
 	
 	protected List<Rectangle> collidableTiles;
 	protected List<Rectangle> evilTiles;
+	protected List<DynamicTile> dynamicTiles;
 	
-	protected List<DynamicTile> dynamicTiles; 
+	protected List<Entity> entities;
 	
 	public Level(int id) {
 		this.ID = id;
+		isComplete = false;
 		tiledMap = Resources.getMapForLevel(id);
 		if (tiledMap.getLayers().getCount() != Constants.LAYER_MIN_COUNT) 
 		{
 			System.err.println("tiledMap for level " + ID + " must have at minimum "+ Constants.LAYER_MIN_COUNT + " layers!");
 		}
+		
+		entities = new ArrayList<Entity>();
+		
 		evilTiles = new ArrayList<Rectangle>();
 		collidableTiles = new ArrayList<Rectangle>();
 		computeCollidableTiles();
@@ -47,29 +50,24 @@ public class Level {
 		computeLevelRect();
 		loadDynamicTiles();
 		
-		mainCharacter = new MainCharacter(computePosition(Constants.LAYER_START_POS));
-		mainCharacter.setCollisionBox(new Vector2(5, 0), 54, 100);
-		
-		gargoyle = new Gargoyle(computePosition(Constants.LAYER_END_POS));
-		gargoyle.setCollisionBox(new Vector2(8, 0), 64, 64);
-		
-		isComplete = false;
+		//TODO [tiz] init main character & gargoyle
+//		mainCharacter = new MainCharacter(computePosition(Constants.LAYER_START_POS));
+//		mainCharacter.setCollisionBox(new Vector2(5, 0), 54, 100);
+//		
+//		gargoyle = new Gargoyle(computePosition(Constants.LAYER_END_POS));
+//		gargoyle.setCollisionBox(new Vector2(8, 0), 64, 64);
+	}
+	
+	public List<Entity> getEntities() {
+		return entities;
 	}
 	
 	public TiledMap getTiledMap() {
 		return tiledMap;
 	}
 	
-	public MainCharacter getMainCharacter() {
-		return mainCharacter;
-	}
-	
 	public Rectangle getLevelRect() {
 		return levelRect;
-	}
-	
-	public Gargoyle getGargoyle() {
-		return gargoyle;
 	}
 	
 	public List<DynamicTile> getDynamicTiles() {

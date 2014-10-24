@@ -4,25 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.cendric.ecs.components.Component;
+import com.cendric.ecs.components.ComponentType;
 
 public class Entity {
 	private static Integer count = 0;
 	
 	public Integer id;
-	public Map<String, Component> components;
+	public Map<ComponentType, Component> components;
 	
 	public Entity() {
 		this.id = count;
 		count++;
-		this.components = new HashMap<String, Component>();
+		this.components = new HashMap<ComponentType, Component>();
 	}
 	
 	public void addComponent(Component component) {
-		this.components.put(component.getName(), component);
+		this.components.put(component.getType(), component);
 	}
 	
-	public void removeComponent(String componentName) {
-		this.components.remove(componentName);
+	public void removeComponent(ComponentType type) {
+		this.components.remove(type);
 	}
 	
 	public String toString() {

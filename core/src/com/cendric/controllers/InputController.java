@@ -1,71 +1,76 @@
 package com.cendric.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.Constants;
-import com.cendric.controllers.WorldController.Key;
 
 public class InputController {
 	
-	private WorldController worldController;
-	private boolean firingSpell;
+	private Map<Key, Boolean> pressedKeys;
+	private Vector2 mousePosition;
 	
 	public InputController(WorldController worldController) {
-		this.worldController = worldController;
+		pressedKeys = new HashMap<Key, Boolean>();
+		mousePosition = new Vector2();
 		Gdx.input.setCursorCatched(true);
-		firingSpell = false;
+	}
+	
+	public Boolean isKeyPressed(Key key) {
+		return pressedKeys.get(key);
+	}
+	
+	public Vector2 getMousePosition() {
+		return mousePosition;
 	}
 	
 	public void update() {
+		mousePosition = new Vector2(Gdx.input.getX(), Constants.WINDOW_HEIGHT - Gdx.input.getY());
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.A)){
-			worldController.keyPressed(Key.LEFT, true);
+			pressedKeys.put(Key.LEFT, true);
 	    }
 		else {
-			worldController.keyPressed(Key.LEFT, false);
+			pressedKeys.put(Key.LEFT, false);
 		}
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.D)){
-			worldController.keyPressed(Key.RIGHT, true);
+			pressedKeys.put(Key.RIGHT, true);
 	    }
 		else {
-			worldController.keyPressed(Key.RIGHT, false);
+			pressedKeys.put(Key.RIGHT, false);
 		}
+		
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-			worldController.keyPressed(Key.JUMP, true);
+			pressedKeys.put(Key.JUMP, true);
 		}
 		else {
-			worldController.keyPressed(Key.JUMP, false);
+			pressedKeys.put(Key.JUMP, false);
 		}
 		
 		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
-			if (!firingSpell) {
-				worldController.keyPressed(Key.FIRE, true);
-				firingSpell = true;
-			} else {
-				worldController.keyPressed(Key.FIRE, false);
-			}
+			pressedKeys.put(Key.CAST, true);
 		}
 		else {
-			worldController.keyPressed(Key.FIRE, false);
-			firingSpell = false;
+			pressedKeys.put(Key.CAST, false);
 		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-			worldController.keyPressed(Key.SPELL_FIRE, true);
+			pressedKeys.put(Key.NUM_1, true);
 		}
 		else {
-			worldController.keyPressed(Key.SPELL_FIRE, false);
+			pressedKeys.put(Key.NUM_1, false);
 		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-			worldController.keyPressed(Key.SPELL_ICE, true);
+			pressedKeys.put(Key.NUM_2, true);
 		}
 		else {
-			worldController.keyPressed(Key.SPELL_ICE, false);
+			pressedKeys.put(Key.NUM_2, false);
 		}
-		
-		Vector2 mousePosition = new Vector2(Gdx.input.getX(), Constants.WINDOW_HEIGHT - Gdx.input.getY());
-		worldController.setMousePosition(mousePosition);
 	}  
 }

@@ -4,18 +4,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.Resources;
+import com.cendric.ecs.systems.SpriteRenderSystem;
 import com.cendric.models.GameObject;
 import com.cendric.models.Level;
 import com.cendric.models.MainCharacter;
 
 public class WorldView {
 	private Level currentLevel;
-	private MainCharacter character;
 	private WorldController controller;
-
+	
 	public WorldView(Level level, WorldController controller) {
 		currentLevel = level;
-		character = level.getMainCharacter();
 		this.controller = controller;
 	}
 	

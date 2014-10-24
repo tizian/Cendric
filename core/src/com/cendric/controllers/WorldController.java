@@ -23,10 +23,6 @@ public class WorldController {
 
 	private CendricGame game;
 
-	public enum Key {
-		LEFT, RIGHT, JUMP, FIRE, SPELL_FIRE, SPELL_ICE
-	}
-
 	private Level currentLevel;
 	private MainCharacter character;
 
@@ -222,19 +218,5 @@ public class WorldController {
 			Spell spell = new Spell(staffPosition, direction, character.spell);
 			spells.add(spell);
 		}
-	}
-
-	private static Map<Key, Boolean> keys = new HashMap<WorldController.Key, Boolean>();
-	static {
-		keys.put(Key.LEFT, false);
-		keys.put(Key.RIGHT, false);
-		keys.put(Key.JUMP, false);
-		keys.put(Key.FIRE, false);
-		keys.put(Key.SPELL_FIRE, false);
-		keys.put(Key.SPELL_ICE, false);
-	};
-	
-	public void keyPressed(Key key, boolean pressed) {
-		keys.get(keys.put(key, pressed));
 	}
 }
