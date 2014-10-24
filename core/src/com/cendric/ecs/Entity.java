@@ -10,12 +10,16 @@ public class Entity {
 	private static Integer count = 0;
 	
 	public Integer id;
-	public Map<ComponentType, Component> components;
+	private Map<ComponentType, Component> components;
 	
 	public Entity() {
 		this.id = count;
 		count++;
 		this.components = new HashMap<ComponentType, Component>();
+	}
+	
+	public Component getComponent(ComponentType type) {
+		return this.components.get(type);
 	}
 	
 	public void addComponent(Component component) {

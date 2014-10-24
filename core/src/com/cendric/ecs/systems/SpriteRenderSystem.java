@@ -2,6 +2,7 @@ package com.cendric.ecs.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.cendric.ecs.Entity;
+import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.PositionComponent;
 import com.cendric.ecs.components.TextureComponent;
 
@@ -9,12 +10,12 @@ public class SpriteRenderSystem extends RenderSystem {
 
 	@Override
 	public void render(Entity entity, SpriteBatch spriteBatch) {
-		PositionComponent p = (PositionComponent) entity.components.get("Position");
-		TextureComponent t = (TextureComponent) entity.components.get("Texture");
-		if (p == null) return;
-		if (t == null) return;
+		PositionComponent pos = (PositionComponent) entity.getComponent(ComponentType.Position);
+		TextureComponent tex = (TextureComponent) entity.getComponent(ComponentType.Texture);
+		if (pos == null) return;
+		if (tex == null) return;
 		
-		spriteBatch.draw(t.texture, p.x, p.y);
+		spriteBatch.draw(tex.texture, pos.x, pos.y);
 	}
 
 	@Override

@@ -16,17 +16,17 @@ public class PlayerInputSystem extends System {
 
 	@Override
 	public void update(Entity entity, float dt) {
-		MovementComponent m = (MovementComponent) entity.components.get(ComponentType.Movement);
-		if (m == null) return;
+		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
+		if (mov == null) return;
 		
 		if (inputController.isKeyPressed(Key.LEFT)) {
-			m.vxTarget = -m.MAX_VELOCITY;
+			mov.vxTarget = -mov.MAX_VELOCITY;
 		}
 		else if (inputController.isKeyPressed(Key.RIGHT)) {
-			m.vxTarget = m.MAX_VELOCITY;
+			mov.vxTarget = mov.MAX_VELOCITY;
 		}
 		else {
-			m.vxTarget = 0;
+			mov.vxTarget = 0;
 		}
 
 		// TODO [tiz] detect on platform somehow and store somewhere...

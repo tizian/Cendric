@@ -2,26 +2,28 @@ package com.cendric.ecs.systems;
 
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.ComponentType;
+import com.cendric.ecs.components.MassComponent;
 import com.cendric.ecs.components.MovementComponent;
 
 public class AccelerationSystem extends System {
 
 	@Override
 	public void update(Entity entity, float dt) {
-		MovementComponent m = (MovementComponent) entity.components.get(ComponentType.Movement);
-		if (m == null) return;
+		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
+		MassComponent m = (MassComponent) entity.getComponent(ComponentType.Mass);
+		if (mov == null) return;
 		
-		float dirx = Math.signum(m.vxTarget - m.vx);
-		float diry = Math.signum(m.vyTarget - m.vy);
+		float dirx = Math.signum(mov.vxTarget - mov.vx);
+		float diry = Math.signum(mov.vyTarget - mov.vy);
 		
-		m.vx = m.vx + dirx * m.ACCELERATION * dt;
-		m.vy = m.vy + diry * m.GRAVITY * dt;
+		mov.vx = mov.vx + dirx * mov.ACCELERATION * dt;
+		mov.vy = mov.vy + diry * mov.GRAVITY * m.mass * dt;
 		
-		if (Math.signum(m.vxTarget - m.vx) != dirx) {
-			m.vx = m.vxTarget;
+		if (Math.signum(mov.vxTarget - mov.vx) != dirx) {
+			mov.vx = mov.vxTarget;
 		}
-		if (Math.signum(m.vyTarget - m.vy) != diry) {
-			m.vy = m.vyTarget;
+		if (Math.signum(mov.vyTarget - mov.vy) != diry) {
+			mov.vy = mov.vyTarget;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.cendric.ecs.systems;
 
 import com.cendric.ecs.Entity;
+import com.cendric.ecs.components.BoundingBoxComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.ecs.components.PositionComponent;
@@ -9,12 +10,18 @@ public class MovementSystem extends System {
 
 	@Override
 	public void update(Entity entity, float dt) {
-		PositionComponent p = (PositionComponent) entity.components.get(ComponentType.Position);
-		MovementComponent m = (MovementComponent) entity.components.get(ComponentType.Movement);
-		if (p == null) return;
-		if (m == null) return;
+		PositionComponent pos = (PositionComponent) entity.getComponent(ComponentType.Position);
+		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
+		if (pos == null) return;
+		if (mov == null) return;
 		
-		p.x = p.x + m.vx * dt;
-		p.y = p.y + m.vy * dt;
+		pos.x = pos.x + mov.vx * dt;
+		pos.y = pos.y + mov.vy * dt;
+		
+		BoundingBoxComponent bb = (BoundingBoxComponent) entity.getComponent(ComponentType.BoundingBox);
+		if (bb == null) return;
+		
+		bb.boundingBox.x = bb.boundingBox.x + mov.vx * dt;
+		bb.boundingBox.y = bb.boundingBox.y + mov.vy * dt;
 	}
 }
