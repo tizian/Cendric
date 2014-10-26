@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
 		this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap());
 		
         game.camera.setToOrtho(false,Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-        // TODO [tiz] change tile size to 1x1
+        // TODO [tiz] change tile size to 1x1....or maybe not
         game.camera.update();
 		
 		inputController = new InputController(worldController);
