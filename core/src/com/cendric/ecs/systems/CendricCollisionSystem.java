@@ -9,16 +9,17 @@ import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.models.Level;
 
-public class CollisionSystem extends UpdateSystem {
+public class CendricCollisionSystem extends UpdateSystem {
 	
 	private Level level;
 	
-	public CollisionSystem(Level level) {
+	public CendricCollisionSystem(Level level) {
 		this.level = level;
 	}
 
 	@Override
 	protected void update(Entity entity, float dt) {
+		if (!entity.tag.equals("Cendric")) return;
 		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
 		BoundingBoxComponent bb = (BoundingBoxComponent) entity.getComponent(ComponentType.BoundingBox);
 		if (mov == null) return;

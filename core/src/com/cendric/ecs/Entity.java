@@ -9,10 +9,12 @@ import com.cendric.ecs.components.ComponentType;
 public class Entity {
 	private static Integer count = 0;
 	
+	public String tag;
 	public Integer id;
 	private Map<ComponentType, Component> components;
 	
-	public Entity() {
+	public Entity(String tag) {
+		this.tag = tag;
 		this.id = count;
 		count++;
 		this.components = new HashMap<ComponentType, Component>();

@@ -15,6 +15,11 @@ public class SpriteRenderSystem extends RenderSystem {
 		if (pos == null) return;
 		if (tex == null) return;
 		
-		spriteBatch.draw(tex.texture, (int)pos.x, (int)pos.y);
+		if (tex.texture != null) {
+			spriteBatch.draw(tex.texture, (int)pos.x, (int)pos.y);
+		}
+		if (tex.textureOverlay != null) {
+			spriteBatch.draw(tex.textureOverlay, (int)pos.x, (int)pos.y);
+		}
 	}
 }

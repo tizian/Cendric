@@ -1,30 +1,21 @@
 package com.cendric.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.cendric.CendricGame;
-import com.cendric.Constants;
 import com.cendric.ecs.Entity;
-import com.cendric.ecs.components.AnimationStateComponent;
 import com.cendric.ecs.systems.AccelerationSystem;
-import com.cendric.ecs.systems.AnimationSystem;
-import com.cendric.ecs.systems.CollisionSystem;
+import com.cendric.ecs.systems.CendricAnimationSystem;
+import com.cendric.ecs.systems.CendricCollisionSystem;
+import com.cendric.ecs.systems.CendricInputSystem;
 import com.cendric.ecs.systems.MovementSystem;
-import com.cendric.ecs.systems.PlayerInputSystem;
-import com.cendric.models.DynamicTile;
+import com.cendric.ecs.systems.SpellAnimationSystem;
+import com.cendric.ecs.systems.SpellCollisionSystem;
 import com.cendric.models.Level;
-import com.cendric.models.MainCharacter;
 import com.cendric.models.Spell;
-import com.cendric.models.Spell.SpellId;
-import com.cendric.screens.GameOverScreen;
-import com.cendric.screens.SuccessScreen;
 public class WorldController {
 	
 	// TODO [tiz] lots of rewriting...
@@ -39,12 +30,13 @@ public class WorldController {
 	
 	private InputController input;
 	
-	private PlayerInputSystem playerInput;
+	private CendricInputSystem playerInput;
 	private AccelerationSystem acceleration;
-	private AnimationSystem animation;
-	private CollisionSystem collision;
+	private CendricAnimationSystem cendricAnimation;
+	private SpellAnimationSystem spellAnimation;
+	private CendricCollisionSystem cendricCollision;
+	private SpellCollisionSystem spellCollision;
 	private MovementSystem movement;
-	
 
 	public WorldController(CendricGame game, Level level, InputController input) {
 		this.game = game;
@@ -59,11 +51,13 @@ public class WorldController {
 
 		spells = new ArrayList<Spell>();
 		
-		playerInput = new PlayerInputSystem(input);
+		playerInput = new CendricInputSystem(input, level);
 		acceleration = new AccelerationSystem();
-		animation = new AnimationSystem();
+		cendricAnimation = new CendricAnimationSystem();
+		spellAnimation = new SpellAnimationSystem();
 		
-		collision = new CollisionSystem(currentLevel);
+		cendricCollision = new CendricCollisionSystem(level);
+		spellCollision = new SpellCollisionSystem(level);
 		movement = new MovementSystem();
 		
 	}
@@ -71,14 +65,20 @@ public class WorldController {
 	public void update(float delta) {
 		List<Entity> entities = currentLevel.getEntities();
 		
+		// Note: the update order is somewhat important
+		
 		playerInput.update(entities, delta);
 		acceleration.update(entities, delta);
 		
-		collision.update(entities, delta);
-		animation.update(entities, delta);
+		spellCollision.update(entities, delta);
+		cendricCollision.update(entities, delta);
+		
+		cendricAnimation.update(entities, delta);
+		spellAnimation.update(entities, delta);
+		
 		movement.update(entities, delta);
 		
-		
+		currentLevel.updateEntityArray();
 		
 		/*
 		processInput();
@@ -145,14 +145,14 @@ public class WorldController {
 	}
 	*/
 
-	private void checkSpellCollisions(Spell spell) {
-		List<DynamicTile> tiles = currentLevel.getDynamicTiles();
-		for (DynamicTile tile : tiles) {
-			if (spell.getCollisionBox().overlaps(tile.getRect())) {
-				tile.hit(spell.spell);
-			}
-		}
-	}
+//	private void checkSpellCollisions(Spell spell) {
+//		List<DynamicTile> tiles = currentLevel.getDynamicTiles();
+//		for (DynamicTile tile : tiles) {
+//			if (spell.getCollisionBox().overlaps(tile.getRect())) {
+//				tile.hit(spell.spell);
+//			}
+//		}
+//	}
 
 	boolean checkSpellCollisionWithBlocks(Spell spell) {
 		List<Rectangle> collidableTiles = currentLevel.getCollidableTiles();

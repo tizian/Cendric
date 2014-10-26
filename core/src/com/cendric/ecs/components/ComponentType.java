@@ -7,4 +7,5 @@ public enum ComponentType {
 	Texture,
 	BoundingBox,
 	AnimationState,
+	SpellState,
 }

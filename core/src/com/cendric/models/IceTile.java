@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Rectangle;
 import com.cendric.Constants;
-import com.cendric.models.Spell.SpellId;
+import com.cendric.ecs.components.SpellStateComponent.SpellType;
 
 /**
  * @author tiz, iro
@@ -20,8 +20,8 @@ public class IceTile extends DynamicTile {
 		return rect;
 	}
 	
-	public void hit(SpellId spell) {
-		if (spell != SpellId.FIRE) return;
+	public void hit(SpellType spell) {
+		if (spell != SpellType.FIRE) return;
 		TiledMapTileLayer layer = (TiledMapTileLayer) level.tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
 		Cell cell = layer.getCell(column, row);
 		if (cell.getTile().getId() == Constants.TILE_ICE_1_ID) {

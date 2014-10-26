@@ -3,7 +3,7 @@ package com.cendric.models;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.cendric.Constants;
-import com.cendric.models.Spell.SpellId;
+import com.cendric.ecs.components.SpellStateComponent.SpellType;
 
 /**
  * @author tiz, iro
@@ -15,8 +15,8 @@ public class WaterTile extends DynamicTile {
 		super(column, row, level);
 	}
 	
-	public void hit(SpellId spell) {
-		if (spell != SpellId.ICE) return;
+	public void hit(SpellType spell) {
+		if (spell != SpellType.ICE) return;
 		TiledMapTileLayer layer = (TiledMapTileLayer) level.tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
 		if (layer.getCell(column, row) == null) {
 				layer.setCell(column, row, new Cell());

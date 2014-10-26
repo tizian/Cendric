@@ -32,6 +32,8 @@ public class Level {
 	protected List<DynamicTile> dynamicTiles;
 	
 	protected List<Entity> entities;
+	protected List<Entity> toAdd;
+	protected List<Entity> toDelete;
 	
 	public Level(int id) {
 		this.ID = id;
@@ -43,6 +45,8 @@ public class Level {
 		}
 		
 		entities = new ArrayList<Entity>();
+		toAdd = new ArrayList<Entity>();
+		toDelete = new ArrayList<Entity>();
 		
 		evilTiles = new ArrayList<Rectangle>();
 		collidableTiles = new ArrayList<Rectangle>();
@@ -62,8 +66,23 @@ public class Level {
 //		gargoyle.setCollisionBox(new Vector2(8, 0), 64, 64);
 	}
 	
+	public void updateEntityArray() {
+		entities.addAll(toAdd);
+		entities.removeAll(toDelete);
+		toAdd.clear();
+		toDelete.clear();
+	}
+	
 	public List<Entity> getEntities() {
 		return entities;
+	}
+	
+	public void addEntity(Entity e) {
+		toAdd.add(e);
+	}
+	
+	public void removeEntity(Entity e) {
+		toDelete.add(e);
 	}
 	
 	public TiledMap getTiledMap() {

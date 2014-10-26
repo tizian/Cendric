@@ -2,6 +2,7 @@ package com.cendric.models;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.cendric.Constants;
+import com.cendric.ecs.components.SpellStateComponent.SpellType;
 import com.cendric.models.Spell.SpellId;
 
 /**
@@ -44,7 +45,7 @@ public abstract class DynamicTile {
 	 * called by a controller when the tile gets hit with a certain spell
 	 * @param spell the id of the spell the tile gets 
 	 */
-	public abstract void hit(SpellId spell);
+	public abstract void hit(SpellType spell);
 	
 	public Rectangle getRect() {
 		return rect;

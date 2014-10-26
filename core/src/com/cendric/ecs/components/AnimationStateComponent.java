@@ -2,7 +2,7 @@ package com.cendric.ecs.components;
 
 public class AnimationStateComponent extends Component {
 	
-	public float animationTime;
+	public float animationTime;	// TODO Animation abstraction class that includes this. Goal: no specific XAnimationSystem classes for each entity type...
 	public boolean facingLeft;
 	public State state;
 	

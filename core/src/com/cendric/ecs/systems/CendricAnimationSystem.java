@@ -5,19 +5,24 @@ import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.AnimationStateComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
+import com.cendric.ecs.components.SpellStateComponent;
+import com.cendric.ecs.components.SpellStateComponent.SpellType;
 import com.cendric.ecs.components.TextureComponent;
 import com.cendric.ecs.components.AnimationStateComponent.State;
 
-public class AnimationSystem extends UpdateSystem {
+public class CendricAnimationSystem extends UpdateSystem {
 
 	@Override
 	protected void update(Entity entity, float dt) {
+		if (!entity.tag.equals("Cendric")) return;
 		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
 		AnimationStateComponent as = (AnimationStateComponent) entity.getComponent(ComponentType.AnimationState);
 		TextureComponent tex = (TextureComponent) entity.getComponent(ComponentType.Texture);
+		SpellStateComponent sp = (SpellStateComponent) entity.getComponent(ComponentType.SpellState);
 		if (mov == null) return;
 		if (as == null) return;
 		if (tex == null) return;
+		if (sp == null) return;
 		
 		if (mov.vx < -20) {
 			as.state = State.WALKING;
@@ -44,11 +49,11 @@ public class AnimationSystem extends UpdateSystem {
 			tex.texture = as.facingLeft ? Resources.cendricJumpingLeftFrame : Resources.cendricJumpingRightFrame;
 		}
 		
-//		if (spell.equals(SpellId.FIRE)) {
-//			staffEffect = isFacingLeft ? Resources.staffFireLeft.getKeyFrame(stateTime, true) : Resources.staffFireRight.getKeyFrame(stateTime, true);
-//		} else if (spell.equals(SpellId.ICE)) {
-//			staffEffect = isFacingLeft ? Resources.staffIceLeft.getKeyFrame(stateTime, true) : Resources.staffIceRight.getKeyFrame(stateTime, true);
-//		}
+		if (sp.spellType == SpellType.FIRE) {
+			tex.textureOverlay = as.facingLeft ? Resources.staffFireLeft.getKeyFrame(as.animationTime, true) : Resources.staffFireRight.getKeyFrame(as.animationTime, true);
+		} else if (sp.spellType == SpellType.ICE) {
+			tex.textureOverlay = as.facingLeft ? Resources.staffIceLeft.getKeyFrame(as.animationTime, true) : Resources.staffIceRight.getKeyFrame(as.animationTime, true);
+		}
 	}
 
 }
