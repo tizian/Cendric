@@ -7,6 +7,7 @@ import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.BoundingBoxComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
+import com.cendric.ecs.components.PositionComponent;
 import com.cendric.models.Level;
 
 public class CendricCollisionSystem extends UpdateSystem {
@@ -20,8 +21,10 @@ public class CendricCollisionSystem extends UpdateSystem {
 	@Override
 	protected void update(Entity entity, float dt) {
 		if (!entity.tag.equals("Cendric")) return;
+		PositionComponent pos = (PositionComponent) entity.getComponent(ComponentType.Position);
 		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
 		BoundingBoxComponent bb = (BoundingBoxComponent) entity.getComponent(ComponentType.BoundingBox);
+		if (pos == null) return;
 		if (mov == null) return;
 		if (bb == null) return;
 		
@@ -35,11 +38,19 @@ public class CendricCollisionSystem extends UpdateSystem {
 		nextRect.x = nextRect.x + mov.vx * dt;
 
 		if (!nextRect.overlaps(level.getLevelRect())) {
-//			mov.vx = 0;
+			mov.vx = 0;
 		}
 
 		for (Rectangle rect : collidableTiles) {
 			if (nextRect.overlaps(rect)) {
+				if (mov.vx > 0) {
+					bb.boundingBox.x = rect.x - bb.boundingBox.width;
+					pos.x = bb.boundingBox.x - 5;
+				}
+				else if (mov.vy < 0) {
+					bb.boundingBox.x = rect.x + rect.width;
+					pos.x = bb.boundingBox.x + 5;
+				}
 				mov.vx = 0;
 				break;
 			}
@@ -59,6 +70,12 @@ public class CendricCollisionSystem extends UpdateSystem {
 			if (nextRect.overlaps(rect)) {
 				if (mov.vy < 0) {
 					mov.grounded = true;
+					bb.boundingBox.y = rect.y + rect.height;
+					pos.y = bb.boundingBox.y;
+				}
+				else if (mov.vy > 0) {
+					bb.boundingBox.y = rect.y - bb.boundingBox.height;
+					pos.y = bb.boundingBox.y;
 				}
 				mov.vy = 0;
 				break;

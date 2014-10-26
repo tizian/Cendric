@@ -10,7 +10,7 @@ public class MovementComponent extends Component {
 	public float JUMP_SPEED = 920;
 	public float JUMP_SPEED_CUTOFF = 400;
 	
-	public float ACCELERATION = 600;
+	public float ACCELERATION = 1200;
 	
 	public float vxTarget;
 	public float vyTarget;
