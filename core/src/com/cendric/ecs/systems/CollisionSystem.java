@@ -3,12 +3,12 @@ package com.cendric.ecs.systems;
 import com.cendric.ecs.Entity;
 import com.cendric.models.Level;
 
-public class CollisionSystem extends System {
+public class CollisionSystem extends UpdateSystem {
 	
 	Level level;
 
 	@Override
-	public void update(Entity entity, float dt) {
+	protected void update(Entity entity, float dt) {
 		// TODO [tiz] collision
 	}
 

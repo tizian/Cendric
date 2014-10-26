@@ -9,16 +9,12 @@ import com.cendric.ecs.components.TextureComponent;
 public class SpriteRenderSystem extends RenderSystem {
 
 	@Override
-	public void render(Entity entity, SpriteBatch spriteBatch) {
+	protected void render(Entity entity, SpriteBatch spriteBatch) {
 		PositionComponent pos = (PositionComponent) entity.getComponent(ComponentType.Position);
 		TextureComponent tex = (TextureComponent) entity.getComponent(ComponentType.Texture);
 		if (pos == null) return;
 		if (tex == null) return;
 		
 		spriteBatch.draw(tex.texture, pos.x, pos.y);
-	}
-
-	@Override
-	public void update(Entity entity, float dt) {
 	}
 }

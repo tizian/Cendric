@@ -5,10 +5,10 @@ import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MassComponent;
 import com.cendric.ecs.components.MovementComponent;
 
-public class AccelerationSystem extends System {
+public class AccelerationSystem extends UpdateSystem {
 
 	@Override
-	public void update(Entity entity, float dt) {
+	protected void update(Entity entity, float dt) {
 		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
 		MassComponent m = (MassComponent) entity.getComponent(ComponentType.Mass);
 		if (mov == null) return;
@@ -17,7 +17,10 @@ public class AccelerationSystem extends System {
 		float diry = Math.signum(mov.vyTarget - mov.vy);
 		
 		mov.vx = mov.vx + dirx * mov.ACCELERATION * dt;
-		mov.vy = mov.vy + diry * mov.GRAVITY * m.mass * dt;
+		
+		if (m != null) {
+			mov.vy = mov.vy + diry * mov.GRAVITY * m.mass * dt;
+		}
 		
 		if (Math.signum(mov.vxTarget - mov.vx) != dirx) {
 			mov.vx = mov.vxTarget;

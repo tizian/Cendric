@@ -11,30 +11,38 @@ import com.cendric.models.MainCharacter;
 
 public class WorldView {
 	private Level currentLevel;
-	private WorldController controller;
+	private InputController input;
 	
-	public WorldView(Level level, WorldController controller) {
+	SpriteRenderSystem spriteSystem;
+	
+	public WorldView(Level level, InputController input) {
 		currentLevel = level;
-		this.controller = controller;
+		this.input = input;
+		
+		spriteSystem = new SpriteRenderSystem();
 	}
 	
 	public void draw(SpriteBatch batch) {
 		// draw character
-		batch.draw(currentLevel.getGargoyle().getTextureRegion(), currentLevel
-				.getGargoyle().getPosition().x, currentLevel.getGargoyle()
-				.getPosition().y);
-		batch.draw(character.getTextureRegion(), character.getPosition().x,
-				character.getPosition().y);
-		batch.draw(character.getStaffEffect(), character.getPosition().x,
-				character.getPosition().y);
-		// draw spells
-		for (GameObject spell : controller.getSpells()) {
-			batch.draw(spell.getTextureRegion(), spell.getPosition().x,
-					spell.getPosition().y);
-		}
+		
+		spriteSystem.render(currentLevel.getEntities(), batch);
+		
+		// TODO [tiz] replace
+//		batch.draw(currentLevel.getGargoyle().getTextureRegion(), currentLevel
+//				.getGargoyle().getPosition().x, currentLevel.getGargoyle()
+//				.getPosition().y);
+//		batch.draw(character.getTextureRegion(), character.getPosition().x,
+//				character.getPosition().y);
+//		batch.draw(character.getStaffEffect(), character.getPosition().x,
+//				character.getPosition().y);
+//		// draw spells
+//		for (GameObject spell : controller.getSpells()) {
+//			batch.draw(spell.getTextureRegion(), spell.getPosition().x,
+//					spell.getPosition().y);
+//		}
 		
 		// draw aim cursor
-		Vector2 mousePosition = controller.getMousPosition();
+		Vector2 mousePosition = input.getMousePosition();
 		batch.draw(Resources.aimCursor, mousePosition.x, mousePosition.y);
 	}
 	

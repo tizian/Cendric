@@ -6,14 +6,16 @@ import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.ecs.components.PositionComponent;
 
-public class MovementSystem extends System {
+public class MovementSystem extends UpdateSystem {
 
 	@Override
-	public void update(Entity entity, float dt) {
+	protected void update(Entity entity, float dt) {
 		PositionComponent pos = (PositionComponent) entity.getComponent(ComponentType.Position);
 		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
 		if (pos == null) return;
 		if (mov == null) return;
+		
+		System.out.println(mov.vy);
 		
 		pos.x = pos.x + mov.vx * dt;
 		pos.y = pos.y + mov.vy * dt;

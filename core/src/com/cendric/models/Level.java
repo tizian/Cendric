@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.cendric.Constants;
 import com.cendric.Resources;
 import com.cendric.ecs.Entity;
+import com.cendric.ecs.EntityFactory;
 
 /**
  * @author tiz, iro
@@ -49,6 +50,9 @@ public class Level {
 		computeEvilTiles();
 		computeLevelRect();
 		loadDynamicTiles();
+		
+		Vector2 pos = computePosition(Constants.LAYER_START_POS);
+		entities.add(EntityFactory.createCendric(pos.x, pos.y));
 		
 		//TODO [tiz] init main character & gargoyle
 //		mainCharacter = new MainCharacter(computePosition(Constants.LAYER_START_POS));

@@ -11,6 +11,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
+import com.cendric.ecs.Entity;
+import com.cendric.ecs.systems.AccelerationSystem;
+import com.cendric.ecs.systems.MovementSystem;
+import com.cendric.ecs.systems.PlayerInputSystem;
 import com.cendric.models.DynamicTile;
 import com.cendric.models.Level;
 import com.cendric.models.MainCharacter;
@@ -18,34 +22,52 @@ import com.cendric.models.Spell;
 import com.cendric.models.Spell.SpellId;
 import com.cendric.screens.GameOverScreen;
 import com.cendric.screens.SuccessScreen;
-
+d
 public class WorldController {
+	
+	// TODO [tiz] lots of rewriting...
 
 	private CendricGame game;
 
 	private Level currentLevel;
-	private MainCharacter character;
 
 	private ArrayList<Spell> spells;
 
 	private Vector2 mousePosition;
+	
+	private InputController input;
+	
+	private AccelerationSystem acceleration;
+	private MovementSystem movement;
+	private PlayerInputSystem playerInput;
 
-	public WorldController(CendricGame game, Level level) {
+	public WorldController(CendricGame game, Level level, InputController input) {
 		this.game = game;
+		this.input = input;
 		currentLevel = level;
-		character = level.getMainCharacter();
 		
 		// TODO: maybe find a better place for this?
-		System.out.println(character.getPosition());
-		Vector3 mouseStartWorld = new Vector3(character.getPosition().x + 2*Constants.TILE_SIZE, character.getPosition().y + Constants.TILE_SIZE, 0);
-		System.out.println(mouseStartWorld);
-		Vector3 mousStartScreen = game.camera.unproject(mouseStartWorld);
-		Gdx.input.setCursorPosition(Math.round(mousStartScreen.x), Math.round(mousStartScreen.y));
+//		Vector3 mouseStartWorld = new Vector3(character.getPosition().x + 2*Constants.TILE_SIZE, character.getPosition().y + Constants.TILE_SIZE, 0);
+//		System.out.println(mouseStartWorld);
+//		Vector3 mousStartScreen = game.camera.unproject(mouseStartWorld);
+//		Gdx.input.setCursorPosition(Math.round(mousStartScreen.x), Math.round(mousStartScreen.y));
 
 		spells = new ArrayList<Spell>();
+		
+		acceleration = new AccelerationSystem();
+		movement = new MovementSystem();
+		playerInput = new PlayerInputSystem(input);
 	}
 
 	public void update(float delta) {
+		List<Entity> entities = currentLevel.getEntities();
+		
+		playerInput.update(entities, delta);
+		acceleration.update(entities, delta);
+		movement.update(entities, delta);
+		
+		
+		/*
 		processInput();
 		checkPlayerCollisionWithBlocks(delta);
 		character.update(delta);
@@ -93,8 +115,10 @@ public class WorldController {
 			game.finishCurrentLevel();
 			game.setScreen(new SuccessScreen(game));
 		}
+		*/
 	}
 
+	/*
 	private boolean checkIsDead() {
 		if (character.getPosition().y < -1.5 * Constants.TILE_SIZE)
 			return true;
@@ -106,6 +130,7 @@ public class WorldController {
 		}
 		return false;
 	}
+	*/
 
 	private void checkSpellCollisions(Spell spell) {
 		List<DynamicTile> tiles = currentLevel.getDynamicTiles();
@@ -126,11 +151,14 @@ public class WorldController {
 		return false;
 	}
 	
+	/*
 	boolean playerHasReachedGargoyle() {
 		return character.getCollisionBox().overlaps(
 				currentLevel.getGargoyle().getCollisionBox());
 	}
+	*/
 
+	/*
 	private void checkPlayerCollisionWithBlocks(float delta) {
 		List<Rectangle> collidableTiles = currentLevel.getCollidableTiles();
 
@@ -172,12 +200,14 @@ public class WorldController {
 			}
 		}
 	}
+	*/
 	
 	// The following methods are used by the world view
 	public Vector2 getMousPosition() {
 		return mousePosition;
 	}
 
+	/*
 	public Vector2 getStaffPosition() {
 		Vector2 staffPosition;
 		if (character.isFacingLeft) {
@@ -187,6 +217,7 @@ public class WorldController {
 		}
 		return staffPosition;
 	}
+	*/
 	
 	public List<Spell> getSpells() {
 		return spells;
@@ -197,6 +228,7 @@ public class WorldController {
 		mousePosition = mousePos;
 	}
 	
+	/*
 	private void processInput() {
 		if (keys.get(Key.SPELL_FIRE)) {
 			character.spell = SpellId.FIRE;
@@ -219,4 +251,5 @@ public class WorldController {
 			spells.add(spell);
 		}
 	}
+	*/
 }

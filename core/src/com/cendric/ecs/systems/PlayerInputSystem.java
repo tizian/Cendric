@@ -6,7 +6,7 @@ import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 
-public class PlayerInputSystem extends System {
+public class PlayerInputSystem extends UpdateSystem {
 	
 	private InputController inputController;
 	
@@ -15,7 +15,7 @@ public class PlayerInputSystem extends System {
 	}
 
 	@Override
-	public void update(Entity entity, float dt) {
+	protected void update(Entity entity, float dt) {
 		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
 		if (mov == null) return;
 		
@@ -28,6 +28,8 @@ public class PlayerInputSystem extends System {
 		else {
 			mov.vxTarget = 0;
 		}
+		
+		mov.vyTarget = mov.TERMINAL_VELOCITY;
 
 		// TODO [tiz] detect on platform somehow and store somewhere...
 //		if (player on platform) {

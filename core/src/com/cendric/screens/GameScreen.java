@@ -37,9 +37,9 @@ public class GameScreen implements Screen {
         // TODO [tiz] change tile size to 1x1
         game.camera.update();
 		
-		worldController = new WorldController(game, level);
 		inputController = new InputController(worldController);
-		worldView = new WorldView(level, worldController);
+		worldController = new WorldController(game, level, inputController);
+		worldView = new WorldView(level, inputController);
 		
 		helpOverlay = Resources.helpOverlay;
 	}

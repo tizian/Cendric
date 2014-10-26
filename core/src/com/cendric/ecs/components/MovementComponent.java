@@ -2,12 +2,12 @@ package com.cendric.ecs.components;
 
 public class MovementComponent extends Component {
 	
-	public final float GRAVITY = 2;
+	public final float GRAVITY = -100;
 	
-	public float MAX_VELOCITY = 2;
-	public float TERMINAL_VELOCITY = 3;
+	public float MAX_VELOCITY = 200;
+	public float TERMINAL_VELOCITY = 100;
 	
-	public float ACCELERATION = 1;
+	public float ACCELERATION = 400;
 	
 	public float vxTarget;
 	public float vyTarget;
