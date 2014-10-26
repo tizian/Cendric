@@ -26,10 +26,7 @@ public class GargoyleSystem extends UpdateSystem {
 		Entity player = level.getEntities().get(0);	// risky (?) assumption: Cendric is 1st entity in list
 		BoundingBoxComponent playerBB = (BoundingBoxComponent) player.getComponent(ComponentType.BoundingBox);
 		
-		System.out.println(gargoyleBB.boundingBox);
-		
 		if (playerBB.boundingBox.overlaps(gargoyleBB.boundingBox)) {
-			System.out.println("bla");
 			level.finish();
 			game.finishCurrentLevel();
 			game.setScreen(new SuccessScreen(game));

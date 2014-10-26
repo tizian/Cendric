@@ -7,9 +7,11 @@ public class SpellStateComponent extends Component {
 	}
 	
 	public SpellType spellType;
+	public int numberReflections;
 	
 	public SpellStateComponent(SpellType type) {
 		spellType = type;
+		numberReflections = 3;
 	}
 
 	@Override

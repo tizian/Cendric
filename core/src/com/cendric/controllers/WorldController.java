@@ -42,8 +42,8 @@ public class WorldController {
 		Entity player = currentLevel.getEntities().get(0);	// risky (?) assumption: Cendric is 1st entity in list
 		PositionComponent pos = (PositionComponent) player.getComponent(ComponentType.Position);
 		Vector3 mouseStartWorld = new Vector3(pos.x + 2*Constants.TILE_SIZE, pos.y + Constants.TILE_SIZE, 0);
-		Vector3 mousStartScreen = game.camera.unproject(mouseStartWorld);
-		Gdx.input.setCursorPosition(Math.round(mousStartScreen.x), Math.round(mousStartScreen.y));
+		Vector3 mouseStartScreen = game.camera.unproject(mouseStartWorld);
+		Gdx.input.setCursorPosition(Math.round(mouseStartScreen.x), Math.round(mouseStartScreen.y));
 
 		playerInput = new CendricInputSystem(input, level);
 		acceleration = new AccelerationSystem();
@@ -86,18 +86,14 @@ public class WorldController {
 		if (pos.x < Constants.WINDOW_WIDTH / 2) {
 			game.camera.position.x = Constants.WINDOW_WIDTH / 2;
 		}
-		if (pos.x > currentLevel.getLevelRect().width
-				- Constants.WINDOW_WIDTH / 2) {
-			game.camera.position.x = currentLevel.getLevelRect().width
-					- Constants.WINDOW_WIDTH / 2;
+		if (pos.x > currentLevel.getLevelRect().width - Constants.WINDOW_WIDTH / 2) {
+			game.camera.position.x = currentLevel.getLevelRect().width - Constants.WINDOW_WIDTH / 2;
 		}
 		if (pos.y < Constants.WINDOW_HEIGHT / 2) {
 			game.camera.position.y = Constants.WINDOW_HEIGHT / 2;
 		}
-		if (pos.y > currentLevel.getLevelRect().height
-				- Constants.WINDOW_HEIGHT / 2) {
-			game.camera.position.y = currentLevel.getLevelRect().height
-					- Constants.WINDOW_HEIGHT / 2;
+		if (pos.y > currentLevel.getLevelRect().height - Constants.WINDOW_HEIGHT / 2) {
+			game.camera.position.y = currentLevel.getLevelRect().height - Constants.WINDOW_HEIGHT / 2;
 		}
 		game.camera.update();
 		game.batch.setProjectionMatrix(game.camera.combined);
