@@ -4,7 +4,7 @@ public enum ComponentType {
 	Position,
 	Movement,
 	Mass,
-	Collision,
 	Texture,
 	BoundingBox,
+	AnimationState,
 }

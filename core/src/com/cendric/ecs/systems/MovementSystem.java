@@ -15,10 +15,10 @@ public class MovementSystem extends UpdateSystem {
 		if (pos == null) return;
 		if (mov == null) return;
 		
-		System.out.println(mov.vy);
-		
 		pos.x = pos.x + mov.vx * dt;
 		pos.y = pos.y + mov.vy * dt;
+		
+		
 		
 		BoundingBoxComponent bb = (BoundingBoxComponent) entity.getComponent(ComponentType.BoundingBox);
 		if (bb == null) return;

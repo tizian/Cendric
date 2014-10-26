@@ -14,5 +14,4 @@ public class BoundingBoxComponent extends Component {
 	public ComponentType getType() {
 		return ComponentType.BoundingBox;
 	}
-
 }

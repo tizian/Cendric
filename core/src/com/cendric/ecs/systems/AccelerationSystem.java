@@ -12,19 +12,18 @@ public class AccelerationSystem extends UpdateSystem {
 		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
 		MassComponent m = (MassComponent) entity.getComponent(ComponentType.Mass);
 		if (mov == null) return;
+		if (m == null) return;
 		
 		float dirx = Math.signum(mov.vxTarget - mov.vx);
 		float diry = Math.signum(mov.vyTarget - mov.vy);
 		
 		mov.vx = mov.vx + dirx * mov.ACCELERATION * dt;
-		
-		if (m != null) {
-			mov.vy = mov.vy + diry * mov.GRAVITY * m.mass * dt;
-		}
+		mov.vy = mov.vy + diry * mov.GRAVITY * m.mass * dt;
 		
 		if (Math.signum(mov.vxTarget - mov.vx) != dirx) {
 			mov.vx = mov.vxTarget;
 		}
+		
 		if (Math.signum(mov.vyTarget - mov.vy) != diry) {
 			mov.vy = mov.vyTarget;
 		}

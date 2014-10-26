@@ -82,6 +82,7 @@ public class Level {
 		return evilTiles;
 	}
 	
+	// TODO Collision can be done more efficiently with a lookup table like getCollidableTile(int x, int y)
 	public List<Rectangle> getCollidableTiles() {
 		return collidableTiles;
 	}

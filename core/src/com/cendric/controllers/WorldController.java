@@ -12,7 +12,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
 import com.cendric.ecs.Entity;
+import com.cendric.ecs.components.AnimationStateComponent;
 import com.cendric.ecs.systems.AccelerationSystem;
+import com.cendric.ecs.systems.AnimationSystem;
+import com.cendric.ecs.systems.CollisionSystem;
 import com.cendric.ecs.systems.MovementSystem;
 import com.cendric.ecs.systems.PlayerInputSystem;
 import com.cendric.models.DynamicTile;
@@ -36,9 +39,12 @@ public class WorldController {
 	
 	private InputController input;
 	
-	private AccelerationSystem acceleration;
-	private MovementSystem movement;
 	private PlayerInputSystem playerInput;
+	private AccelerationSystem acceleration;
+	private AnimationSystem animation;
+	private CollisionSystem collision;
+	private MovementSystem movement;
+	
 
 	public WorldController(CendricGame game, Level level, InputController input) {
 		this.game = game;
@@ -53,9 +59,13 @@ public class WorldController {
 
 		spells = new ArrayList<Spell>();
 		
-		acceleration = new AccelerationSystem();
-		movement = new MovementSystem();
 		playerInput = new PlayerInputSystem(input);
+		acceleration = new AccelerationSystem();
+		animation = new AnimationSystem();
+		
+		collision = new CollisionSystem(currentLevel);
+		movement = new MovementSystem();
+		
 	}
 
 	public void update(float delta) {
@@ -63,7 +73,11 @@ public class WorldController {
 		
 		playerInput.update(entities, delta);
 		acceleration.update(entities, delta);
+		
+		collision.update(entities, delta);
+		animation.update(entities, delta);
 		movement.update(entities, delta);
+		
 		
 		
 		/*

@@ -3,6 +3,7 @@ package com.cendric.ecs.systems;
 import com.cendric.controllers.InputController;
 import com.cendric.controllers.Key;
 import com.cendric.ecs.Entity;
+import com.cendric.ecs.components.AnimationStateComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 
@@ -29,14 +30,21 @@ public class PlayerInputSystem extends UpdateSystem {
 			mov.vxTarget = 0;
 		}
 		
-		mov.vyTarget = mov.TERMINAL_VELOCITY;
+		if (inputController.isKeyPressed(Key.JUMP) && mov.grounded) {
+			mov.vy = mov.JUMP_SPEED;
+			mov.grounded = false;
+		}
+		else if (!inputController.isKeyPressed(Key.JUMP) && !mov.grounded) {
+			if (mov.vy > mov.JUMP_SPEED_CUTOFF) {
+				mov.vy = mov.JUMP_SPEED_CUTOFF;
+			}
+		}
 
-		// TODO [tiz] detect on platform somehow and store somewhere...
-//		if (player on platform) {
-//			m.vyTarget = 0;
-//		}
-//		else {
-//			m.vyTarget = m.TERMINAL_VELOCITY;
-//		}
+		if (mov.grounded) {
+			mov.vyTarget = 0;
+		}
+		else {
+			mov.vyTarget = mov.TERMINAL_VELOCITY;
+		}
 	}
 }
