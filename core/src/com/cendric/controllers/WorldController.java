@@ -22,7 +22,6 @@ import com.cendric.models.Spell;
 import com.cendric.models.Spell.SpellId;
 import com.cendric.screens.GameOverScreen;
 import com.cendric.screens.SuccessScreen;
-d
 public class WorldController {
 	
 	// TODO [tiz] lots of rewriting...
