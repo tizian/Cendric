@@ -1,6 +1,8 @@
 package com.cendric.ecs;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.cendric.Resources;
 import com.cendric.ecs.components.AnimationStateComponent;
 import com.cendric.ecs.components.BoundingBoxComponent;
 import com.cendric.ecs.components.MassComponent;
@@ -46,5 +48,18 @@ public class EntityFactory {
 		fire.addComponent(mov);
 		
 		return fire;
+	}
+	
+	public static Entity createGargoyle(float x, float y) {
+		Entity gargoyle = new Entity("Gargoyle");
+		
+		gargoyle.addComponent(new PositionComponent(x, y));
+		gargoyle.addComponent(new BoundingBoxComponent(new Rectangle(x+8, y, 64, 64)));
+		
+		TextureComponent tex = new TextureComponent();
+		tex.texture = new TextureRegion(Resources.gargoyle);
+		gargoyle.addComponent(tex);
+		
+		return gargoyle;
 	}
 }

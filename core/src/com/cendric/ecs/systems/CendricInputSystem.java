@@ -38,8 +38,6 @@ public class CendricInputSystem extends UpdateSystem {
 		if (sp == null) return;
 		if (as == null) return;
 		
-		System.out.println(level.getEntities().size());
-		
 		if (inputController.isKeyPressed(Key.LEFT)) {
 			mov.vxTarget = -mov.MAX_VELOCITY;
 		}

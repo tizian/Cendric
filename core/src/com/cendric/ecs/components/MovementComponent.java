@@ -4,7 +4,7 @@ public class MovementComponent extends Component {
 	
 	public final float GRAVITY = 1500;
 	
-	public float MAX_VELOCITY = 200;
+	public float MAX_VELOCITY = 300;
 	public float TERMINAL_VELOCITY = -1000;
 	
 	public float JUMP_SPEED = 920;

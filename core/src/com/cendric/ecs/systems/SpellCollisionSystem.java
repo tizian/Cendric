@@ -36,7 +36,6 @@ public class SpellCollisionSystem extends UpdateSystem {
 		List<Rectangle> collidableTiles = level.getCollidableTiles();
 		for (Rectangle rect : collidableTiles) {
 			if (bb.boundingBox.overlaps(rect)) {
-				System.out.println("del");
 				level.removeEntity(entity);
 			}
 		}

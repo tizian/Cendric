@@ -3,7 +3,6 @@ package com.cendric.models;
 import com.badlogic.gdx.math.Rectangle;
 import com.cendric.Constants;
 import com.cendric.ecs.components.SpellStateComponent.SpellType;
-import com.cendric.models.Spell.SpellId;
 
 /**
  * 

@@ -55,15 +55,11 @@ public class Level {
 		computeLevelRect();
 		loadDynamicTiles();
 		
-		Vector2 pos = computePosition(Constants.LAYER_START_POS);
-		entities.add(EntityFactory.createCendric(pos.x, pos.y));
-		
-		//TODO [tiz] init main character & gargoyle
-//		mainCharacter = new MainCharacter(computePosition(Constants.LAYER_START_POS));
-//		mainCharacter.setCollisionBox(new Vector2(5, 0), 54, 100);
-//		
-//		gargoyle = new Gargoyle(computePosition(Constants.LAYER_END_POS));
-//		gargoyle.setCollisionBox(new Vector2(8, 0), 64, 64);
+		Vector2 start = computePosition(Constants.LAYER_START_POS);
+		entities.add(EntityFactory.createCendric(start.x, start.y));
+
+		Vector2 end = computePosition(Constants.LAYER_END_POS);
+		entities.add(EntityFactory.createGargoyle(end.x, end.y));
 	}
 	
 	public void updateEntityArray() {
