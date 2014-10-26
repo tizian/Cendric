@@ -28,17 +28,24 @@ public class SpellCollisionSystem extends UpdateSystem {
 		if (mov == null) return;
 		if (bb == null) return;
 		if (sp == null) return;
+
+		Rectangle nextRect = new Rectangle(bb.boundingBox);
+		
+		nextRect.x = nextRect.x + mov.vx * dt;
+		nextRect.y = nextRect.y + mov.vy * dt;
 		
 		List<DynamicTile> tiles = level.getDynamicTiles();
+		
 		for (DynamicTile tile : tiles) {
-			if (bb.boundingBox.overlaps(tile.getRect())) {
+			if (nextRect.overlaps(tile.getRect())) {
 				tile.hit(sp.spellType);
 			}
 		}
-
+		
+		nextRect.x = bb.boundingBox.x;
+		nextRect.y = bb.boundingBox.y;
+		
 		List<Rectangle> collidableTiles = level.getCollidableTiles();
-
-		Rectangle nextRect = new Rectangle(bb.boundingBox);
 
 		// Check x direction
 		nextRect.x = nextRect.x + mov.vx * dt;
