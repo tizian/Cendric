@@ -18,8 +18,9 @@ public class MainMenuScreen implements Screen {
 	private CendricGame game;
 	
 	private Texture titleText;
-	private Texture titleCendric;
+//	private Texture titleCendric;
 	private Animation casino;
+	private Animation cendric;
 	
 	private BitmapFont font;
 	private Color purple = new Color(114/255f, 87/255f, 126/255f, 1f);
@@ -32,8 +33,8 @@ public class MainMenuScreen implements Screen {
 		this.game = game;
 		
 		// Textures
-		titleText = new Texture(Gdx.files.internal("sprites/CendricTitle.png"));
-		titleCendric = new Texture(Gdx.files.internal("sprites/CendricHero.png"));
+		titleText = new Texture(Gdx.files.internal("menu/CendricTitle.png"));
+//		titleCendric = new Texture(Gdx.files.internal("menu/CendricHero.png"));
 		
 		// Font
 		font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
@@ -41,12 +42,19 @@ public class MainMenuScreen implements Screen {
 		font.setScale(5);
 		
 		// Animation
-		Texture casino1 = new Texture(Gdx.files.internal("sprites/CasinoEdition1.png"));
-		Texture casino2 = new Texture(Gdx.files.internal("sprites/CasinoEdition2.png"));
+		Texture casino1 = new Texture(Gdx.files.internal("menu/CasinoEdition1.png"));
+		Texture casino2 = new Texture(Gdx.files.internal("menu/CasinoEdition2.png"));
 		TextureRegion[] casinoRegion = new TextureRegion[2];
 		casinoRegion[0] = new TextureRegion(casino1);
 		casinoRegion[1] = new TextureRegion(casino2);
 		casino = new Animation(ANIMATION_TIME, casinoRegion);
+		
+		Texture cendric1 = new Texture(Gdx.files.internal("menu/CendricCasino1.png"));
+		Texture cendric2 = new Texture(Gdx.files.internal("menu/CendricCasino2.png"));
+		TextureRegion[] cendricRegion = new TextureRegion[2];
+		cendricRegion[0] = new TextureRegion(cendric1);
+		cendricRegion[1] = new TextureRegion(cendric2);
+		cendric = new Animation(ANIMATION_TIME, cendricRegion);
 		
 		this.selection = selection;
 		stateTime = 0.0f;
@@ -69,11 +77,14 @@ public class MainMenuScreen implements Screen {
         
         // Draw casino edition animation
         stateTime += delta;
+        
         TextureRegion casinoFrame = casino.getKeyFrame(stateTime, true);
         game.batch.draw(casinoFrame, (1280-casinoFrame.getRegionWidth()/4)/2, 320, casinoFrame.getRegionWidth()/4, casinoFrame.getRegionHeight()/4);
         
         // Draw Cendric
-        game.batch.draw(titleCendric, 820, -50, titleCendric.getWidth()/3, titleCendric.getHeight()/3);
+//        game.batch.draw(titleCendric, 820, -50, titleCendric.getWidth()/3, titleCendric.getHeight()/3);
+        TextureRegion cendricFrame = cendric.getKeyFrame(stateTime, true);
+        game.batch.draw(cendricFrame, 820, -50, cendricFrame.getRegionWidth()/3, cendricFrame.getRegionHeight()/3);
         
         // Text
         font.setScale(5);
@@ -164,7 +175,7 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void dispose() {
 		titleText.dispose();
-		titleCendric.dispose();
+//		titleCendric.dispose();
 		font.dispose();
 	}
 }
