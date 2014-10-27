@@ -179,19 +179,6 @@ public class Resources {
 	public static TiledMap getMapForLevel(int levelID) {
 		return levelMap.get(levelID);
 	}
-	
-	public static String[] getLevelProperties(int levelID) {
-		switch (levelID) {
-		case 1:
-			return new String[] {"vegas_top_left", "vegas_top_right", "vegas_down_left", "vegas_down_right"};
-		case 2:
-			return null;
-		case 3: 
-			return null;
-		default: 
-			return null;
-		}
-  	}
 
 	public static void dispose() {
 		
