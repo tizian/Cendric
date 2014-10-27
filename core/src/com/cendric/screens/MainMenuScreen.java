@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
 
@@ -49,37 +50,43 @@ public class MainMenuScreen implements Screen {
         game.batch.begin();
         
         // Draw title text
-        game.batch.draw(titleText, 110, 320);
+        game.batch.draw(titleText, 110, 375, 749, 315);
         
         // Draw Cendric
         game.batch.draw(titleCendric, 860, 25);
         
         // Text
+        font.setScale(5);
         font.setColor(Color.WHITE);
         
-        font.draw(game.batch, "START GAME", 280, 320);
-        font.draw(game.batch, "CONTROLS", 360, 245);
-        font.draw(game.batch, "ABOUT", 480, 170);
-        font.draw(game.batch, "EXIT", 520, 95);
+        font.draw(game.batch, "START GAME", 280, 390);
+        font.draw(game.batch, "CONTROLS", 360, 325);
+        font.draw(game.batch, "ABOUT", 480, 250);
+        font.draw(game.batch, "EXIT", 520, 180);
         
         font.setColor(purple);
         
         if (selection == 0) {
-        	font.draw(game.batch, "START GAME", 280, 320);
-        	font.draw(game.batch, "<", 700, 320);
+        	font.draw(game.batch, "START GAME", 280, 390);
+        	font.draw(game.batch, "<", 700, 390);
         }
         if (selection == 1) {
-        	font.draw(game.batch, "CONTROLS", 360, 245);
-        	font.draw(game.batch, "<", 700, 245);
+        	font.draw(game.batch, "CONTROLS", 360, 325);
+        	font.draw(game.batch, "<", 700, 325);
         }
         if (selection == 2) {
-        	font.draw(game.batch, "ABOUT", 480, 170);
-        	font.draw(game.batch, "<", 700, 170);
+        	font.draw(game.batch, "ABOUT", 480, 250);
+        	font.draw(game.batch, "<", 700, 250);
         }
         if (selection == 3) {
-        	font.draw(game.batch, "EXIT", 520, 95);
-        	font.draw(game.batch, "<", 700, 95);
+        	font.draw(game.batch, "EXIT", 520, 180);
+        	font.draw(game.batch, "<", 700, 180);
         }
+        
+        font.setScale(2.4f);
+        font.setColor(Color.WHITE);
+        
+        font.drawWrapped(game.batch, "& 2014 - ISABELLE ROESCH - TIZIAN ZELTNER", 0, 50, 1280, HAlignment.CENTER);
         
         game.batch.end();
         
