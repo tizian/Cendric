@@ -81,6 +81,7 @@ public class Level {
 	 * and then call animateTiles("water_frame")
 	 */
 	private void animateTiles(String... properties) {
+		if (properties == null) return;
 		Array<StaticTiledMapTile> tiles;
 		TiledMapTileSet tileSet = tiledMap.getTileSets().getTileSet(0);
 		
