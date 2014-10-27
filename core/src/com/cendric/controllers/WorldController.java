@@ -2,8 +2,6 @@ package com.cendric.controllers;
 
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector3;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
 import com.cendric.ecs.Entity;
@@ -38,12 +36,6 @@ public class WorldController {
 	public WorldController(CendricGame game, Level level, InputController input) {
 		this.game = game;
 		currentLevel = level;
-		
-		Entity player = currentLevel.getEntities().get(0);	// risky (?) assumption: Cendric is 1st entity in list
-		PositionComponent pos = (PositionComponent) player.getComponent(ComponentType.Position);
-		Vector3 mouseStartWorld = new Vector3(pos.x + 2*Constants.TILE_SIZE, pos.y + Constants.TILE_SIZE, 0);
-		Vector3 mouseStartScreen = game.camera.unproject(mouseStartWorld);
-		Gdx.input.setCursorPosition(Math.round(mouseStartScreen.x), Math.round(mouseStartScreen.y));
 
 		playerInput = new CendricInputSystem(input, level);
 		acceleration = new AccelerationSystem();

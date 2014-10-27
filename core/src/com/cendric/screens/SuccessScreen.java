@@ -20,7 +20,7 @@ public class SuccessScreen extends SplashScreen {
 	public Screen nextScreen() {
 		if (game.getCurrentLevel() > Resources.levelCount) {
 			game.setCurrentLevel(1);
-			return new TitleScreen(game);
+			return new MainMenuScreen(game, 0);
 		} else {
 			return new GameScreen(game);
 		}

@@ -12,11 +12,13 @@ import com.cendric.Constants;
 public class InputController {
 	
 	private Map<Key, Boolean> pressedKeys;
+	private Vector2 lastMousePosition;
 	private Vector2 mousePosition;
 	
 	public InputController(WorldController worldController) {
 		pressedKeys = new HashMap<Key, Boolean>();
 		mousePosition = new Vector2();
+		lastMousePosition = new Vector2();
 		Gdx.input.setCursorCatched(true);
 	}
 	
@@ -28,7 +30,12 @@ public class InputController {
 		return mousePosition;
 	}
 	
+	public Vector2 getMouseDelta() {
+		return mousePosition.cpy().sub(lastMousePosition);
+	}
+	
 	public void update() {
+		lastMousePosition = mousePosition.cpy();
 		mousePosition = new Vector2(Gdx.input.getX(), Constants.WINDOW_HEIGHT - Gdx.input.getY());
 		
 		if(Gdx.input.isKeyPressed(Input.Keys.A)){

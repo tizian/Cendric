@@ -54,7 +54,7 @@ public class SpellCollisionSystem extends UpdateSystem {
 			if (nextRect.overlaps(rect)) {
 				mov.vx = -mov.vx;
 				sp.numberReflections--;
-				if (sp.numberReflections <= 0) {
+				if (sp.numberReflections < 0) {
 					level.removeEntity(entity);
 				}
 				break;
@@ -70,7 +70,7 @@ public class SpellCollisionSystem extends UpdateSystem {
 			if (nextRect.overlaps(rect)) {
 				mov.vy = -mov.vy;
 				sp.numberReflections--;
-				if (sp.numberReflections <= 0) {
+				if (sp.numberReflections < 0) {
 					level.removeEntity(entity);
 				}
 				break;

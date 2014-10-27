@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -23,8 +22,6 @@ public class GameScreen implements Screen {
 	private WorldController worldController;
 	private InputController inputController;
 	private WorldView worldView;
-	
-	private Texture helpOverlay;
 
 	public GameScreen(CendricGame game) {
 		this.game = game;
@@ -39,9 +36,7 @@ public class GameScreen implements Screen {
 		
 		inputController = new InputController(worldController);
 		worldController = new WorldController(game, level, inputController);
-		worldView = new WorldView(level, inputController);
-		
-		helpOverlay = Resources.helpOverlay;
+		worldView = new WorldView(level);
 	}
 
 	@Override
@@ -50,10 +45,7 @@ public class GameScreen implements Screen {
 		worldController.update(delta);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-			Gdx.app.exit();
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
-			game.setScreen(new TutorialScreen(game, this));
+			game.setScreen(new MainMenuScreen(game, 0));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			game.setScreen(new GameScreen(game));
@@ -66,7 +58,6 @@ public class GameScreen implements Screen {
 		tiledMapRenderer.render();
 		
 		game.batch.begin();
-		game.batch.draw(helpOverlay, game.camera.position.x - Constants.WINDOW_WIDTH/2, game.camera.position.y - Constants.WINDOW_HEIGHT/2);
 		worldView.draw(game.batch);
 		game.batch.end();
 		
@@ -97,5 +88,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		// TODO this seems bad....
 	}
 }

@@ -57,9 +57,12 @@ public class Level {
 		
 		Vector2 start = computePosition(Constants.LAYER_START_POS);
 		entities.add(EntityFactory.createCendric(start.x, start.y));
+		
+		entities.add(EntityFactory.createCursor(start.y, start.x));
 
 		Vector2 end = computePosition(Constants.LAYER_END_POS);
 		entities.add(EntityFactory.createGargoyle(end.x, end.y));
+		
 	}
 	
 	public void updateEntityArray() {

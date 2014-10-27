@@ -11,7 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class Resources {
-	
+
 	// splash screens
 	public static Texture titleScreen;
 	public static Texture gameoverScreen;

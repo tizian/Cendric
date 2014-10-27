@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.cendric.screens.TitleScreen;
+import com.cendric.screens.MainMenuScreen;
 
 /**
  * @author tiz, iro
@@ -29,7 +29,7 @@ public class CendricGame extends Game {
 
 		// Set first Screen.
 		currentLevelID = 1;
-		this.setScreen(new TitleScreen(this));
+		this.setScreen(new MainMenuScreen(this, 0));
 	}
 
 	@Override

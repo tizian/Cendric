@@ -29,25 +29,30 @@ public class EntityFactory {
 	}
 	
 	public static Entity createSpellCast(SpellType type, float x, float y, float dx, float dy) {
-		Entity fire = new Entity("Spell");
+		Entity spell = new Entity("Spell");
 		
-		fire.addComponent(new SpellStateComponent(type));
-		fire.addComponent(new BoundingBoxComponent(new Rectangle(x+5, y+5, 20, 20)));
-		fire.addComponent(new PositionComponent(x, y));
-		fire.addComponent(new TextureComponent());
-		fire.addComponent(new AnimationStateComponent());
+		SpellStateComponent sp = new SpellStateComponent(type);
+		if (type == SpellType.ICE) {
+			sp.numberReflections = 1;
+		}
+		
+		spell.addComponent(sp);
+		spell.addComponent(new BoundingBoxComponent(new Rectangle(x+5, y+5, 20, 20)));
+		spell.addComponent(new PositionComponent(x, y));
+		spell.addComponent(new TextureComponent());
+		spell.addComponent(new AnimationStateComponent());
 		
 		MassComponent m = new MassComponent();
 		m.mass = 0;
-		fire.addComponent(m);
+		spell.addComponent(m);
 		
 		MovementComponent mov = new MovementComponent();
 		mov.vx = dx;
 		mov.vy = dy;
 		mov.ACCELERATION = 0;
-		fire.addComponent(mov);
+		spell.addComponent(mov);
 		
-		return fire;
+		return spell;
 	}
 	
 	public static Entity createGargoyle(float x, float y) {
@@ -61,5 +66,18 @@ public class EntityFactory {
 		gargoyle.addComponent(tex);
 		
 		return gargoyle;
+	}
+	
+	public static Entity createCursor(float x, float y) {
+		Entity cursor = new Entity("Cursor");
+		
+		cursor.addComponent(new PositionComponent(x, y));
+		cursor.addComponent(new BoundingBoxComponent(new Rectangle(x, y, 32, 32)));
+		
+		TextureComponent tex = new TextureComponent();
+		tex.texture = new TextureRegion(Resources.aimCursor);
+		cursor.addComponent(tex);
+		
+		return cursor;
 	}
 }
