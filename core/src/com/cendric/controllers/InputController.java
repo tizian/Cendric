@@ -19,7 +19,6 @@ public class InputController {
 		pressedKeys = new HashMap<Key, Boolean>();
 		mousePosition = new Vector2();
 		lastMousePosition = new Vector2();
-		Gdx.input.setCursorCatched(true);
 	}
 	
 	public Boolean isKeyPressed(Key key) {

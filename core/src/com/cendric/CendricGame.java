@@ -1,6 +1,7 @@
 package com.cendric;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -29,6 +30,7 @@ public class CendricGame extends Game {
 
 		// Set first Screen.
 		currentLevelID = 1;
+		Gdx.input.setCursorCatched(true);
 		this.setScreen(new MainMenuScreen(this, 0));
 	}
 

@@ -55,14 +55,31 @@ public class MainMenuScreen implements Screen {
         game.batch.draw(titleCendric, 860, 25);
         
         // Text
-        if (selection == 0) font.setColor(purple); else font.setColor(Color.WHITE);
+        font.setColor(Color.WHITE);
+        
         font.draw(game.batch, "START GAME", 280, 320);
-        if (selection == 1) font.setColor(purple); else font.setColor(Color.WHITE);
         font.draw(game.batch, "CONTROLS", 360, 245);
-        if (selection == 2) font.setColor(purple); else font.setColor(Color.WHITE);
         font.draw(game.batch, "ABOUT", 480, 170);
-        if (selection == 3) font.setColor(purple); else font.setColor(Color.WHITE);
         font.draw(game.batch, "EXIT", 520, 95);
+        
+        font.setColor(purple);
+        
+        if (selection == 0) {
+        	font.draw(game.batch, "START GAME", 280, 320);
+        	font.draw(game.batch, "<", 700, 320);
+        }
+        if (selection == 1) {
+        	font.draw(game.batch, "CONTROLS", 360, 245);
+        	font.draw(game.batch, "<", 700, 245);
+        }
+        if (selection == 2) {
+        	font.draw(game.batch, "ABOUT", 480, 170);
+        	font.draw(game.batch, "<", 700, 170);
+        }
+        if (selection == 3) {
+        	font.draw(game.batch, "EXIT", 520, 95);
+        	font.draw(game.batch, "<", 700, 95);
+        }
         
         game.batch.end();
         
