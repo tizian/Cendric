@@ -8,4 +8,5 @@ public enum ComponentType {
 	BoundingBox,
 	AnimationState,
 	SpellState,
+	CendricSpells,
 }

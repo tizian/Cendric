@@ -1,5 +1,6 @@
 package com.cendric.ecs.systems;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.controllers.InputController;
 import com.cendric.controllers.Key;
@@ -7,11 +8,10 @@ import com.cendric.ecs.Entity;
 import com.cendric.ecs.EntityFactory;
 import com.cendric.ecs.components.AnimationStateComponent;
 import com.cendric.ecs.components.BoundingBoxComponent;
+import com.cendric.ecs.components.CendricSpellsComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.ecs.components.PositionComponent;
-import com.cendric.ecs.components.SpellStateComponent;
-import com.cendric.ecs.components.SpellStateComponent.SpellType;
 import com.cendric.models.Level;
 
 public class CendricInputSystem extends UpdateSystem {
@@ -32,11 +32,11 @@ public class CendricInputSystem extends UpdateSystem {
 		if (!entity.tag.equals("Cendric")) return;
 		PositionComponent pos = (PositionComponent) entity.getComponent(ComponentType.Position);
 		MovementComponent mov = (MovementComponent) entity.getComponent(ComponentType.Movement);
-		SpellStateComponent sp = (SpellStateComponent) entity.getComponent(ComponentType.SpellState);
+		CendricSpellsComponent cp = (CendricSpellsComponent) entity.getComponent(ComponentType.CendricSpells);
 		AnimationStateComponent as = (AnimationStateComponent) entity.getComponent(ComponentType.AnimationState);
 		if (pos == null) return;
 		if (mov == null) return;
-		if (sp == null) return;
+		if (cp == null) return;
 		if (as == null) return;
 		
 		Entity cursor = level.getEntities().get(1);	// risky (?) assumption: cursor is 2nd entity in list
@@ -71,10 +71,19 @@ public class CendricInputSystem extends UpdateSystem {
 		}
 		
 		if (inputController.isKeyPressed(Key.NUM_1)) {
-			sp.spellType = SpellType.FIRE;
+			cp.setCurrentSpellIndex(0);
 		}
 		else if (inputController.isKeyPressed(Key.NUM_2)) {
-			sp.spellType = SpellType.ICE;
+			cp.setCurrentSpellIndex(1);
+		}
+		
+		int scrollAmount = inputController.getScrollAmount();
+		
+		if (scrollAmount == 1) {
+			cp.nextSpell();
+		}
+		else if (scrollAmount == -1) {
+			cp.previousSpell();
 		}
 		
 		if (inputController.isKeyPressed(Key.CAST) && castPossible) {
@@ -87,7 +96,7 @@ public class CendricInputSystem extends UpdateSystem {
 			}
 			Vector2 mousePosition = new Vector2(cursorPos.x, cursorPos.y);
 			Vector2 dir = mousePosition.sub(staffPosition).nor().scl(500);
-			level.addEntity(EntityFactory.createSpellCast(sp.spellType, staffPosition.x, staffPosition.y, dir.x, dir.y));
+			level.addEntity(EntityFactory.createSpellCast(cp.activeSpellType(), staffPosition.x, staffPosition.y, dir.x, dir.y));
 			castPossible = false;
 		}
 		else if(!inputController.isKeyPressed(Key.CAST)) {

@@ -50,6 +50,7 @@ public class WorldController {
 	}
 
 	public void update(float delta) {
+		if (game.isPaused()) return;
 		List<Entity> entities = currentLevel.getEntities();
 		
 		// Note: the update order is somewhat important

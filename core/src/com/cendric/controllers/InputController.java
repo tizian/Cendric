@@ -6,6 +6,7 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.Constants;
 
@@ -14,11 +15,22 @@ public class InputController {
 	private Map<Key, Boolean> pressedKeys;
 	private Vector2 lastMousePosition;
 	private Vector2 mousePosition;
+	private int scrollAmount;
 	
 	public InputController(WorldController worldController) {
 		pressedKeys = new HashMap<Key, Boolean>();
 		mousePosition = new Vector2();
 		lastMousePosition = new Vector2();
+		
+		scrollAmount = 0;
+		
+		Gdx.input.setInputProcessor(new InputAdapter() {
+			@Override
+			public boolean scrolled(int amount) {
+				scrollAmount = amount;
+				return true;
+			}
+		});
 	}
 	
 	public Boolean isKeyPressed(Key key) {
@@ -31,6 +43,12 @@ public class InputController {
 	
 	public Vector2 getMouseDelta() {
 		return mousePosition.cpy().sub(lastMousePosition);
+	}
+	
+	public int getScrollAmount() {
+		int ret = scrollAmount;
+		scrollAmount = 0;
+		return ret;
 	}
 	
 	public void update() {
@@ -78,5 +96,5 @@ public class InputController {
 		else {
 			pressedKeys.put(Key.NUM_2, false);
 		}
-	}  
+	}
 }

@@ -16,17 +16,31 @@ public class CendricGame extends Game {
 
 	// One SpriteBatch for the whole game. Passed on to all Screens.
 	public SpriteBatch batch;
+	public SpriteBatch guiBatch;
 	public ShapeRenderer shapeRenderer;
 	public OrthographicCamera camera;
 
 	private int currentLevelID;
+	
+	private boolean paused;
+	
+	public void pauseUnpause() {
+		paused = !paused;
+	}
+	
+	public boolean isPaused() {
+		return paused;
+	}
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
+		guiBatch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		camera = new OrthographicCamera();
 		Resources.load();
+		
+		paused = false;
 
 		// Set first Screen.
 		currentLevelID = 1;

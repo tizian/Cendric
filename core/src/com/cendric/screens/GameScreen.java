@@ -50,6 +50,9 @@ public class GameScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			game.setScreen(new GameScreen(game));
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
+			game.pauseUnpause();
+		}
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -64,6 +67,8 @@ public class GameScreen implements Screen {
 		game.shapeRenderer.begin(ShapeType.Line);
 		worldView.draw(game.shapeRenderer);
 		game.shapeRenderer.end();
+		
+		
 	}
 
 	@Override

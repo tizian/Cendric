@@ -1,7 +1,10 @@
 package com.cendric.controllers;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.cendric.ecs.Entity;
 import com.cendric.ecs.systems.SpriteRenderSystem;
 import com.cendric.models.Level;
 
@@ -12,17 +15,14 @@ public class WorldView {
 	
 	public WorldView(Level level) {
 		currentLevel = level;
-		
 		spriteSystem = new SpriteRenderSystem();
 	}
 	
 	public void draw(SpriteBatch batch) {
-		// Run render system
-		spriteSystem.render(currentLevel.getEntities(), batch);
+		List<Entity> entities = currentLevel.getEntities();
 		
-		// draw aim cursor
-//		Vector2 mousePosition = input.getMousePosition();
-//		batch.draw(Resources.aimCursor, mousePosition.x, mousePosition.y);
+		// Run render system
+		spriteSystem.render(entities, batch);
 	}
 	
 	public void draw(ShapeRenderer shapeRenderer) {
