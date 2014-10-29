@@ -86,7 +86,7 @@
  </layer>
  <layer name="Background Overlay" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRgAx4gZiPxnYIArEQEAvT0A5RIBYDYnEa2jEKBg8AAEy3AJQ=
+   eJxjYBgFo2AUjIJRgAx4gZiPxnYIArEQEAvT0A5RIBYDYnEa2jEcgAgZeDACAP93AZg=
   </data>
  </layer>
 </map>
