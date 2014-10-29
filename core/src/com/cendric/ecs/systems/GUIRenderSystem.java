@@ -38,11 +38,12 @@ public class GUIRenderSystem extends RenderSystem {
 			Vector2 center = new Vector2(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/2);
 			
 			Vector2 direction = input.getMousePosition().cpy().sub(center);
-			float angle = direction.angle() - 90.0f;
+			float angle = (direction.angle() - 90.0f);
+			if (angle < 0) angle += 360.0f;
 			
 			int selectedIndex = round(angle, 360.0f/cp.numberOfKnownSpells());
 			
-			System.out.println(input.getMousePosition().x + ", " + input.getMousePosition().y + ", " + selectedIndex);
+			System.out.println(angle + ", " + selectedIndex);
 			cp.setCurrentSpellIndex(selectedIndex);
 			
 			
