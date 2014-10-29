@@ -26,8 +26,6 @@ public class CendricGame extends Game {
 	
 	public void pauseUnpause() {
 		paused = !paused;
-		boolean cursorCatched = Gdx.input.isCursorCatched();
-		Gdx.input.setCursorCatched(!cursorCatched);
 	}
 	
 	public boolean isPaused() {

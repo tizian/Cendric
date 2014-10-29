@@ -7,6 +7,7 @@ import com.cendric.CendricGame;
 import com.cendric.Constants;
 import com.cendric.Resources;
 import com.cendric.controllers.InputController;
+import com.cendric.controllers.Key;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.CendricSpellsComponent;
 import com.cendric.ecs.components.ComponentType;
@@ -38,14 +39,18 @@ public class GUIRenderSystem extends RenderSystem {
 			Vector2 center = new Vector2(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/2);
 			
 			Vector2 direction = input.getMousePosition().cpy().sub(center);
+			if (direction.len() > circleR) {
+				direction.nor().scl(circleR-100);
+				input.setMousePosition(center.cpy().add(direction));
+				direction = input.getMousePosition().cpy().sub(center);
+			}
+			
 			float angle = (direction.angle() - 90.0f);
 			if (angle < 0) angle += 360.0f;
 			
 			int selectedIndex = round(angle, 360.0f/cp.numberOfKnownSpells());
 			
-			System.out.println(angle + ", " + selectedIndex);
 			cp.setCurrentSpellIndex(selectedIndex);
-			
 			
 			for (int i = 0; i < cp.numberOfKnownSpells(); i++) {
 				Vector2 pos = new Vector2(center.x + (float)Math.cos(startTheta + i * deltaTheta) * circleR, center.y + (float)Math.sin(startTheta + i *deltaTheta) * circleR);
@@ -63,6 +68,10 @@ public class GUIRenderSystem extends RenderSystem {
 				else if (i % 2 == 1) {
 					drawCircle(batch, Resources.spellIce1, pos.x, pos.y, 1.2f*18);
 				}
+			}
+			
+			if (input.isKeyPressed(Key.CAST)) {
+				game.pauseUnpause();
 			}
 		}
 	}
