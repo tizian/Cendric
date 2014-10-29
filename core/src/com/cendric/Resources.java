@@ -18,6 +18,10 @@ public class Resources {
 	public static Texture successScreen;
 	public static Texture tutorialScreen;
 	public static Texture helpOverlay;
+	
+	// GUI
+	public static Texture spellSlot;
+	public static Texture spellSlotSelected;
 
 	// spells
 	public static Texture spellFire1;
@@ -95,6 +99,10 @@ public class Resources {
 		successScreen = new Texture(Gdx.files.internal("successScreen.png"));
 		tutorialScreen = new Texture(Gdx.files.internal("tutorialScreen.png"));
 		helpOverlay = new Texture(Gdx.files.internal("helpOverlay.png"));
+		
+		// GUI
+		spellSlot = new Texture(Gdx.files.internal("gui/SpellSlot.png"));
+		spellSlotSelected = new Texture(Gdx.files.internal("gui/SpellSlotSelected.png"));
 		
 		// load textures spells
 		spellFire1 = new Texture(Gdx.files.internal("sprites/spells/spell_fire_1.png"));
@@ -181,6 +189,9 @@ public class Resources {
 	}
 
 	public static void dispose() {
+		
+		spellSlot.dispose();
+		spellSlotSelected.dispose();
 		
 		cendricIdleRight.dispose(); 
 		cendricWalking1.dispose(); 

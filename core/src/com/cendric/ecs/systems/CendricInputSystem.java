@@ -1,6 +1,5 @@
 package com.cendric.ecs.systems;
 
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.controllers.InputController;
 import com.cendric.controllers.Key;
@@ -75,6 +74,30 @@ public class CendricInputSystem extends UpdateSystem {
 		}
 		else if (inputController.isKeyPressed(Key.NUM_2)) {
 			cp.setCurrentSpellIndex(1);
+		}
+		else if (inputController.isKeyPressed(Key.NUM_3)) {
+			cp.setCurrentSpellIndex(2);
+		}
+		else if (inputController.isKeyPressed(Key.NUM_4)) {
+			cp.setCurrentSpellIndex(3);
+		}
+		else if (inputController.isKeyPressed(Key.NUM_5)) {
+			cp.setCurrentSpellIndex(4);
+		}
+		else if (inputController.isKeyPressed(Key.NUM_6)) {
+			cp.setCurrentSpellIndex(5);
+		}
+		else if (inputController.isKeyPressed(Key.NUM_7)) {
+			cp.setCurrentSpellIndex(6);
+		}
+		else if (inputController.isKeyPressed(Key.NUM_8)) {
+			cp.setCurrentSpellIndex(7);
+		}
+		else if (inputController.isKeyPressed(Key.NUM_9)) {
+			cp.setCurrentSpellIndex(8);
+		}
+		else if (inputController.isKeyPressed(Key.NUM_0)) {
+			cp.setCurrentSpellIndex(9);
 		}
 		
 		int scrollAmount = inputController.getScrollAmount();

@@ -9,6 +9,14 @@ public class CendricSpellsComponent extends Component {
 	private ArrayList<SpellType> knownSpells;
 	private int currentSpellIndex;
 	
+	public int numberOfKnownSpells() {
+		return knownSpells.size();
+	}
+	
+	public int activeSpellIndex() {
+		return currentSpellIndex;
+	}
+	
 	public SpellType activeSpellType() {
 		if (knownSpells.isEmpty()) return null;
 		return knownSpells.get(currentSpellIndex);

@@ -96,5 +96,61 @@ public class InputController {
 		else {
 			pressedKeys.put(Key.NUM_2, false);
 		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
+			pressedKeys.put(Key.NUM_3, true);
+		}
+		else {
+			pressedKeys.put(Key.NUM_3, false);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
+			pressedKeys.put(Key.NUM_4, true);
+		}
+		else {
+			pressedKeys.put(Key.NUM_4, false);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.NUM_5)) {
+			pressedKeys.put(Key.NUM_5, true);
+		}
+		else {
+			pressedKeys.put(Key.NUM_5, false);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.NUM_6)) {
+			pressedKeys.put(Key.NUM_6, true);
+		}
+		else {
+			pressedKeys.put(Key.NUM_6, false);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.NUM_7)) {
+			pressedKeys.put(Key.NUM_7, true);
+		}
+		else {
+			pressedKeys.put(Key.NUM_7, false);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.NUM_8)) {
+			pressedKeys.put(Key.NUM_8, true);
+		}
+		else {
+			pressedKeys.put(Key.NUM_8, false);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.NUM_9)) {
+			pressedKeys.put(Key.NUM_9, true);
+		}
+		else {
+			pressedKeys.put(Key.NUM_9, false);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.NUM_0)) {
+			pressedKeys.put(Key.NUM_0, true);
+		}
+		else {
+			pressedKeys.put(Key.NUM_0, false);
+		}
 	}
 }

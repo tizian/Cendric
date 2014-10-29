@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
 import com.cendric.Resources;
+import com.cendric.controllers.GUIView;
 import com.cendric.controllers.InputController;
 import com.cendric.controllers.WorldController;
 import com.cendric.controllers.WorldView;
@@ -22,6 +23,7 @@ public class GameScreen implements Screen {
 	private WorldController worldController;
 	private InputController inputController;
 	private WorldView worldView;
+	private GUIView guiView;
 
 	public GameScreen(CendricGame game) {
 		this.game = game;
@@ -37,6 +39,7 @@ public class GameScreen implements Screen {
 		inputController = new InputController(worldController);
 		worldController = new WorldController(game, level, inputController);
 		worldView = new WorldView(level);
+		guiView = new GUIView(game, level);
 	}
 
 	@Override
@@ -68,7 +71,9 @@ public class GameScreen implements Screen {
 		worldView.draw(game.shapeRenderer);
 		game.shapeRenderer.end();
 		
-		
+		game.guiBatch.begin();
+		guiView.draw(game.guiBatch);
+		game.guiBatch.end();
 	}
 
 	@Override
