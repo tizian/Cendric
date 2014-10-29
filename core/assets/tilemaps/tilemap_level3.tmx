@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="level3_tileset" tilewidth="64" tileheight="64">
-  <image source="level3_tileset.png" width="256" height="768"/>
+  <image source="level3_tileset.png" width="256" height="1024"/>
   <tile id="12">
    <animation>
     <frame tileid="12" duration="100"/>
@@ -58,15 +58,63 @@
     <frame tileid="46" duration="100"/>
    </animation>
   </tile>
+  <tile id="48">
+   <animation>
+    <frame tileid="48" duration="300"/>
+    <frame tileid="52" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="49">
+   <animation>
+    <frame tileid="49" duration="300"/>
+    <frame tileid="53" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="50">
+   <animation>
+    <frame tileid="50" duration="300"/>
+    <frame tileid="54" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="51">
+   <animation>
+    <frame tileid="51" duration="300"/>
+    <frame tileid="55" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="56">
+   <animation>
+    <frame tileid="56" duration="300"/>
+    <frame tileid="60" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="57">
+   <animation>
+    <frame tileid="57" duration="300"/>
+    <frame tileid="61" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="58">
+   <animation>
+    <frame tileid="58" duration="300"/>
+    <frame tileid="62" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="59">
+   <animation>
+    <frame tileid="59" duration="300"/>
+    <frame tileid="63" duration="300"/>
+   </animation>
+  </tile>
  </tileset>
  <layer name="Background" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJzjYWBg4BnFoxiIuXGw6WHfYDBnsNpB73gZxaN4FA9NDACicRdp
+   eJzjYWBg4BnFo3gUjzjMOQjcMIpRMQsUU9NMFTq4e9QOwpiTBEyuHQAQKBed
   </data>
  </layer>
  <layer name="Collidable" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGAS2BABmYVAAARZAA0Q==
+   eJxjYBgFo2AUjETAj8SWgWJaglE7BocdMmhYAYpH7aCtHQJkYFIBACk1BLg=
   </data>
  </layer>
  <layer name="Evil" width="25" height="20">
@@ -86,7 +134,7 @@
  </layer>
  <layer name="Background Overlay" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRgAx4gZiPxnYIArEQEAvT0A5RIBYDYnEa2jEcgAgZeDACAP93AZg=
+   eJxjYBgFo2AUjHRgDMRGNLbDEohthogdvEDMR2M7BIFYCIiFaWiHKBCLAbE4khgorq2gbBsom9pxb4nEtkGjB6MdIjgwLjtEyLSH1gAAagwGgQ==
   </data>
  </layer>
 </map>
