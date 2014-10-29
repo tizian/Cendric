@@ -1,21 +1,14 @@
 package com.cendric.models;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
-import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.cendric.Constants;
 import com.cendric.Resources;
 import com.cendric.ecs.Entity;
@@ -70,63 +63,6 @@ public class Level {
 		Vector2 end = computePosition(Constants.LAYER_END_POS);
 		entities.add(EntityFactory.createGargoyle(end.x, end.y));
 
-		animateTiles(getAllProperties());
-
-	}
-
-	/**
-	 * lets assume that all properties on the tileset are animation
-	 * properties... and that we have exactly one property per tile.
-	 * 
-	 * @return all properties
-	 */
-	private String[] getAllProperties() {
-		TiledMapTileSet tileSet = tiledMap.getTileSets().getTileSet(0);
-		Set<String> properties = new HashSet<String>();
-
-		for (TiledMapTile tile : tileSet) {
-			if (tile.getProperties().getKeys().hasNext()) {
-				properties.add(tile.getProperties().getKeys().next());
-			}
-		}
-
-		return properties.toArray(new String[properties.size()]);
-	}
-
-	/**
-	 * Animate tiles
-	 * 
-	 * @param properties
-	 *            the properties of the frames to be animated. They have to be
-	 *            like water_frame - 1 water_frame - 2 and then call
-	 *            animateTiles("water_frame")
-	 */
-	private void animateTiles(String... properties) {
-		if (properties == null)
-			return;
-		Array<StaticTiledMapTile> tiles;
-		TiledMapTileSet tileSet = tiledMap.getTileSets().getTileSet(0);
-
-		for (String property : properties) {
-			tiles = new Array<StaticTiledMapTile>();
-			for (TiledMapTile tile : tileSet) {
-				if (tile.getProperties().get(property) != null)
-					tiles.add(new StaticTiledMapTile(tile.getTextureRegion()));
-			}
-
-			for (MapLayer layer_ : tiledMap.getLayers()) {
-				TiledMapTileLayer layer = (TiledMapTileLayer) layer_;
-				for (int column = 0; column < layer.getWidth(); column++) {
-					for (int row = 0; row < layer.getHeight(); row++) {
-						Cell cell = layer.getCell(column, row);
-						if (cell == null || cell.getTile() == null)
-							continue;
-						if (cell.getTile().getProperties().get(property) != null)
-							cell.setTile(new AnimatedTiledMapTile(0.5f, tiles));
-					}
-				}
-			}
-		}
 	}
 
 	public void updateEntityArray() {
