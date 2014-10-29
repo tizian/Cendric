@@ -23,6 +23,10 @@ public class EntityFactory {
 		ArrayList<SpellType> knownSpells = new ArrayList<SpellType>();
 		knownSpells.add(SpellType.FIRE);
 		knownSpells.add(SpellType.ICE);
+		knownSpells.add(SpellType.FIRE);
+		knownSpells.add(SpellType.ICE);
+		knownSpells.add(SpellType.FIRE);
+		knownSpells.add(SpellType.ICE);
 		
 		cendric.addComponent(new PositionComponent(x, y));
 		cendric.addComponent(new BoundingBoxComponent(new Rectangle(x+5, y, 54, 115)));

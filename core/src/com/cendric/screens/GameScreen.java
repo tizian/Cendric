@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
 		inputController = new InputController(worldController);
 		worldController = new WorldController(game, level, inputController);
 		worldView = new WorldView(level);
-		guiView = new GUIView(game, level);
+		guiView = new GUIView(game, level, inputController);
 	}
 
 	@Override

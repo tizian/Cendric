@@ -13,9 +13,9 @@ public class GUIView {
 	
 	GUIRenderSystem guiRenderSystem;
 	
-	public GUIView(CendricGame game, Level level) {
+	public GUIView(CendricGame game, Level level, InputController input) {
 		currentLevel = level;
-		guiRenderSystem = new GUIRenderSystem(game);
+		guiRenderSystem = new GUIRenderSystem(game, input);
 	}
 	
 	public void draw(SpriteBatch batch) {
