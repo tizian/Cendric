@@ -40,7 +40,7 @@ public class GUIRenderSystem extends RenderSystem {
 			Vector2 direction = input.getMousePosition().cpy().sub(center);
 			float angle = direction.angle() - 90.0f;
 			
-			int selectedIndex = round(angle, (int) (360.0f/cp.numberOfKnownSpells()));
+			int selectedIndex = round(angle, 360.0f/cp.numberOfKnownSpells());
 			
 			System.out.println(input.getMousePosition().x + ", " + input.getMousePosition().y + ", " + selectedIndex);
 			cp.setCurrentSpellIndex(selectedIndex);
@@ -70,7 +70,7 @@ public class GUIRenderSystem extends RenderSystem {
 		batch.draw(tex, x-r, y-r, 2*r, 2*r);
 	}
 	
-	int round(double i, int v){
+	int round(double i, float v){
 	    return (int) (Math.round(i/v));
 	}
 }
