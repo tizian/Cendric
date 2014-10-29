@@ -22,6 +22,7 @@ public class Resources {
 	// GUI
 	public static Texture spellSlot;
 	public static Texture spellSlotSelected;
+	public static Texture blackOverlay;
 
 	// spells
 	public static Texture spellFire1;
@@ -103,6 +104,7 @@ public class Resources {
 		// GUI
 		spellSlot = new Texture(Gdx.files.internal("gui/SpellSlot.png"));
 		spellSlotSelected = new Texture(Gdx.files.internal("gui/SpellSlotSelected.png"));
+		blackOverlay = new Texture(Gdx.files.internal("gui/Overlay.png"));
 		
 		// load textures spells
 		spellFire1 = new Texture(Gdx.files.internal("sprites/spells/spell_fire_1.png"));
@@ -192,6 +194,7 @@ public class Resources {
 		
 		spellSlot.dispose();
 		spellSlotSelected.dispose();
+		blackOverlay.dispose();
 		
 		cendricIdleRight.dispose(); 
 		cendricWalking1.dispose(); 
