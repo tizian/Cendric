@@ -88,6 +88,8 @@ public class WorldController {
 		if (pos.y > currentLevel.getLevelRect().height - Constants.WINDOW_HEIGHT / 2) {
 			game.camera.position.y = currentLevel.getLevelRect().height - Constants.WINDOW_HEIGHT / 2;
 		}
+		game.camera.position.x = Math.round(game.camera.position.x);
+		game.camera.position.y = Math.round(game.camera.position.y);
 		game.camera.update();
 		game.batch.setProjectionMatrix(game.camera.combined);
 		game.shapeRenderer.setProjectionMatrix(game.camera.combined);
