@@ -43,8 +43,9 @@ public abstract class DynamicTile {
 	/**
 	 * called by a controller when the tile gets hit with a certain spell
 	 * @param spell the id of the spell the tile gets 
+	 * @return whether the spell should disappear or not after it has hit this tile
 	 */
-	public abstract void hit(SpellType spell);
+	public abstract boolean hit(SpellType spell);
 	
 	public Rectangle getRect() {
 		return rect;

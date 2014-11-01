@@ -38,7 +38,10 @@ public class SpellCollisionSystem extends UpdateSystem {
 		
 		for (DynamicTile tile : tiles) {
 			if (nextRect.overlaps(tile.getRect())) {
-				tile.hit(sp.spellType);
+				if (tile.hit(sp.spellType)) {
+					level.removeEntity(entity);
+					break;
+				}
 			}
 		}
 		

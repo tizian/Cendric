@@ -13,7 +13,9 @@ public class Constants {
 	public static final int LAYER_EVIL = 2;
 	public static final int LAYER_START_POS = 3;
 	public static final int LAYER_END_POS = 4;
+	public static final int LAYER_LEVERS = 5;
 	public static final int LAYER_MIN_COUNT = 5;
+	
 	
 	// Tiles
 	public static final int TILE_ICE_1_ID = 2;

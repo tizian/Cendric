@@ -1,7 +1,9 @@
 package com.cendric.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -29,6 +31,7 @@ public class Level {
 	protected List<Rectangle> collidableTiles;
 	protected List<Rectangle> evilTiles;
 	protected List<DynamicTile> dynamicTiles;
+	protected Map<String, Lever> leverMap;
 
 	protected List<Entity> entities;
 	protected List<Entity> toAdd;
@@ -50,10 +53,12 @@ public class Level {
 
 		evilTiles = new ArrayList<Rectangle>();
 		collidableTiles = new ArrayList<Rectangle>();
+		leverMap = new HashMap<String, Lever>();
 		computeCollidableTiles();
 		computeEvilTiles();
 		computeLevelRect();
 		loadDynamicTiles();
+		loadLevers();
 
 		Vector2 start = computePosition(Constants.LAYER_START_POS);
 		entities.add(EntityFactory.createCendric(start.x, start.y+5));
@@ -117,7 +122,6 @@ public class Level {
 		isComplete = true;
 	}
 
-	// TODO [iro] refactor this ugly shit
 	public void loadDynamicTiles() {
 		dynamicTiles = new ArrayList<DynamicTile>();
 		for (MapLayer layer_ : tiledMap.getLayers()) {
@@ -144,6 +148,37 @@ public class Level {
 				dynamicTiles.add(new WaterTile(column, row, this));
 			}
 		}
+		if (cell.getTile().getProperties().containsKey("bouncer")) {
+			Lever l = new Lever(column, row, this);
+			leverMap.put((String) cell.getTile().getProperties().get("bouncer"), l);
+			dynamicTiles.add(l);
+		}
+	}
+	
+	public void loadLevers() {
+		// check if we have a lever layer
+		if (tiledMap.getLayers().getCount() < 6) return;
+		
+		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(
+				Constants.LAYER_LEVERS);
+		
+		for (int column = 0; column < layer.getWidth(); column++) {
+			for (int row = 0; row < layer.getHeight(); row++) {
+				Cell cell = layer.getCell(column, row);
+				if (cell != null && cell.getTile() != null) {
+					if (cell.getTile().getProperties().containsKey("bouncer_id")) {
+						String id = (String) cell.getTile().getProperties().get("bouncer_id");
+						Lever l = leverMap.get(id);
+						if (l == null) {
+							System.err.println("No lever found for id " + id);
+						} else {
+							l.addCell(cell);
+						}
+					}
+				}
+			}
+		}
+		
 	}
 
 	/**

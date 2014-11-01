@@ -98,6 +98,10 @@ public class Resources {
 	// Gargoyle
 	public static Texture gargoyle;
 	
+	// Lever
+	public static Texture lever_active;
+	public static Texture lever_inactive;
+	
 	public static void load() {
 		
 		font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
@@ -194,6 +198,10 @@ public class Resources {
 		
 		// load gargoyle
 		gargoyle = new Texture(Gdx.files.internal("sprites/gargoyle.png"));
+		
+		// load lever
+		lever_inactive = new Texture(Gdx.files.internal("sprites/lever/bouncer_1.png"));
+		lever_active = new Texture(Gdx.files.internal("sprites/lever/bouncer_2.png"));
 	}
 	
 	public static TiledMap getMapForLevel(int levelID) {
@@ -238,6 +246,9 @@ public class Resources {
 		spellMoney2.dispose();
 		
 		gargoyle.dispose();
+		
+		lever_active.dispose();
+		lever_inactive.dispose();
 		
 		if (levelMap != null) {
 			for (TiledMap tm : levelMap.values()) {

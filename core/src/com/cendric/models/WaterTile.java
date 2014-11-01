@@ -15,8 +15,8 @@ public class WaterTile extends DynamicTile {
 		super(column, row, level);
 	}
 	
-	public void hit(SpellType spell) {
-		if (spell != SpellType.ICE) return;
+	public boolean hit(SpellType spell) {
+		if (spell != SpellType.ICE) return false;
 		TiledMapTileLayer layer = (TiledMapTileLayer) level.tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
 		if (layer.getCell(column, row) == null) {
 				layer.setCell(column, row, new Cell());
@@ -24,6 +24,7 @@ public class WaterTile extends DynamicTile {
 		layer.getCell(column, row).setTile(level.tiledMap.getTileSets().getTile(Constants.TILE_FROZEN_WATER_ID));
 		level.computeCollidableTiles();
 		level.loadDynamicTiles();
+		return false;
 	}
 
 	/**

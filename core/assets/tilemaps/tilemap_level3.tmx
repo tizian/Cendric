@@ -107,6 +107,49 @@
    </animation>
   </tile>
  </tileset>
+ <tileset firstgid="129" name="bouncer_tileset" tilewidth="64" tileheight="64">
+  <image source="bouncer_tileset.png" width="256" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="bouncer" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="bouncer" value="2"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="bouncer" value="3"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="bouncer" value="4"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="bouncer_id" value="1"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="bouncer_id" value="2"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="bouncer_id" value="3"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="bouncer_id" value="4"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="Background" width="25" height="20">
   <data encoding="base64" compression="zlib">
    eJxzYWBgcBnFo3gUj2jMA8WjdgysHSxQTE07VGgYFh50wD50wAF0wJwkYFj8h5CIAUVvgiA=
@@ -130,6 +173,14 @@
  <layer name="End Pos" width="25" height="20" visible="0">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGAbGAcaAdgAMAAAhoAAI=
+  </data>
+ </layer>
+ <layer name="Levers" width="25" height="20" visible="0">
+  <properties>
+   <property name="ID" value="1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGAQg0QunWAXUFeQAAxBABBw==
   </data>
  </layer>
  <layer name="Background Overlay" width="25" height="20">

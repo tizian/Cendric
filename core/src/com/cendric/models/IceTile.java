@@ -20,8 +20,8 @@ public class IceTile extends DynamicTile {
 		return rect;
 	}
 	
-	public void hit(SpellType spell) {
-		if (spell != SpellType.FIRE) return;
+	public boolean hit(SpellType spell) {
+		if (spell != SpellType.FIRE) return false;
 		TiledMapTileLayer layer = (TiledMapTileLayer) level.tiledMap.getLayers().get(Constants.LAYER_COLLIDABLE);
 		Cell cell = layer.getCell(column, row);
 		if (cell.getTile().getId() == Constants.TILE_ICE_1_ID) {
@@ -31,6 +31,7 @@ public class IceTile extends DynamicTile {
 			level.computeCollidableTiles();
 			level.loadDynamicTiles();
 		}
+		return false;
 	}
 
 	/**
