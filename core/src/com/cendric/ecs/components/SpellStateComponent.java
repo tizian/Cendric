@@ -3,7 +3,7 @@ package com.cendric.ecs.components;
 public class SpellStateComponent extends Component {
 	
 	public static enum SpellType {
-		FIRE, ICE;
+		FIRE, ICE, MONEY;
 	}
 	
 	public SpellType spellType;

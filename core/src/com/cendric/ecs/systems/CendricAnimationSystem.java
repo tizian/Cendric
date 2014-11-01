@@ -53,6 +53,8 @@ public class CendricAnimationSystem extends UpdateSystem {
 			tex.textureOverlay = as.facingLeft ? Resources.staffFireLeft.getKeyFrame(as.animationTime, true) : Resources.staffFireRight.getKeyFrame(as.animationTime, true);
 		} else if (cp.activeSpellType() == SpellType.ICE) {
 			tex.textureOverlay = as.facingLeft ? Resources.staffIceLeft.getKeyFrame(as.animationTime, true) : Resources.staffIceRight.getKeyFrame(as.animationTime, true);
+		} else if (cp.activeSpellType() == SpellType.MONEY) {
+			tex.textureOverlay = as.facingLeft ? Resources.staffMoneyLeft.getKeyFrame(as.animationTime, true) : Resources.staffMoneyRight.getKeyFrame(as.animationTime, true);
 		}
 	}
 

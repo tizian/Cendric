@@ -35,6 +35,11 @@ public class Resources {
 	public static Texture spellIce2;
 	private static final float SPELL_ICE_ANIMATION_DURATION = 0.15f;
 	
+	public static Animation spellMoney;
+	public static Texture spellMoney1;
+	public static Texture spellMoney2;
+	private static final float SPELL_MONEY_ANIMATION_DURATION = 0.15f;
+	
 	// cendric
 	public static Texture cendricIdleLeft;
 	public static Texture cendricIdleRight;
@@ -59,6 +64,8 @@ public class Resources {
 	public static Texture staffFire2;
 	public static Texture staffIce1;
 	public static Texture staffIce2;
+	public static Texture staffMoney1;
+	public static Texture staffMoney2;
 	
 	public static Animation staffFireLeft;
 	public static Animation staffFireRight;
@@ -67,6 +74,10 @@ public class Resources {
 	public static Animation staffIceLeft;
 	public static Animation staffIceRight;
 	private static final float STAFF_ICE_ANIMATION_DURATION = 0.15f;
+	
+	public static Animation staffMoneyLeft;
+	public static Animation staffMoneyRight;
+	private static final float STAFF_MONEY_ANIMATION_DURATION = 0.15f;
 	
 	// tiled maps
 	public static Map<Integer, TiledMap> levelMap;
@@ -108,6 +119,8 @@ public class Resources {
 		spellFire2 = new Texture(Gdx.files.internal("sprites/spells/spell_fire_2.png"));
 		spellIce1 = new Texture(Gdx.files.internal("sprites/spells/spell_ice_1.png"));
 		spellIce2 = new Texture(Gdx.files.internal("sprites/spells/spell_ice_2.png"));
+		spellMoney1 = new Texture(Gdx.files.internal("sprites/spells/spell_money_1.png"));
+		spellMoney2 = new Texture(Gdx.files.internal("sprites/spells/spell_money_2.png"));
 		
 		TextureRegion[] spellFireRegion = new TextureRegion[2];
 		spellFireRegion[0] = new TextureRegion(spellFire1);
@@ -120,6 +133,12 @@ public class Resources {
 		spellIceRegion[1] = new TextureRegion(spellIce2);
 		spellIce = new Animation(SPELL_ICE_ANIMATION_DURATION, spellIceRegion);
 		spells.put(SpellType.ICE, spellIce);
+		
+		TextureRegion[] spellMoneyRegion = new TextureRegion[2];
+		spellMoneyRegion[0] = new TextureRegion(spellMoney1);
+		spellMoneyRegion[1] = new TextureRegion(spellMoney2);
+		spellMoney = new Animation(SPELL_MONEY_ANIMATION_DURATION, spellMoneyRegion);
+		spells.put(SpellType.MONEY, spellMoney);
 		
 		// load textures cendric
 		cendricIdleRight = new Texture(Gdx.files.internal("sprites/cendric/cendric_idle.png"));
@@ -154,6 +173,8 @@ public class Resources {
 		staffFire2 = new Texture(Gdx.files.internal("sprites/cendric/staff_fire_2.png"));
 		staffIce1 = new Texture(Gdx.files.internal("sprites/cendric/staff_ice_1.png"));
 		staffIce2 = new Texture(Gdx.files.internal("sprites/cendric/staff_ice_2.png"));
+		staffMoney1 = new Texture(Gdx.files.internal("sprites/cendric/staff_money_1.png"));
+		staffMoney2 = new Texture(Gdx.files.internal("sprites/cendric/staff_money_2.png"));
 		
 		TextureRegion[] staffFireLeftRegion = new TextureRegion[2];
 		staffFireLeftRegion[0] = new TextureRegion(staffFire1);
@@ -180,6 +201,19 @@ public class Resources {
 		staffIceRightRegion[0] = new TextureRegion(staffIce1);
 		staffIceRightRegion[1] = new TextureRegion(staffIce2);
 		staffIceRight = new Animation(STAFF_ICE_ANIMATION_DURATION, staffIceRightRegion);
+		
+		TextureRegion[] staffMoneyLeftRegion = new TextureRegion[2];
+		staffMoneyLeftRegion[0] = new TextureRegion(staffMoney1);
+		staffMoneyLeftRegion[1] = new TextureRegion(staffMoney2);
+		for (TextureRegion r : staffMoneyLeftRegion) {
+			r.flip(true, false);
+		}
+		staffMoneyLeft = new Animation(STAFF_MONEY_ANIMATION_DURATION, staffMoneyLeftRegion);
+		
+		TextureRegion[] staffMoneyRightRegion = new TextureRegion[2];
+		staffMoneyRightRegion[0] = new TextureRegion(staffMoney1);
+		staffMoneyRightRegion[1] = new TextureRegion(staffMoney2);
+		staffMoneyRight = new Animation(STAFF_MONEY_ANIMATION_DURATION, staffMoneyRightRegion);
 		
 		// load gargoyle
 		gargoyle = new Texture(Gdx.files.internal("sprites/gargoyle.png"));

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="64" tileheight="64" backgroundcolor="#090b2d">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="64" tileheight="64" backgroundcolor="#1e0866">
  <tileset firstgid="1" name="level3_tileset" tilewidth="64" tileheight="64">
-  <image source="level3_tileset.png" width="256" height="1024"/>
+  <image source="level3_tileset.png" width="256" height="2048"/>
   <tile id="12">
    <animation>
     <frame tileid="12" duration="100"/>
@@ -109,7 +109,7 @@
  </tileset>
  <layer name="Background" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJzjYWBg4BnFo3gUjzjMOQjcMIpRMQsUU9NMFTq4e9QOwpiTBEyuHQAQKBed
+   eJxjYBgFo4C+gGegHTAKMAAPA+F4oTTeiLGDUjDU7WCBYmraoUIlc0DABQ170AH70AEH0AFzkoBh8R9CIgYADlYcfA==
   </data>
  </layer>
  <layer name="Collidable" width="25" height="20">
@@ -134,7 +134,7 @@
  </layer>
  <layer name="Background Overlay" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjHRgDMRGNLbDEohthogdvEDMR2M7BIFYCIiFaWiHKBCLAbE4khgorq2gbBsom9pxb4nEtkGjB6MdIjgwLjtEyLSH1gAAagwGgQ==
+   eJxjYBgFo2AUjHRgDMRGNLbDEohthogdvEDMR2M7BIFYCIiFaWiHKBCLAbE4khgorq2gbBsom9K4N0DjWyKxbdDokW4HLQEAqVwGhQ==
   </data>
  </layer>
 </map>

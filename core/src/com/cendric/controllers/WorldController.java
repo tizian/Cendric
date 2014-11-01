@@ -39,7 +39,7 @@ public class WorldController {
 		currentLevel = level;
 		inputController = input;
 
-		playerInput = new CendricInputSystem(game, input, level);
+		playerInput = new CendricInputSystem(input, level);
 		acceleration = new AccelerationSystem();
 		cendricAnimation = new CendricAnimationSystem();
 		spellAnimation = new SpellAnimationSystem();

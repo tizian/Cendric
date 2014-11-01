@@ -26,6 +26,7 @@ public class EntityFactory {
 		cendric.addComponent(new AnimationStateComponent());
 		
 		CendricSpellsComponent cp = new CendricSpellsComponent();
+		cp.learnSpell(SpellType.MONEY);
 		cp.learnSpell(SpellType.FIRE);
 		cp.learnSpell(SpellType.ICE);
 		

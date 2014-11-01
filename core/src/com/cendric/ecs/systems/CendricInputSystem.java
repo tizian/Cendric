@@ -1,7 +1,6 @@
 package com.cendric.ecs.systems;
 
 import com.badlogic.gdx.math.Vector2;
-import com.cendric.CendricGame;
 import com.cendric.controllers.InputController;
 import com.cendric.controllers.Key;
 import com.cendric.ecs.Entity;
@@ -16,12 +15,10 @@ import com.cendric.models.Level;
 
 public class CendricInputSystem extends UpdateSystem {
 	
-	private CendricGame game;
 	private InputController inputController;
 	private Level level;
 	
-	public CendricInputSystem(CendricGame game, InputController inputController, Level level) {
-		this.game = game;
+	public CendricInputSystem(InputController inputController, Level level) {
 		this.inputController = inputController;
 		this.level = level;
 	}
