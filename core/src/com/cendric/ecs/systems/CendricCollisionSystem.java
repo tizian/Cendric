@@ -31,6 +31,13 @@ public class CendricCollisionSystem extends UpdateSystem {
 		mov.grounded = false;
 		
 		List<Rectangle> collidableTiles = level.getCollidableTiles();
+		
+		for (Rectangle rect : collidableTiles) {
+			if (bb.boundingBox.overlaps(rect)) {
+				mov.vx = 0;
+				mov.vy = 0;
+			}
+		}
 
 		Rectangle nextRect = new Rectangle(bb.boundingBox);
 
