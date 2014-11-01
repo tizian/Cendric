@@ -5,6 +5,6 @@ Cendric
 
 Build with [libGDX](http://libgdx.badlogicgames.com/) and [Tiled Map Editor](http://www.mapeditor.org/) for the [Hackzurich 2014](http://www.hackzurich.com/).
 
-![Title Screen](https://github.com/tizian/Cendric/blob/master/core/assets/titleScreen.png)
+![Title Screen](https://github.com/tizian/Cendric/blob/master/screenshot1.png)
 
-![Screenshot](https://github.com/tizian/Cendric/blob/master/screenshot.png)
+![Screenshot](https://github.com/tizian/Cendric/blob/master/screenshot2.png)
