@@ -46,7 +46,7 @@ public class GUIRenderSystem extends RenderSystem {
 				cp.unlearnSpell();
 			}
 			
-			float slotRadius = Resources.spellSlot.getWidth() * 1.44f;
+			float slotRadius = Resources.spellSlot.getWidth() * 1.7f;
 			float circleR;
 			
 			if (cp.numberOfKnownSpells() == 1) {
@@ -61,8 +61,8 @@ public class GUIRenderSystem extends RenderSystem {
 			Vector2 center = new Vector2(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/2);
 			
 			Vector2 direction = input.getMousePosition().cpy().sub(center);
-			if (direction.len() > circleR) {
-				direction.nor().scl(circleR-100);
+			if (direction.len() > 50) {
+				direction.nor().scl(20);
 				input.setMousePosition(center.cpy().add(direction));
 				direction = input.getMousePosition().cpy().sub(center);
 			}
@@ -84,16 +84,16 @@ public class GUIRenderSystem extends RenderSystem {
 					drawCircle(batch, Resources.spellSlot, pos.x, pos.y, slotRadius);
 				}
 				
-				drawCircle(batch, Resources.getSpellAnimation(cp.spellTypeForIndex(i)).getKeyFrame(stateTime, true).getTexture(), pos.x, pos.y, 22);
+				drawCircle(batch, Resources.getSpellAnimation(cp.spellTypeForIndex(i)).getKeyFrame(stateTime, true).getTexture(), pos.x, pos.y, 20);
 				
 				Resources.font.setScale(1.8f);
 				Resources.font.drawWrapped(game.guiBatch, cp.spellTypeForIndex(i).name(), pos.x - 50, pos.y - 2.6f*18, 100, HAlignment.CENTER);
+				String number = String.valueOf(i+1);
+				if (i == 9) number = "0";
+				Resources.font.drawWrapped(game.guiBatch, number, pos.x-50.5f, pos.y + slotRadius - 5, 100, HAlignment.CENTER);
 			}
 			
-			int bla = input.getScrollAmount();	// resets internal scroll amount
-			System.out.println(bla);
-			bla = input.getScrollAmount();	// resets internal scroll amount
-			System.out.println(bla);
+				input.getScrollAmount();	// resets internal scroll amount
 			
 			if (input.isKeyPressed(Key.CAST) || input.isKeyPressed(Key.ESC)) {
 				game.pauseUnpause();
