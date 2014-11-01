@@ -227,11 +227,15 @@ public class Resources {
 		staffFire2.dispose();
 		staffIce1.dispose();
 		staffIce2.dispose();
+		staffMoney1.dispose();
+		staffMoney2.dispose();
 		
 		spellFire1.dispose();
 		spellFire2.dispose();
 		spellIce1.dispose();
 		spellIce2.dispose();
+		spellMoney1.dispose();
+		spellMoney2.dispose();
 		
 		gargoyle.dispose();
 		
