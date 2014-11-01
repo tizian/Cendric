@@ -23,21 +23,22 @@ public class Resources {
 	public static Texture blackOverlay;
 
 	// spells
-	public static Map<SpellType, Animation> spells;
+	private static Map<SpellType, Animation> spells;
+	private static Map<SpellType, Animation> staffEffects;
 	
-	public static Animation spellFire;
-	public static Texture spellFire1;
-	public static Texture spellFire2;
+	private static Animation spellFire;
+	private static Texture spellFire1;
+	private static Texture spellFire2;
 	private static final float SPELL_FIRE_ANIMATION_DURATION = 0.15f;
 	
-	public static Animation spellIce;
-	public static Texture spellIce1;
-	public static Texture spellIce2;
+	private static Animation spellIce;
+	private static Texture spellIce1;
+	private static Texture spellIce2;
 	private static final float SPELL_ICE_ANIMATION_DURATION = 0.15f;
 	
-	public static Animation spellMoney;
-	public static Texture spellMoney1;
-	public static Texture spellMoney2;
+	private static Animation spellMoney;
+	private static Texture spellMoney1;
+	private static Texture spellMoney2;
 	private static final float SPELL_MONEY_ANIMATION_DURATION = 0.15f;
 	
 	// cendric
@@ -60,31 +61,27 @@ public class Resources {
 	public static Texture aimCursor;
 	
 	// staff overlay
-	public static Texture staffFire1;
-	public static Texture staffFire2;
-	public static Texture staffIce1;
-	public static Texture staffIce2;
-	public static Texture staffMoney1;
-	public static Texture staffMoney2;
+	private static Texture staffFire1;
+	private static Texture staffFire2;
+	private static Texture staffIce1;
+	private static Texture staffIce2;
+	private static Texture staffMoney1;
+	private static Texture staffMoney2;
 	
-	public static Animation staffFireLeft;
-	public static Animation staffFireRight;
+	private static Animation staffFire;
 	private static final float STAFF_FIRE_ANIMATION_DURATION = 0.15f;
 	
-	public static Animation staffIceLeft;
-	public static Animation staffIceRight;
+	private static Animation staffIce;
 	private static final float STAFF_ICE_ANIMATION_DURATION = 0.15f;
 	
-	public static Animation staffMoneyLeft;
-	public static Animation staffMoneyRight;
+	private static Animation staffMoney;
 	private static final float STAFF_MONEY_ANIMATION_DURATION = 0.15f;
 	
 	// tiled maps
 	public static Map<Integer, TiledMap> levelMap;
-	public static TiledMap tiledMapLevel1;
-	public static TiledMap tiledMapLevel2;
-	public static TiledMap tiledMapLevel3;
-	public static int levelCount;
+	private static TiledMap tiledMapLevel1;
+	private static TiledMap tiledMapLevel2;
+	private static TiledMap tiledMapLevel3;
 	
 	public static void loadTiledMaps() {
 		// load tiled maps
@@ -96,7 +93,6 @@ public class Resources {
 		levelMap.put(2, tiledMapLevel1);
 		levelMap.put(3, tiledMapLevel2);
 		levelMap.put(1, tiledMapLevel3);
-		levelCount = levelMap.size();
 	}
 	
 	// Gargoyle
@@ -114,6 +110,7 @@ public class Resources {
 		// load spells
 		
 		spells = new HashMap<SpellType, Animation>();
+		staffEffects = new HashMap<SpellType, Animation>();
 		
 		spellFire1 = new Texture(Gdx.files.internal("sprites/spells/spell_fire_1.png"));
 		spellFire2 = new Texture(Gdx.files.internal("sprites/spells/spell_fire_2.png"));
@@ -175,45 +172,25 @@ public class Resources {
 		staffIce2 = new Texture(Gdx.files.internal("sprites/cendric/staff_ice_2.png"));
 		staffMoney1 = new Texture(Gdx.files.internal("sprites/cendric/staff_money_1.png"));
 		staffMoney2 = new Texture(Gdx.files.internal("sprites/cendric/staff_money_2.png"));
-		
-		TextureRegion[] staffFireLeftRegion = new TextureRegion[2];
-		staffFireLeftRegion[0] = new TextureRegion(staffFire1);
-		staffFireLeftRegion[1] = new TextureRegion(staffFire2);
-		for (TextureRegion r : staffFireLeftRegion) {
-			r.flip(true, false);
-		}
-		staffFireLeft = new Animation(STAFF_FIRE_ANIMATION_DURATION, staffFireLeftRegion);
-		
+
 		TextureRegion[] staffFireRightRegion = new TextureRegion[2];
 		staffFireRightRegion[0] = new TextureRegion(staffFire1);
 		staffFireRightRegion[1] = new TextureRegion(staffFire2);
-		staffFireRight = new Animation(STAFF_FIRE_ANIMATION_DURATION, staffFireRightRegion);
-		
-		TextureRegion[] staffIceLeftRegion = new TextureRegion[2];
-		staffIceLeftRegion[0] = new TextureRegion(staffIce1);
-		staffIceLeftRegion[1] = new TextureRegion(staffIce2);
-		for (TextureRegion r : staffIceLeftRegion) {
-			r.flip(true, false);
-		}
-		staffIceLeft = new Animation(STAFF_ICE_ANIMATION_DURATION, staffIceLeftRegion);
+		staffFire = new Animation(STAFF_FIRE_ANIMATION_DURATION, staffFireRightRegion);
 		
 		TextureRegion[] staffIceRightRegion = new TextureRegion[2];
 		staffIceRightRegion[0] = new TextureRegion(staffIce1);
 		staffIceRightRegion[1] = new TextureRegion(staffIce2);
-		staffIceRight = new Animation(STAFF_ICE_ANIMATION_DURATION, staffIceRightRegion);
-		
-		TextureRegion[] staffMoneyLeftRegion = new TextureRegion[2];
-		staffMoneyLeftRegion[0] = new TextureRegion(staffMoney1);
-		staffMoneyLeftRegion[1] = new TextureRegion(staffMoney2);
-		for (TextureRegion r : staffMoneyLeftRegion) {
-			r.flip(true, false);
-		}
-		staffMoneyLeft = new Animation(STAFF_MONEY_ANIMATION_DURATION, staffMoneyLeftRegion);
+		staffIce = new Animation(STAFF_ICE_ANIMATION_DURATION, staffIceRightRegion);
 		
 		TextureRegion[] staffMoneyRightRegion = new TextureRegion[2];
 		staffMoneyRightRegion[0] = new TextureRegion(staffMoney1);
 		staffMoneyRightRegion[1] = new TextureRegion(staffMoney2);
-		staffMoneyRight = new Animation(STAFF_MONEY_ANIMATION_DURATION, staffMoneyRightRegion);
+		staffMoney = new Animation(STAFF_MONEY_ANIMATION_DURATION, staffMoneyRightRegion);
+		
+		staffEffects.put(SpellType.FIRE, staffFire);
+		staffEffects.put(SpellType.ICE, staffIce);
+		staffEffects.put(SpellType.MONEY, staffMoney);
 		
 		// load gargoyle
 		gargoyle = new Texture(Gdx.files.internal("sprites/gargoyle.png"));
@@ -223,8 +200,15 @@ public class Resources {
 		return levelMap.get(levelID);
 	}
 	
-	public static Animation getSpellAnimation(SpellType spellType) {
-		return spells.get(spellType);
+	public static TextureRegion getSpellTexture(SpellType spellType, float stateTime) {
+		return spells.get(spellType).getKeyFrame(stateTime, true);
+	}
+	
+	public static TextureRegion getStaffEffectTexture(SpellType spellType, float stateTime, boolean facingLeft) {
+		TextureRegion keyFrame = staffEffects.get(spellType).getKeyFrame(stateTime, true);
+		TextureRegion ret = new TextureRegion(keyFrame);
+		ret.flip(facingLeft, false);
+		return ret;
 	}
 
 	public static void dispose() {

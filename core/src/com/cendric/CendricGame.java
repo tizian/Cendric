@@ -68,7 +68,7 @@ public class CendricGame extends Game {
 	}
 
 	public void setCurrentLevel(int levelID) {
-		if (levelID < 1 || levelID > Resources.levelCount) {
+		if (levelID < 1 || levelID > Resources.levelMap.size()) {
 			System.err.println("There is no level with level ID " + levelID
 					+ " loaded.");
 			return;

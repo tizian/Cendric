@@ -49,13 +49,6 @@ public class CendricAnimationSystem extends UpdateSystem {
 			tex.texture = as.facingLeft ? Resources.cendricJumpingLeftFrame : Resources.cendricJumpingRightFrame;
 		}
 		
-		if (cp.activeSpellType() == SpellType.FIRE) {
-			tex.textureOverlay = as.facingLeft ? Resources.staffFireLeft.getKeyFrame(as.animationTime, true) : Resources.staffFireRight.getKeyFrame(as.animationTime, true);
-		} else if (cp.activeSpellType() == SpellType.ICE) {
-			tex.textureOverlay = as.facingLeft ? Resources.staffIceLeft.getKeyFrame(as.animationTime, true) : Resources.staffIceRight.getKeyFrame(as.animationTime, true);
-		} else if (cp.activeSpellType() == SpellType.MONEY) {
-			tex.textureOverlay = as.facingLeft ? Resources.staffMoneyLeft.getKeyFrame(as.animationTime, true) : Resources.staffMoneyRight.getKeyFrame(as.animationTime, true);
-		}
+		tex.textureOverlay = Resources.getStaffEffectTexture(cp.activeSpellType(), as.animationTime, as.facingLeft);
 	}
-
 }

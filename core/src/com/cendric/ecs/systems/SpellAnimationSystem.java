@@ -21,7 +21,7 @@ public class SpellAnimationSystem extends UpdateSystem {
 		
 		as.animationTime += dt;
 		
-		tex.texture = Resources.getSpellAnimation(sp.spellType).getKeyFrame(as.animationTime, true);
+		tex.texture = Resources.getSpellTexture(sp.spellType, as.animationTime);
 	}
 
 }

@@ -84,7 +84,7 @@ public class GUIRenderSystem extends RenderSystem {
 					drawCircle(batch, Resources.spellSlot, pos.x, pos.y, slotRadius);
 				}
 				
-				drawCircle(batch, Resources.getSpellAnimation(cp.spellTypeForIndex(i)).getKeyFrame(stateTime, true).getTexture(), pos.x, pos.y, 20);
+				drawCircle(batch, Resources.getSpellTexture(cp.spellTypeForIndex(i), stateTime).getTexture(), pos.x, pos.y, 20);
 				
 				Resources.font.setScale(1.8f);
 				Resources.font.drawWrapped(game.guiBatch, cp.spellTypeForIndex(i).name(), pos.x - 50, pos.y - 2.6f*18, 100, HAlignment.CENTER);
