@@ -20,7 +20,7 @@
  </layer>
  <layer name="StartPos" width="40" height="20" visible="0">
   <data encoding="base64" compression="zlib">
-   eJztzkERAAAIA6DZv7QpdvqABCQAAPDHXAeoWg5gAAI=
+   eJztzjENAAAIA7Dh3zQW9hGSVkETAACgNdeB5xYNwAAC
   </data>
  </layer>
  <layer name="EndPos" width="40" height="20" visible="0">

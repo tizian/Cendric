@@ -14,5 +14,6 @@ public enum Key {
 	NUM_7,
 	NUM_8,
 	NUM_9,
-	NUM_0
+	NUM_0,
+	ESC,
 }

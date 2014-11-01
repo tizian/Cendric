@@ -56,7 +56,7 @@ public class Level {
 		loadDynamicTiles();
 
 		Vector2 start = computePosition(Constants.LAYER_START_POS);
-		entities.add(EntityFactory.createCendric(start.x, start.y));
+		entities.add(EntityFactory.createCendric(start.x, start.y+5));
 
 		entities.add(EntityFactory.createCursor(start.y, start.x));
 

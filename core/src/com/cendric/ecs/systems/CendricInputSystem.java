@@ -20,13 +20,10 @@ public class CendricInputSystem extends UpdateSystem {
 	private InputController inputController;
 	private Level level;
 	
-	private boolean castPossible;
-	
 	public CendricInputSystem(CendricGame game, InputController inputController, Level level) {
 		this.game = game;
 		this.inputController = inputController;
 		this.level = level;
-		castPossible = true;
 	}
 
 	@Override
@@ -105,16 +102,14 @@ public class CendricInputSystem extends UpdateSystem {
 		
 		int scrollAmount = inputController.getScrollAmount();
 		
-		if (!game.isPaused()) {
-			if (scrollAmount == 1) {
-				cp.nextSpell();
-			}
-			else if (scrollAmount == -1) {
-				cp.previousSpell();
-			}
+		if (scrollAmount == 1) {
+			cp.nextSpell();
+		}
+		else if (scrollAmount == -1) {
+			cp.previousSpell();
 		}
 		
-		if (inputController.isKeyPressed(Key.CAST) && castPossible) {
+		if (inputController.isKeyPressed(Key.CAST)) {
 			Vector2 staffPosition = new Vector2();
 			if (as.facingLeft) {
 				staffPosition = new Vector2(pos.x + 14, pos.y + 100);
@@ -125,10 +120,8 @@ public class CendricInputSystem extends UpdateSystem {
 			Vector2 mousePosition = new Vector2(cursorPos.x, cursorPos.y);
 			Vector2 dir = mousePosition.sub(staffPosition).nor().scl(500);
 			level.addEntity(EntityFactory.createSpellCast(cp.activeSpellType(), staffPosition.x, staffPosition.y, dir.x, dir.y));
-			castPossible = false;
 		}
 		else if(!inputController.isKeyPressed(Key.CAST)) {
-			castPossible = true;
 		}
 		
 		Vector2 mouseDelta = inputController.getMouseDelta();

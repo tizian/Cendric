@@ -49,7 +49,6 @@ public class GUIRenderSystem extends RenderSystem {
 			float slotRadius = Resources.spellSlot.getWidth() * 1.44f;
 			float circleR;
 			
-			
 			if (cp.numberOfKnownSpells() == 1) {
 				circleR = 0;
 			}
@@ -91,7 +90,12 @@ public class GUIRenderSystem extends RenderSystem {
 				Resources.font.drawWrapped(game.guiBatch, cp.spellTypeForIndex(i).name(), pos.x - 50, pos.y - 2.6f*18, 100, HAlignment.CENTER);
 			}
 			
-			if (input.isKeyPressed(Key.CAST)) {
+			int bla = input.getScrollAmount();	// resets internal scroll amount
+			System.out.println(bla);
+			bla = input.getScrollAmount();	// resets internal scroll amount
+			System.out.println(bla);
+			
+			if (input.isKeyPressed(Key.CAST) || input.isKeyPressed(Key.ESC)) {
 				game.pauseUnpause();
 			}
 		}

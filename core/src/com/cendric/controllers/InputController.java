@@ -2,6 +2,7 @@ package com.cendric.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -17,12 +18,16 @@ public class InputController {
 	private Vector2 mousePosition;
 	private int scrollAmount;
 	
+	private boolean clickPossible;
+	
 	public InputController(WorldController worldController) {
 		pressedKeys = new HashMap<Key, Boolean>();
 		mousePosition = new Vector2();
 		lastMousePosition = new Vector2();
 		
 		scrollAmount = 0;
+		
+		clickPossible = true;
 		
 		Gdx.input.setInputProcessor(new InputAdapter() {
 			@Override
@@ -80,10 +85,15 @@ public class InputController {
 			pressedKeys.put(Key.JUMP, false);
 		}
 		
-		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
+		if (Gdx.input.isButtonPressed(Buttons.LEFT) && clickPossible) {
 			pressedKeys.put(Key.CAST, true);
+			clickPossible = false;
 		}
-		else {
+		else if (Gdx.input.isButtonPressed(Buttons.LEFT) && !clickPossible) {
+			pressedKeys.put(Key.CAST, false);
+		}
+		else if (!Gdx.input.isButtonPressed(Buttons.LEFT)) {
+			clickPossible = true;
 			pressedKeys.put(Key.CAST, false);
 		}
 		
@@ -155,6 +165,13 @@ public class InputController {
 		}
 		else {
 			pressedKeys.put(Key.NUM_0, false);
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+			pressedKeys.put(Key.ESC, true);
+		}
+		else {
+			pressedKeys.put(Key.ESC, false);
 		}
 	}
 }
