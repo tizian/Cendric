@@ -36,6 +36,7 @@ public class SpellCollisionSystem extends UpdateSystem {
 		
 		List<DynamicTile> tiles = level.getDynamicTiles();
 		
+		// TODO remove
 		for (DynamicTile tile : tiles) {
 			if (nextRect.overlaps(tile.getRect())) {
 				if (tile.hit(sp.spellType)) {
@@ -64,6 +65,8 @@ public class SpellCollisionSystem extends UpdateSystem {
 			}
 		}
 		
+		// TODO foreach Entity e: if e has bounding box, do the same
+		
 		nextRect.x = bb.boundingBox.x;
 
 		// Check y direction
@@ -79,6 +82,8 @@ public class SpellCollisionSystem extends UpdateSystem {
 				break;
 			}
 		}
+		
+		// TODO foreach Entity e: if e has bounding box, do the same
 		
 		if (!bb.boundingBox.overlaps(level.getLevelRect())) {
 			level.removeEntity(entity);
