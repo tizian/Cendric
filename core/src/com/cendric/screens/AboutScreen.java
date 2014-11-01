@@ -9,21 +9,21 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
+import com.cendric.Resources;
 
 public class AboutScreen implements Screen {
 	
 	private CendricGame game;
 	
-	private BitmapFont font;
 	private Color purple = new Color(114/255f, 87/255f, 126/255f, 1f);
 	
 	public AboutScreen(CendricGame game) {
 		this.game = game;
 		
 		// Font
-		font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
-		font.setColor(Color.WHITE);
-		font.setScale(5);
+		Resources.font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
+		Resources.font.setColor(Color.WHITE);
+		Resources.font.setScale(5);
 	}
 
 	@Override
@@ -37,13 +37,13 @@ public class AboutScreen implements Screen {
 		
 		game.batch.begin();
 		
-		font.setScale(7);
-		font.setColor(purple);
-		font.draw(game.batch, "ABOUT", 80, 675);
+		Resources.font.setScale(7);
+		Resources.font.setColor(purple);
+		Resources.font.draw(game.batch, "ABOUT", 80, 675);
 		
-		font.setScale(5);
-		font.setColor(Color.WHITE);
-		font.drawWrapped(game.batch, "CENDRIC IS AWESOME <3", 0, 400, 1280, HAlignment.CENTER);
+		Resources.font.setScale(5);
+		Resources.font.setColor(Color.WHITE);
+		Resources.font.drawWrapped(game.batch, "CENDRIC IS AWESOME <3", 0, 400, 1280, HAlignment.CENTER);
 		
 		game.batch.end();
 		
@@ -74,6 +74,5 @@ public class AboutScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		font.dispose();
 	}
 }

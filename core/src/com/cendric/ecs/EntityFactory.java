@@ -1,7 +1,5 @@
 package com.cendric.ecs;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.cendric.Resources;
@@ -20,21 +18,18 @@ public class EntityFactory {
 	public static Entity createCendric(float x, float y) {
 		Entity cendric = new Entity("Cendric");
 		
-		ArrayList<SpellType> knownSpells = new ArrayList<SpellType>();
-		knownSpells.add(SpellType.FIRE);
-		knownSpells.add(SpellType.ICE);
-		knownSpells.add(SpellType.FIRE);
-		knownSpells.add(SpellType.ICE);
-		knownSpells.add(SpellType.FIRE);
-		knownSpells.add(SpellType.ICE);
-		
 		cendric.addComponent(new PositionComponent(x, y));
 		cendric.addComponent(new BoundingBoxComponent(new Rectangle(x+5, y, 54, 115)));
 		cendric.addComponent(new TextureComponent());
 		cendric.addComponent(new MovementComponent());
 		cendric.addComponent(new MassComponent());
 		cendric.addComponent(new AnimationStateComponent());
-		cendric.addComponent(new CendricSpellsComponent(knownSpells));
+		
+		CendricSpellsComponent cp = new CendricSpellsComponent();
+		cp.learnSpell(SpellType.FIRE);
+		cp.learnSpell(SpellType.ICE);
+		
+		cendric.addComponent(cp);
 		
 		return cendric;
 	}

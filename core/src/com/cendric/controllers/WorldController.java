@@ -23,6 +23,7 @@ public class WorldController {
 
 	private Level currentLevel;
 	
+	private InputController inputController;
 	private CendricInputSystem playerInput;
 	private AccelerationSystem acceleration;
 	private CendricAnimationSystem cendricAnimation;
@@ -36,8 +37,9 @@ public class WorldController {
 	public WorldController(CendricGame game, Level level, InputController input) {
 		this.game = game;
 		currentLevel = level;
+		inputController = input;
 
-		playerInput = new CendricInputSystem(input, level);
+		playerInput = new CendricInputSystem(game, input, level);
 		acceleration = new AccelerationSystem();
 		cendricAnimation = new CendricAnimationSystem();
 		spellAnimation = new SpellAnimationSystem();
@@ -50,7 +52,10 @@ public class WorldController {
 	}
 
 	public void update(float delta) {
+		inputController.update();
+		
 		if (game.isPaused()) return;
+		
 		List<Entity> entities = currentLevel.getEntities();
 		
 		// Note: the update order is somewhat important

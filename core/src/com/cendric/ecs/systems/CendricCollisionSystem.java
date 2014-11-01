@@ -36,17 +36,18 @@ public class CendricCollisionSystem extends UpdateSystem {
 
 		// Check x direction
 		nextRect.x = nextRect.x + mov.vx * dt;
-
-		if (!level.getLevelRect().contains(nextRect) && nextRect.y <= level.getLevelRect().y + level.getLevelRect().height && nextRect.y >= level.getLevelRect().y) {
-			if (mov.vx > 0) {
+		
+		if (!level.getLevelRect().contains(nextRect)) {		//  && nextRect.y <= level.getLevelRect().y + level.getLevelRect().height && nextRect.y >= level.getLevelRect().y
+			if (nextRect.x + nextRect.width > level.getLevelRect().x + level.getLevelRect().width) {
 				bb.boundingBox.x = level.getLevelRect().x + level.getLevelRect().width - bb.boundingBox.width;
 				pos.x = bb.boundingBox.x - 5;	// TODO hardcoded offset to BB (also in other places)
+				mov.vx = 0;
 			}
-			else if (mov.vx < 0) {
+			else if (nextRect.x < level.getLevelRect().x) {
 				bb.boundingBox.x = level.getLevelRect().x;
 				pos.x = bb.boundingBox.x - 5;
+				mov.vx = 0;
 			}
-			mov.vx = 0;
 		}
 
 		for (Rectangle rect : collidableTiles) {
@@ -68,6 +69,14 @@ public class CendricCollisionSystem extends UpdateSystem {
 
 		// Check y direction
 		nextRect.y = nextRect.y + mov.vy * dt;
+		
+		if (!level.getLevelRect().contains(nextRect)) {
+			if (nextRect.y + nextRect.height > level.getLevelRect().y + level.getLevelRect().height) {
+				bb.boundingBox.y = level.getLevelRect().y + level.getLevelRect().height - bb.boundingBox.height;
+				pos.y = bb.boundingBox.y;
+				mov.vy = 0;
+			}
+		}
 
 		for (Rectangle rect : collidableTiles) {
 			if (nextRect.overlaps(rect)) {
