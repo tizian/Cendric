@@ -7,11 +7,11 @@ import com.cendric.ecs.Entity;
 
 public abstract class RenderSystem {
 	
-	public void render(List<Entity> entities, SpriteBatch spriteBatch) {
+	public void render(List<Entity> entities, SpriteBatch spriteBatch, float stateTime) {
 		for (Entity e : entities) {
-			render(e, spriteBatch);
+			render(e, spriteBatch, stateTime);
 		}
 	}
 	
-	protected abstract void render(Entity entity, SpriteBatch spriteBatch);
+	protected abstract void render(Entity entity, SpriteBatch spriteBatch, float stateTime);
 }

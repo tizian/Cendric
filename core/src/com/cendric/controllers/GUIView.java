@@ -18,10 +18,10 @@ public class GUIView {
 		guiRenderSystem = new GUIRenderSystem(game, input);
 	}
 	
-	public void draw(SpriteBatch batch) {
+	public void draw(SpriteBatch batch, float stateTime) {
 		List<Entity> entities = currentLevel.getEntities();
 		
 		// Run gui render system
-		guiRenderSystem.render(entities, batch);
+		guiRenderSystem.render(entities, batch, stateTime);
 	}
 }

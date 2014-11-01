@@ -27,12 +27,10 @@ public class GUIRenderSystem extends RenderSystem {
 	}
 
 	@Override
-	protected void render(Entity entity, SpriteBatch batch) {
+	protected void render(Entity entity, SpriteBatch batch, float stateTime) {
 		if (!entity.tag.equals("Cendric")) return;
 		CendricSpellsComponent cp = (CendricSpellsComponent) entity.getComponent(ComponentType.CendricSpells);
 		if (cp == null) return;
-		
-		float r = Resources.spellSlot.getWidth() * 1.2f;
 		
 		if (game.isPaused()) {
 			batch.draw(Resources.blackOverlay, 0, 0);
@@ -40,14 +38,17 @@ public class GUIRenderSystem extends RenderSystem {
 			Resources.font.setScale(6);
 			Resources.font.drawWrapped(game.guiBatch, "SPELL SELECTION", 0, 700, Constants.WINDOW_WIDTH, HAlignment.CENTER);
 			
+			// TODO DEBUG MODE
 			if (Gdx.input.isKeyJustPressed(Input.Keys.NUMPAD_1)) {
 				cp.learnSpell(SpellType.FIRE);
 			}
 			else if (Gdx.input.isKeyJustPressed(Input.Keys.NUMPAD_2)) {
 				cp.unlearnSpell();
 			}
-
-			float circleR = Constants.WINDOW_HEIGHT / 3.5f;
+			
+			float slotRadius = Resources.spellSlot.getWidth() * 1.44f;
+			float circleR;
+			
 			
 			if (cp.numberOfKnownSpells() == 1) {
 				circleR = 0;
@@ -78,18 +79,13 @@ public class GUIRenderSystem extends RenderSystem {
 				Vector2 pos = new Vector2(center.x + (float)Math.cos(startTheta + i * deltaTheta) * circleR, center.y + (float)Math.sin(startTheta + i *deltaTheta) * circleR);
 				
 				if (i == cp.activeSpellIndex()) {
-					drawCircle(batch, Resources.spellSlotSelected, pos.x, pos.y, 1.2f*r);
+					drawCircle(batch, Resources.spellSlotSelected, pos.x, pos.y, slotRadius);
 				}
 				else {
-					drawCircle(batch, Resources.spellSlot, pos.x, pos.y, 1.2f*r);
+					drawCircle(batch, Resources.spellSlot, pos.x, pos.y, slotRadius);
 				}
 				
-				if (i % 2 == 0) {
-					drawCircle(batch, Resources.spellFire1, pos.x, pos.y, 1.2f*18);
-				}
-				else if (i % 2 == 1) {
-					drawCircle(batch, Resources.spellIce1, pos.x, pos.y, 1.2f*18);
-				}
+				drawCircle(batch, Resources.getSpellAnimation(cp.spellTypeForIndex(i)).getKeyFrame(stateTime, true).getTexture(), pos.x, pos.y, 22);
 				
 				Resources.font.setScale(1.8f);
 				Resources.font.drawWrapped(game.guiBatch, cp.spellTypeForIndex(i).name(), pos.x - 50, pos.y - 2.6f*18, 100, HAlignment.CENTER);

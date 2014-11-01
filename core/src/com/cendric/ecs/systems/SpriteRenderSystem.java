@@ -9,7 +9,7 @@ import com.cendric.ecs.components.TextureComponent;
 public class SpriteRenderSystem extends RenderSystem {
 
 	@Override
-	protected void render(Entity entity, SpriteBatch spriteBatch) {
+	protected void render(Entity entity, SpriteBatch spriteBatch, float stateTime) {
 		PositionComponent pos = (PositionComponent) entity.getComponent(ComponentType.Position);
 		TextureComponent tex = (TextureComponent) entity.getComponent(ComponentType.Texture);
 		if (pos == null) return;

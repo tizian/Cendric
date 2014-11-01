@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.cendric.ecs.components.SpellStateComponent.SpellType;
 
 public class Resources {
 
@@ -22,16 +23,17 @@ public class Resources {
 	public static Texture blackOverlay;
 
 	// spells
+	public static Map<SpellType, Animation> spells;
+	
+	public static Animation spellFire;
 	public static Texture spellFire1;
 	public static Texture spellFire2;
 	private static final float SPELL_FIRE_ANIMATION_DURATION = 0.15f;
 	
+	public static Animation spellIce;
 	public static Texture spellIce1;
 	public static Texture spellIce2;
 	private static final float SPELL_ICE_ANIMATION_DURATION = 0.15f;
-	
-	public static Animation spellFire;
-	public static Animation spellIce;
 	
 	// cendric
 	public static Texture cendricIdleLeft;
@@ -98,7 +100,10 @@ public class Resources {
 		spellSlotSelected = new Texture(Gdx.files.internal("gui/SpellSlotSelected.png"));
 		blackOverlay = new Texture(Gdx.files.internal("gui/Overlay.png"));
 		
-		// load textures spells
+		// load spells
+		
+		spells = new HashMap<SpellType, Animation>();
+		
 		spellFire1 = new Texture(Gdx.files.internal("sprites/spells/spell_fire_1.png"));
 		spellFire2 = new Texture(Gdx.files.internal("sprites/spells/spell_fire_2.png"));
 		spellIce1 = new Texture(Gdx.files.internal("sprites/spells/spell_ice_1.png"));
@@ -108,11 +113,13 @@ public class Resources {
 		spellFireRegion[0] = new TextureRegion(spellFire1);
 		spellFireRegion[1] = new TextureRegion(spellFire2);
 		spellFire = new Animation(SPELL_FIRE_ANIMATION_DURATION, spellFireRegion);
+		spells.put(SpellType.FIRE, spellFire);
 		
 		TextureRegion[] spellIceRegion = new TextureRegion[2];
 		spellIceRegion[0] = new TextureRegion(spellIce1);
 		spellIceRegion[1] = new TextureRegion(spellIce2);
 		spellIce = new Animation(SPELL_ICE_ANIMATION_DURATION, spellIceRegion);
+		spells.put(SpellType.ICE, spellIce);
 		
 		// load textures cendric
 		cendricIdleRight = new Texture(Gdx.files.internal("sprites/cendric/cendric_idle.png"));
@@ -180,6 +187,10 @@ public class Resources {
 	
 	public static TiledMap getMapForLevel(int levelID) {
 		return levelMap.get(levelID);
+	}
+	
+	public static Animation getSpellAnimation(SpellType spellType) {
+		return spells.get(spellType);
 	}
 
 	public static void dispose() {

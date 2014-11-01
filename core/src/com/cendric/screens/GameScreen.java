@@ -24,6 +24,8 @@ public class GameScreen implements Screen {
 	private InputController inputController;
 	private WorldView worldView;
 	private GUIView guiView;
+	
+	private float stateTime;
 
 	public GameScreen(CendricGame game) {
 		this.game = game;
@@ -40,10 +42,14 @@ public class GameScreen implements Screen {
 		worldController = new WorldController(game, level, inputController);
 		worldView = new WorldView(level);
 		guiView = new GUIView(game, level, inputController);
+		
+		stateTime = 0.0f;
 	}
 
 	@Override
 	public void render(float delta) {
+		stateTime += delta;
+		
 		worldController.update(delta);
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
@@ -63,7 +69,7 @@ public class GameScreen implements Screen {
 		tiledMapRenderer.render();
 		
 		game.batch.begin();
-		worldView.draw(game.batch);
+		worldView.draw(game.batch, stateTime);
 		game.batch.end();
 		
 		game.shapeRenderer.begin(ShapeType.Line);
@@ -71,7 +77,7 @@ public class GameScreen implements Screen {
 		game.shapeRenderer.end();
 		
 		game.guiBatch.begin();
-		guiView.draw(game.guiBatch);
+		guiView.draw(game.guiBatch, stateTime);
 		game.guiBatch.end();
 	}
 

@@ -10,19 +10,18 @@ import com.cendric.models.Level;
 
 public class WorldView {
 	private Level currentLevel;
-	
-	SpriteRenderSystem spriteSystem;
+	private SpriteRenderSystem spriteSystem;
 	
 	public WorldView(Level level) {
 		currentLevel = level;
 		spriteSystem = new SpriteRenderSystem();
 	}
 	
-	public void draw(SpriteBatch batch) {
+	public void draw(SpriteBatch batch, float stateTime) {
 		List<Entity> entities = currentLevel.getEntities();
 		
 		// Run render system
-		spriteSystem.render(entities, batch);
+		spriteSystem.render(entities, batch, stateTime);
 	}
 	
 	public void draw(ShapeRenderer shapeRenderer) {

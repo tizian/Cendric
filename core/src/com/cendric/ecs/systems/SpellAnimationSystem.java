@@ -21,17 +21,7 @@ public class SpellAnimationSystem extends UpdateSystem {
 		
 		as.animationTime += dt;
 		
-		switch (sp.spellType) {
-		case FIRE:
-			tex.texture = Resources.spellFire.getKeyFrame(as.animationTime, true);
-			break;
-			
-		case ICE:
-			tex.texture = Resources.spellIce.getKeyFrame(as.animationTime, true);
-
-		default:
-			break;
-		}
+		tex.texture = Resources.getSpellAnimation(sp.spellType).getKeyFrame(as.animationTime, true);
 	}
 
 }
