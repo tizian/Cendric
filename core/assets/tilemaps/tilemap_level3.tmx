@@ -109,12 +109,12 @@
  </tileset>
  <layer name="Background" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4C+gGegHTAKMAAPA+F4oTTeiLGDUjDU7WCBYmraoUIlc0DABQ170AH70AEH0AFzkoBh8R9CIgYADlYcfA==
+   eJxzYWBgcBnFo3gUj2jMA8WjdgysHSxQTE07VGgYFh50wD50wAF0wJwkYFj8h5CIAUVvgiA=
   </data>
  </layer>
  <layer name="Collidable" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjETAj8SWgWJaglE7BocdMmhYAYpH7aCtHQJkYFIBACk1BLg=
+   eJxjYBgFo2AUjETAj8T2AmInGtsHssONxnb4MdDHH140tsOPhnYEMSDiAoTdgTiYyna4MSDSFAj7A7E3DexwQrIH5AdnKtsRBMUw/7hTYIcAGZhUAABtowqQ
   </data>
  </layer>
  <layer name="Evil" width="25" height="20">
@@ -134,7 +134,7 @@
  </layer>
  <layer name="Background Overlay" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjHRgDMRGNLbDEohthogdvEDMR2M7BIFYCIiFaWiHKBCLAbE4khgorq2gbBsom9K4N0DjWyKxbdDokW4HLQEAqVwGhQ==
+   eJxjYBgFo4C+gGegHUBnQKl/1aniCvzAGIiNaGyHJRDbDBE7eIGYj8Z2CAKxEBAL09AOUSAWA2JxJDFQXFtB2TZQNqVxb4DGt0Ri26DRI90OWgIAwX8GxA==
   </data>
  </layer>
 </map>

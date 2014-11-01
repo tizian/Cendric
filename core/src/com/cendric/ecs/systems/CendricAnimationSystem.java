@@ -7,7 +7,6 @@ import com.cendric.ecs.components.AnimationStateComponent.State;
 import com.cendric.ecs.components.CendricSpellsComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
-import com.cendric.ecs.components.SpellStateComponent.SpellType;
 import com.cendric.ecs.components.TextureComponent;
 
 public class CendricAnimationSystem extends UpdateSystem {
