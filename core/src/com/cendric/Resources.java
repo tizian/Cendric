@@ -6,18 +6,15 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class Resources {
 
-	// splash screens
-	public static Texture titleScreen;
-	public static Texture gameoverScreen;
-	public static Texture successScreen;
-	public static Texture tutorialScreen;
-	public static Texture helpOverlay;
+	// Font
+	public static BitmapFont font;
 	
 	// GUI
 	public static Texture spellSlot;
@@ -94,12 +91,7 @@ public class Resources {
 	
 	public static void load() {
 		
-		// load splash screens
-		titleScreen = new Texture(Gdx.files.internal("titleScreen.png"));
-		gameoverScreen = new Texture(Gdx.files.internal("gameoverScreen.png"));
-		successScreen = new Texture(Gdx.files.internal("successScreen.png"));
-		tutorialScreen = new Texture(Gdx.files.internal("tutorialScreen.png"));
-		helpOverlay = new Texture(Gdx.files.internal("helpOverlay.png"));
+		font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
 		
 		// GUI
 		spellSlot = new Texture(Gdx.files.internal("gui/SpellSlot.png"));
@@ -191,6 +183,8 @@ public class Resources {
 	}
 
 	public static void dispose() {
+		
+		font.dispose();
 		
 		spellSlot.dispose();
 		spellSlotSelected.dispose();

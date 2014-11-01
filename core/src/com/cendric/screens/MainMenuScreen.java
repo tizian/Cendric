@@ -7,11 +7,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
+import com.cendric.Resources;
 
 public class MainMenuScreen implements Screen {
 	
@@ -21,8 +21,7 @@ public class MainMenuScreen implements Screen {
 	private Texture titleCendric;
 	private Animation casino;
 	
-	private BitmapFont font;
-	private Color purple = new Color(114/255f, 87/255f, 126/255f, 1f);
+	private Color purple;
 	
 	private int selection;
 	private float stateTime;
@@ -35,11 +34,6 @@ public class MainMenuScreen implements Screen {
 		titleText = new Texture(Gdx.files.internal("menu/CendricTitle.png"));
 		titleCendric = new Texture(Gdx.files.internal("menu/CendricHero.png"));
 		
-		// Font
-		font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
-		font.setColor(Color.WHITE);
-		font.setScale(5);
-		
 		// Animation
 		Texture casino1 = new Texture(Gdx.files.internal("menu/CasinoEdition1.png"));
 		Texture casino2 = new Texture(Gdx.files.internal("menu/CasinoEdition2.png"));
@@ -47,6 +41,8 @@ public class MainMenuScreen implements Screen {
 		casinoRegion[0] = new TextureRegion(casino1);
 		casinoRegion[1] = new TextureRegion(casino2);
 		casino = new Animation(ANIMATION_TIME, casinoRegion);
+		
+		purple = new Color(114/255f, 87/255f, 126/255f, 1f);
 		
 		this.selection = selection;
 		stateTime = 0.0f;
@@ -77,41 +73,41 @@ public class MainMenuScreen implements Screen {
         game.batch.draw(titleCendric, 820, -50, titleCendric.getWidth()/3, titleCendric.getHeight()/3);
         
         // Text
-        font.setScale(5);
-        font.setColor(Color.WHITE);
+        Resources.font.setScale(5);
+        Resources.font.setColor(Color.WHITE);
         
 //        float startHeight = 390;
         float startHeight = 310;
         float deltaHeight = 60;
         
-        font.draw(game.batch, "START GAME", 280, startHeight);
-        font.draw(game.batch, "CONTROLS", 360, startHeight-deltaHeight);
-        font.draw(game.batch, "ABOUT", 480, startHeight-2*deltaHeight);
-        font.draw(game.batch, "EXIT", 520, startHeight-3*deltaHeight);
+        Resources.font.draw(game.batch, "START GAME", 280, startHeight);
+        Resources.font.draw(game.batch, "CONTROLS", 360, startHeight-deltaHeight);
+        Resources.font.draw(game.batch, "ABOUT", 480, startHeight-2*deltaHeight);
+        Resources.font.draw(game.batch, "EXIT", 520, startHeight-3*deltaHeight);
         
-        font.setColor(purple);
+        Resources.font.setColor(purple);
         
         if (selection == 0) {
-        	font.draw(game.batch, "START GAME", 280, startHeight);
-        	font.draw(game.batch, "<", 700, startHeight);
+        	Resources.font.draw(game.batch, "START GAME", 280, startHeight);
+        	Resources.font.draw(game.batch, "<", 700, startHeight);
         }
         if (selection == 1) {
-        	font.draw(game.batch, "CONTROLS", 360, startHeight-deltaHeight);
-        	font.draw(game.batch, "<", 700, startHeight-deltaHeight);
+        	Resources.font.draw(game.batch, "CONTROLS", 360, startHeight-deltaHeight);
+        	Resources.font.draw(game.batch, "<", 700, startHeight-deltaHeight);
         }
         if (selection == 2) {
-        	font.draw(game.batch, "ABOUT", 480, startHeight-2*deltaHeight);
-        	font.draw(game.batch, "<", 700, startHeight-2*deltaHeight);
+        	Resources.font.draw(game.batch, "ABOUT", 480, startHeight-2*deltaHeight);
+        	Resources.font.draw(game.batch, "<", 700, startHeight-2*deltaHeight);
         }
         if (selection == 3) {
-        	font.draw(game.batch, "EXIT", 520, startHeight-3*deltaHeight);
-        	font.draw(game.batch, "<", 700, startHeight-3*deltaHeight);
+        	Resources.font.draw(game.batch, "EXIT", 520, startHeight-3*deltaHeight);
+        	Resources.font.draw(game.batch, "<", 700, startHeight-3*deltaHeight);
         }
         
-        font.setScale(2.4f);
-        font.setColor(Color.WHITE);
+        Resources.font.setScale(2.4f);
+        Resources.font.setColor(Color.WHITE);
         
-        font.drawWrapped(game.batch, "& 2014 - ISABELLE ROESCH - TIZIAN ZELTNER", 0, 50, 1280, HAlignment.CENTER);
+        Resources.font.drawWrapped(game.batch, "& 2014 - ISABELLE ROESCH - TIZIAN ZELTNER", 0, 50, 1280, HAlignment.CENTER);
         
         game.batch.end();
         
@@ -166,6 +162,5 @@ public class MainMenuScreen implements Screen {
 	public void dispose() {
 		titleText.dispose();
 		titleCendric.dispose();
-		font.dispose();
 	}
 }

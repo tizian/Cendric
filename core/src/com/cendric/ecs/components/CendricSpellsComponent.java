@@ -17,6 +17,10 @@ public class CendricSpellsComponent extends Component {
 		return currentSpellIndex;
 	}
 	
+	public SpellType spellTypeForIndex(int index) {
+		return knownSpells.get(index);
+	}
+	
 	public SpellType activeSpellType() {
 		if (knownSpells.isEmpty()) return null;
 		return knownSpells.get(currentSpellIndex);
@@ -44,8 +48,16 @@ public class CendricSpellsComponent extends Component {
 		}
 	}
 	
-	public CendricSpellsComponent(ArrayList<SpellType> knownSpells) {
-		this.knownSpells = knownSpells;
+	public void learnSpell(SpellType spellType) {
+		knownSpells.add(spellType);
+	}
+	
+	public void unlearnSpell() {
+		knownSpells.remove(knownSpells.size()-1);
+	}
+	
+	public CendricSpellsComponent() {
+		knownSpells = new ArrayList<SpellType>();
 		currentSpellIndex = 0;
 	}
 

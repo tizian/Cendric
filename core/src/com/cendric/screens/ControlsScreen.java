@@ -9,21 +9,21 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
+import com.cendric.Resources;
 
 public class ControlsScreen implements Screen {
 	
 	private CendricGame game;
 	
-	private BitmapFont font;
 	private Color purple = new Color(114/255f, 87/255f, 126/255f, 1f);
 	
 	public ControlsScreen(CendricGame game) {
 		this.game = game;
 		
 		// Font
-		font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
-		font.setColor(Color.WHITE);
-		font.setScale(5);
+		Resources.font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
+		Resources.font.setColor(Color.WHITE);
+		Resources.font.setScale(5);
 	}
 
 	@Override
@@ -37,15 +37,15 @@ public class ControlsScreen implements Screen {
 		
 		game.batch.begin();
 		
-		font.setScale(7);
-		font.setColor(purple);
-		font.draw(game.batch, "CONTROLS", 80, 675);
+		Resources.font.setScale(7);
+		Resources.font.setColor(purple);
+		Resources.font.draw(game.batch, "CONTROLS", 80, 675);
 		
-		font.setScale(5);
-		font.setColor(Color.WHITE);
-		font.drawMultiLine(game.batch, "A / D\nSPACE\n1 / 2\nMOUSE\nMOUSE BUTTON", 80, 550, 500, HAlignment.RIGHT);
-		font.drawMultiLine(game.batch, "-\n-\n-\n-\n-", 580, 550, 80, HAlignment.CENTER);
-		font.drawMultiLine(game.batch, "MOVE\nJUMP\nSELECT SPELL\nAIM SPELL\nCAST SPELL\n", 660, 550, 500, HAlignment.LEFT);
+		Resources.font.setScale(5);
+		Resources.font.setColor(Color.WHITE);
+		Resources.font.drawMultiLine(game.batch, "A / D\nSPACE\nTAB\nNUMBER KEYS\nMOUSE\nMOUSE BUTTON", 80, 550, 500, HAlignment.RIGHT);
+		Resources.font.drawMultiLine(game.batch, "-\n-\n-\n-\n-", 580, 550, 80, HAlignment.CENTER);
+		Resources.font.drawMultiLine(game.batch, "MOVE\nJUMP\nSPELL SELECTION\nTOGGLE SPELL\nAIM SPELL\nCAST SPELL\n", 660, 550, 500, HAlignment.LEFT);
 		
 		
 		game.batch.end();
@@ -77,7 +77,6 @@ public class ControlsScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		font.dispose();
 	}
 
 }

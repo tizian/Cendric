@@ -44,10 +44,9 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		inputController.update();
 		worldController.update(delta);
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 			game.setScreen(new MainMenuScreen(game, 0));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {

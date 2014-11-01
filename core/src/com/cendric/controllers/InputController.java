@@ -37,10 +37,6 @@ public class InputController {
 		return pressedKeys.get(key);
 	}
 	
-	public void keyPressHandled(Key key) {
-		pressedKeys.put(key, false);
-	}
-	
 	public void setMousePosition(Vector2 pos) {
 		Gdx.input.setCursorPosition((int)pos.x, (int)(Constants.WINDOW_HEIGHT - pos.y));
 	}

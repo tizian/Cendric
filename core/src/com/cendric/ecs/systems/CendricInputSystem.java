@@ -1,6 +1,7 @@
 package com.cendric.ecs.systems;
 
 import com.badlogic.gdx.math.Vector2;
+import com.cendric.CendricGame;
 import com.cendric.controllers.InputController;
 import com.cendric.controllers.Key;
 import com.cendric.ecs.Entity;
@@ -15,12 +16,14 @@ import com.cendric.models.Level;
 
 public class CendricInputSystem extends UpdateSystem {
 	
+	private CendricGame game;
 	private InputController inputController;
 	private Level level;
 	
 	private boolean castPossible;
 	
-	public CendricInputSystem(InputController inputController, Level level) {
+	public CendricInputSystem(CendricGame game, InputController inputController, Level level) {
+		this.game = game;
 		this.inputController = inputController;
 		this.level = level;
 		castPossible = true;
@@ -102,11 +105,13 @@ public class CendricInputSystem extends UpdateSystem {
 		
 		int scrollAmount = inputController.getScrollAmount();
 		
-		if (scrollAmount == 1) {
-			cp.nextSpell();
-		}
-		else if (scrollAmount == -1) {
-			cp.previousSpell();
+		if (!game.isPaused()) {
+			if (scrollAmount == 1) {
+				cp.nextSpell();
+			}
+			else if (scrollAmount == -1) {
+				cp.previousSpell();
+			}
 		}
 		
 		if (inputController.isKeyPressed(Key.CAST) && castPossible) {

@@ -1,7 +1,10 @@
 package com.cendric.ecs.systems;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
@@ -11,6 +14,7 @@ import com.cendric.controllers.Key;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.CendricSpellsComponent;
 import com.cendric.ecs.components.ComponentType;
+import com.cendric.ecs.components.SpellStateComponent.SpellType;
 
 public class GUIRenderSystem extends RenderSystem {
 	
@@ -32,8 +36,26 @@ public class GUIRenderSystem extends RenderSystem {
 		
 		if (game.isPaused()) {
 			batch.draw(Resources.blackOverlay, 0, 0);
+			
+			Resources.font.setScale(6);
+			Resources.font.drawWrapped(game.guiBatch, "SPELL SELECTION", 0, 700, Constants.WINDOW_WIDTH, HAlignment.CENTER);
+			
+			if (Gdx.input.isKeyJustPressed(Input.Keys.NUMPAD_1)) {
+				cp.learnSpell(SpellType.FIRE);
+			}
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.NUMPAD_2)) {
+				cp.unlearnSpell();
+			}
 
-			float circleR = Constants.WINDOW_HEIGHT / 4;
+			float circleR = Constants.WINDOW_HEIGHT / 3.5f;
+			
+			if (cp.numberOfKnownSpells() == 1) {
+				circleR = 0;
+			}
+			else {
+				circleR = Constants.WINDOW_HEIGHT / 8 + cp.numberOfKnownSpells() * 12;
+			}
+			
 			float startTheta = (float) (Math.PI / 2);
 			float deltaTheta = (float) (2*Math.PI / cp.numberOfKnownSpells());
 			Vector2 center = new Vector2(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/2);
@@ -68,6 +90,9 @@ public class GUIRenderSystem extends RenderSystem {
 				else if (i % 2 == 1) {
 					drawCircle(batch, Resources.spellIce1, pos.x, pos.y, 1.2f*18);
 				}
+				
+				Resources.font.setScale(1.8f);
+				Resources.font.drawWrapped(game.guiBatch, cp.spellTypeForIndex(i).name(), pos.x - 50, pos.y - 2.6f*18, 100, HAlignment.CENTER);
 			}
 			
 			if (input.isKeyPressed(Key.CAST)) {
