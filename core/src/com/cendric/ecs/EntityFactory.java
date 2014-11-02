@@ -123,6 +123,7 @@ public class EntityFactory {
 		t.addComponent(tex);
 		
 		BoundingBoxComponent bb = new BoundingBoxComponent(new Rectangle(x + 10, y, Constants.TILE_SIZE - 20, Constants.TILE_SIZE));
+		bb.active = false;
 		t.addComponent(bb);
 		
 		LeverComponent l = new LeverComponent();
