@@ -3,6 +3,7 @@ package com.cendric.ecs.systems;
 import com.badlogic.gdx.math.Vector2;
 import com.cendric.controllers.InputController;
 import com.cendric.controllers.Key;
+import com.cendric.controllers.Level;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.EntityFactory;
 import com.cendric.ecs.components.AnimationStateComponent;
@@ -11,7 +12,6 @@ import com.cendric.ecs.components.CendricSpellsComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.ecs.components.PositionComponent;
-import com.cendric.models.Level;
 
 public class CendricInputSystem extends UpdateSystem {
 	

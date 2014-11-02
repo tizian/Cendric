@@ -16,7 +16,7 @@ import com.cendric.ecs.systems.GargoyleSystem;
 import com.cendric.ecs.systems.MovementSystem;
 import com.cendric.ecs.systems.SpellAnimationSystem;
 import com.cendric.ecs.systems.SpellCollisionSystem;
-import com.cendric.models.Level;
+import com.cendric.ecs.systems.TileSpellCollisionSystem;
 public class WorldController {
 	
 	private CendricGame game;
@@ -30,6 +30,7 @@ public class WorldController {
 	private SpellAnimationSystem spellAnimation;
 	private CendricCollisionSystem cendricCollision;
 	private SpellCollisionSystem spellCollision;
+	private TileSpellCollisionSystem tileSpellCollision;
 	private CendricDeathSystem cendricDeath;
 	private MovementSystem movement;
 	private GargoyleSystem gargoyle;
@@ -44,6 +45,7 @@ public class WorldController {
 		cendricAnimation = new CendricAnimationSystem();
 		spellAnimation = new SpellAnimationSystem();
 		
+		tileSpellCollision = new TileSpellCollisionSystem(level);
 		cendricCollision = new CendricCollisionSystem(level);
 		spellCollision = new SpellCollisionSystem(level);
 		cendricDeath = new CendricDeathSystem(game, level);
@@ -58,11 +60,14 @@ public class WorldController {
 		
 		List<Entity> entities = currentLevel.getEntities();
 		
+//		System.out.println("# entities: " + entities.size());
+		
 		// Note: the update order is somewhat important
 		
 		playerInput.update(entities, delta);
 		acceleration.update(entities, delta);
 		
+		tileSpellCollision.update(entities, delta);
 		spellCollision.update(entities, delta);
 		cendricCollision.update(entities, delta);
 		

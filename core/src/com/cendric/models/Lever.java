@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.cendric.Constants;
 import com.cendric.Resources;
+import com.cendric.controllers.Level;
 import com.cendric.ecs.components.SpellStateComponent.SpellType;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 

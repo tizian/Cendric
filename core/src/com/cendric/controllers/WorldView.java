@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.systems.SpriteRenderSystem;
-import com.cendric.models.Level;
 
 public class WorldView {
 	private Level currentLevel;

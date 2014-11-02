@@ -5,11 +5,11 @@ import java.util.List;
 import com.badlogic.gdx.math.Rectangle;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
+import com.cendric.controllers.Level;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.BoundingBoxComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.PositionComponent;
-import com.cendric.models.Level;
 import com.cendric.screens.GameOverScreen;
 
 public class CendricDeathSystem extends UpdateSystem {

@@ -9,4 +9,5 @@ public enum ComponentType {
 	AnimationState,
 	SpellState,
 	CendricSpells,
+	DynamicTile,
 }

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.cendric.CendricGame;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.systems.GUIRenderSystem;
-import com.cendric.models.Level;
 
 public class GUIView {
 	private Level currentLevel;

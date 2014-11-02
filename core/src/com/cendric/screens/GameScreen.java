@@ -12,9 +12,9 @@ import com.cendric.Constants;
 import com.cendric.Resources;
 import com.cendric.controllers.GUIView;
 import com.cendric.controllers.InputController;
+import com.cendric.controllers.Level;
 import com.cendric.controllers.WorldController;
 import com.cendric.controllers.WorldView;
-import com.cendric.models.Level;
 
 public class GameScreen implements Screen {
 	

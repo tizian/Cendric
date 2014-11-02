@@ -1,10 +1,10 @@
 package com.cendric.ecs.systems;
 
 import com.cendric.CendricGame;
+import com.cendric.controllers.Level;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.BoundingBoxComponent;
 import com.cendric.ecs.components.ComponentType;
-import com.cendric.models.Level;
 import com.cendric.screens.SuccessScreen;
 
 public class GargoyleSystem extends UpdateSystem {

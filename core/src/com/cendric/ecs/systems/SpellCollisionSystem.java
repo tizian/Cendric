@@ -1,15 +1,15 @@
 package com.cendric.ecs.systems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.cendric.controllers.Level;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.BoundingBoxComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.ecs.components.SpellStateComponent;
-import com.cendric.models.DynamicTile;
-import com.cendric.models.Level;
 
 public class SpellCollisionSystem extends UpdateSystem {
 	
@@ -31,30 +31,27 @@ public class SpellCollisionSystem extends UpdateSystem {
 
 		Rectangle nextRect = new Rectangle(bb.boundingBox);
 		
-		nextRect.x = nextRect.x + mov.vx * dt;
-		nextRect.y = nextRect.y + mov.vy * dt;
-		
-		List<DynamicTile> tiles = level.getDynamicTiles();
-		
-		// TODO remove
-		for (DynamicTile tile : tiles) {
-			if (nextRect.overlaps(tile.getRect())) {
-				if (tile.hit(sp.spellType)) {
-					level.removeEntity(entity);
-					break;
-				}
-			}
-		}
-		
 		nextRect.x = bb.boundingBox.x;
 		nextRect.y = bb.boundingBox.y;
 		
-		List<Rectangle> collidableTiles = level.getCollidableTiles();
-
+		List<Rectangle> collidables = new ArrayList<Rectangle>();
+		collidables.addAll(level.getCollidableTiles());
+		
+		List<Entity> entities = level.getEntities();
+		for (Entity e : entities) {
+			if (e.equals(entity)) continue;
+			if (e.tag.equals("Spell")) continue;	// TODO better handling for what collides with what
+			if (e.tag.equals("Cendric")) continue;
+			BoundingBoxComponent bbc = (BoundingBoxComponent) e.getComponent(ComponentType.BoundingBox);
+			if (bbc != null && bbc.active) {
+				collidables.add(bbc.boundingBox);
+			}
+		}
+		
 		// Check x direction
 		nextRect.x = nextRect.x + mov.vx * dt;
 
-		for (Rectangle rect : collidableTiles) {
+		for (Rectangle rect : collidables) {
 			if (nextRect.overlaps(rect)) {
 				mov.vx = -mov.vx;
 				sp.numberReflections--;
@@ -65,14 +62,12 @@ public class SpellCollisionSystem extends UpdateSystem {
 			}
 		}
 		
-		// TODO foreach Entity e: if e has bounding box, do the same
-		
 		nextRect.x = bb.boundingBox.x;
 
 		// Check y direction
 		nextRect.y = nextRect.y + mov.vy * dt;
 
-		for (Rectangle rect : collidableTiles) {
+		for (Rectangle rect : collidables) {
 			if (nextRect.overlaps(rect)) {
 				mov.vy = -mov.vy;
 				sp.numberReflections--;

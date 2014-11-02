@@ -1,14 +1,15 @@
 package com.cendric.ecs.systems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.cendric.controllers.Level;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.components.BoundingBoxComponent;
 import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.ecs.components.PositionComponent;
-import com.cendric.models.Level;
 
 public class CendricCollisionSystem extends UpdateSystem {
 	
@@ -30,9 +31,22 @@ public class CendricCollisionSystem extends UpdateSystem {
 		
 		mov.grounded = false;
 		
-		List<Rectangle> collidableTiles = level.getCollidableTiles();
+		List<Rectangle> collidables = new ArrayList<Rectangle>();
+				
+		collidables.addAll(level.getCollidableTiles());
 		
-		for (Rectangle rect : collidableTiles) {
+		List<Entity> entities = level.getEntities();
+		for (Entity e : entities) {
+			if (e.equals(entity)) continue;
+			if (e.tag.equals("Spell")) continue;	// TODO better handling for what collides with what
+			if (e.tag.equals("Gargoyle")) continue;
+			BoundingBoxComponent bbc = (BoundingBoxComponent) e.getComponent(ComponentType.BoundingBox);
+			if (bbc != null && bbc.active) {
+				collidables.add(bbc.boundingBox);
+			}
+		}
+		
+		for (Rectangle rect : collidables) {
 			if (bb.boundingBox.overlaps(rect)) {
 				mov.vx = 0;
 				mov.vy = 0;
@@ -57,7 +71,7 @@ public class CendricCollisionSystem extends UpdateSystem {
 			}
 		}
 
-		for (Rectangle rect : collidableTiles) {
+		for (Rectangle rect : collidables) {
 			if (nextRect.overlaps(rect)) {
 				if (mov.vx > 0) {
 					bb.boundingBox.x = rect.x - bb.boundingBox.width;
@@ -85,7 +99,7 @@ public class CendricCollisionSystem extends UpdateSystem {
 			}
 		}
 
-		for (Rectangle rect : collidableTiles) {
+		for (Rectangle rect : collidables) {
 			if (nextRect.overlaps(rect)) {
 				if (mov.vy < 0) {
 					mov.grounded = true;
@@ -100,7 +114,5 @@ public class CendricCollisionSystem extends UpdateSystem {
 				break;
 			}
 		}
-		
-		// TODO in future, check all entities with collision component as well
 	}
 }
