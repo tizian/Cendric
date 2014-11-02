@@ -50,8 +50,7 @@ public class CendricCollisionSystem extends UpdateSystem {
 		for (Rectangle rect : collidables) {
 			if (bb.boundingBox.overlaps(rect)) {
 				System.out.println("stuck");
-				mov.vx = 0;
-				mov.vy = 0;
+				return;
 			}
 		}
 
