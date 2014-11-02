@@ -121,7 +121,7 @@ public class MainMenuScreen implements Screen {
         }
         else if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
         	if (selection == 0) {
-        		game.setScreen(new GameScreen(game));
+        		game.setScreen(new LevelSelectionScreen(game));
         	}
         	else if (selection == 1) {
         		game.setScreen(new ControlsScreen(game));

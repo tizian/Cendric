@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
@@ -15,15 +14,12 @@ public class AboutScreen implements Screen {
 	
 	private CendricGame game;
 	
-	private Color purple = new Color(114/255f, 87/255f, 126/255f, 1f);
+	private Color purple;
 	
 	public AboutScreen(CendricGame game) {
 		this.game = game;
 		
-		// Font
-		Resources.font = new BitmapFont(Gdx.files.internal("font/font.fnt"), false);
-		Resources.font.setColor(Color.WHITE);
-		Resources.font.setScale(5);
+		purple = new Color(114/255f, 87/255f, 126/255f, 1f);
 	}
 
 	@Override
@@ -39,7 +35,7 @@ public class AboutScreen implements Screen {
 		
 		Resources.font.setScale(7);
 		Resources.font.setColor(purple);
-		Resources.font.draw(game.batch, "ABOUT", 80, 675);
+		Resources.font.drawWrapped(game.batch, "ABOUT", Constants.WINDOW_WIDTH/2 - 400, 675, 800, HAlignment.CENTER);
 		
 		Resources.font.setScale(5);
 		Resources.font.setColor(Color.WHITE);
@@ -47,7 +43,7 @@ public class AboutScreen implements Screen {
 		
 		game.batch.end();
 		
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 			game.setScreen(new MainMenuScreen(game, 2));
 		}
 	}

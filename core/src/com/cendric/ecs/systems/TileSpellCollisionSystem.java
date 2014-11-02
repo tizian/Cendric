@@ -50,7 +50,6 @@ public class TileSpellCollisionSystem extends UpdateSystem {
 			spellBB.y = spellBB.y + mov.vy * dt;
 			
 			if (!spellBB.overlaps(tileBB)) continue;
-			System.out.println("Hit");
 			switch (dtc.tileID) {
 			
 			case Constants.TILE_ICE_1_ID:
@@ -79,7 +78,6 @@ public class TileSpellCollisionSystem extends UpdateSystem {
 				break;
 				
 			case Constants.TILE_WATER_ID:
-				System.out.println("Hit WATER");
 				if (sp.spellType == SpellType.ICE) {
 					bb.active = true;
 					tex.texture = level.getTiledMap().getTileSets().getTile(Constants.TILE_FROZEN_WATER_ID).getTextureRegion();

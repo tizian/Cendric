@@ -39,6 +39,7 @@ public class CendricGame extends Game {
 		shapeRenderer = new ShapeRenderer();
 		camera = new OrthographicCamera();
 		Resources.load();
+		Resources.loadTiledMaps();
 		
 		paused = false;
 
@@ -61,6 +62,9 @@ public class CendricGame extends Game {
 
 	public void finishCurrentLevel() {
 		currentLevelID++;
+		if (currentLevelID > Resources.levelMap.size()) {
+			currentLevelID = 1;
+		}
 	}
 
 	public int getCurrentLevel() {

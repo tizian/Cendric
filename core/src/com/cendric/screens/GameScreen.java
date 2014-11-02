@@ -29,7 +29,6 @@ public class GameScreen implements Screen {
 
 	public GameScreen(CendricGame game) {
 		this.game = game;
-        
 		Resources.loadTiledMaps();
 		Level level = new Level(game.getCurrentLevel());
 		this.tiledMapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap());

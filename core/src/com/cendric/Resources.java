@@ -21,6 +21,8 @@ public class Resources {
 	public static Texture spellSlot;
 	public static Texture spellSlotSelected;
 	public static Texture blackOverlay;
+	public static Texture levelSlot;
+	public static Texture levelSlotSelected;
 
 	// spells
 	private static Map<SpellType, Animation> spells;
@@ -90,9 +92,9 @@ public class Resources {
 		tiledMapLevel3 = new TmxMapLoader().load("tilemaps/tilemap_level3.tmx");
 		
 		levelMap = new HashMap<Integer, TiledMap>();
-		levelMap.put(2, tiledMapLevel1);
+		levelMap.put(1, tiledMapLevel1);
 		levelMap.put(3, tiledMapLevel2);
-		levelMap.put(1, tiledMapLevel3);
+		levelMap.put(2, tiledMapLevel3);
 	}
 	
 	// Gargoyle
@@ -110,6 +112,8 @@ public class Resources {
 		spellSlot = new Texture(Gdx.files.internal("gui/SpellSlot.png"));
 		spellSlotSelected = new Texture(Gdx.files.internal("gui/SpellSlotSelected.png"));
 		blackOverlay = new Texture(Gdx.files.internal("gui/Overlay.png"));
+		levelSlot = new Texture(Gdx.files.internal("gui/LevelSlot.png"));
+		levelSlotSelected = new Texture(Gdx.files.internal("gui/LevelSlotSelected.png"));
 		
 		// load spells
 		
@@ -234,6 +238,8 @@ public class Resources {
 		spellSlot.dispose();
 		spellSlotSelected.dispose();
 		blackOverlay.dispose();
+		levelSlot.dispose();
+		levelSlotSelected.dispose();
 		
 		cendricIdleRight.dispose(); 
 		cendricWalking1.dispose(); 

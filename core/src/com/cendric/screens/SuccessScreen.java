@@ -54,13 +54,7 @@ public class SuccessScreen implements Screen {
         game.batch.end();
         
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-        	if (game.getCurrentLevel() > Resources.levelMap.size()) {
-    			game.setCurrentLevel(1);
-    			game.setScreen(new MainMenuScreen(game, 0));
-    		}
-        	else {
-    			game.setScreen(new GameScreen(game));
-    		}
+        	game.setScreen(new LevelSelectionScreen(game));
         }
 	}
 
