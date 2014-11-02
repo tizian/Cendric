@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -58,10 +59,10 @@ public class Level implements Constants {
 		leverMap = new HashMap<String, Entity>();
 		
 		loadDynamicTiles();
+		loadLevers();
 		computeCollidableTiles();
 		computeEvilTiles();
 		computeLevelRect();
-		loadLevers();
 		
 		Vector2 start = computePosition(LAYER_START_POS);
 		entities.add(EntityFactory.createCendric(start.x, start.y+5));
@@ -145,7 +146,6 @@ public class Level implements Constants {
 				for (int row = 0; row < layer.getHeight(); row++) {
 					Cell cell = layer.getCell(column, row);
 					addDynamicTile(cell, column, row);
-					
 				}
 			}
 		}
@@ -163,8 +163,9 @@ public class Level implements Constants {
 		}
 		
 		if (tile.getProperties().containsKey("lever")) {
-			Entity e = EntityFactory.createLever(column * TILE_SIZE, row * TILE_SIZE);
-			leverMap.put((String) cell.getTile().getProperties().get("lever"), e);
+			String id = (String) cell.getTile().getProperties().get("lever");
+			Entity e = EntityFactory.createLever(id, column * TILE_SIZE, row * TILE_SIZE);
+			leverMap.put(id, e);
 			entities.add(e);
 			cell.setTile(null);
 		}
@@ -175,7 +176,9 @@ public class Level implements Constants {
 		if (tiledMap.getLayers().getCount() < 6) return;
 		
 		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(
-				Constants.LAYER_LEVERS);
+				LAYER_LEVERS);
+		TiledMapTileLayer collidable = (TiledMapTileLayer) tiledMap.getLayers().get(
+				LAYER_COLLIDABLE);
 		
 		for (int column = 0; column < layer.getWidth(); column++) {
 			for (int row = 0; row < layer.getHeight(); row++) {
@@ -187,8 +190,16 @@ public class Level implements Constants {
 						if (e == null) {
 							System.err.println("No lever found for id " + id);
 						} else {
-							LeverComponent l = (LeverComponent) e.getComponent(ComponentType.Lever);
-							l.addCell(column, row);
+							Cell c = collidable.getCell(column, row);
+							TextureRegion tex = (c == null || c.getTile() == null) 
+									? null : c.getTile().getTextureRegion();
+							// remove this tiles
+							if (c != null) c.setTile(null);
+							cell.setTile(null);
+							Entity lb = EntityFactory.createLeverBox(column * TILE_SIZE, row * TILE_SIZE, tex);
+							// add this box to level and also to the lever component!
+							entities.add(lb);
+							((LeverComponent) e.getComponent(ComponentType.Lever)).addBox(lb);;
 						}
 					}
 				}

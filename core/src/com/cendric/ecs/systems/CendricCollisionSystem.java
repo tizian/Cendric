@@ -42,15 +42,8 @@ public class CendricCollisionSystem extends UpdateSystem {
 			if (e.tag.equals("Gargoyle")) continue;
 			if (e.tag.equals("Cursor")) continue;
 			BoundingBoxComponent bbc = (BoundingBoxComponent) e.getComponent(ComponentType.BoundingBox);
-			if (bbc != null && bbc.active) {
+			if (bbc != null && bbc.active && !bb.boundingBox.overlaps(bbc.boundingBox)) {
 				collidables.add(bbc.boundingBox);
-			}
-		}
-		
-		for (Rectangle rect : collidables) {
-			if (bb.boundingBox.overlaps(rect)) {
-				System.out.println("stuck");
-				return;
 			}
 		}
 

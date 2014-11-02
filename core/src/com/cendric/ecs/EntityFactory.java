@@ -113,7 +113,7 @@ public class EntityFactory {
 		return t;
 	}
 	
-	public static Entity createLever(float x, float y) {
+	public static Entity createLever(String id, float x, float y) {
 		Entity t = new Entity("Lever");
 		
 		t.addComponent(new PositionComponent(x, y));
@@ -126,8 +126,24 @@ public class EntityFactory {
 		bb.active = false;
 		t.addComponent(bb);
 		
-		LeverComponent l = new LeverComponent();
+		LeverComponent l = new LeverComponent(id);
 		t.addComponent(l);
+
+		return t;
+	}
+	
+	public static Entity createLeverBox(float x, float y, TextureRegion texture) {
+		Entity t = new Entity("LeverBox");
+		
+		t.addComponent(new PositionComponent(x, y));
+		
+		TextureComponent tex = new TextureComponent();
+		tex.texture = texture;
+		t.addComponent(tex);
+		
+		BoundingBoxComponent bb = new BoundingBoxComponent(new Rectangle(x, y, Constants.TILE_SIZE, Constants.TILE_SIZE));
+		bb.active = !(tex.texture == null);
+		t.addComponent(bb);
 
 		return t;
 	}

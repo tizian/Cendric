@@ -3,29 +3,32 @@ package com.cendric.ecs.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.math.Vector2;
+import com.cendric.ecs.Entity;
 
 public class LeverComponent extends Component {
-
-	public List<Vector2> affectedCells;
-	public boolean active;
 	
-	public LeverComponent() {
-		affectedCells = new ArrayList<Vector2>();
+	public String id;
+	public boolean active;
+	public List<Entity> affectedBoxes;
+	
+	public LeverComponent(String id) {
+		this.id = id;
 		active = true;
+		affectedBoxes = new ArrayList<Entity>();
 	}
 	
 	@Override
 	public ComponentType getType() {
 		return ComponentType.Lever;
 	}
-	
-	public void addCell(float col, float row) {
-		affectedCells.add(new Vector2(col, row));
-	}
-	
+
 	public void switchActive() {
 		active = !active;
+	}
+	
+	public void addBox(Entity e) {
+		if (!e.tag.equals("LeverBox")) return;
+		affectedBoxes.add(e);
 	}
 
 }
