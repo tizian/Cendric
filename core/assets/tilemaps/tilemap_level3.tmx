@@ -115,7 +115,7 @@
  </layer>
  <layer name="Collidable" width="25" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMBIA0zCxYygCcTpgAINUAkQ=
+   eJxjYBgFo2AUjETANtAOoDIYTv6hlV+YaGQuve0YikCcDhgAubQCVg==
   </data>
  </layer>
  <layer name="Evil" width="25" height="20">
@@ -138,7 +138,7 @@
    <property name="ID" value="1"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMNCgHIldPWCuGAVDGQAAJnIA8w==
+   eJxjYBgFo2AUjERQPdAOoDIY6v4pR2IPdb+MgoEBAHBnAek=
   </data>
  </layer>
  <layer name="Background Overlay" width="25" height="20">

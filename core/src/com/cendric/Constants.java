@@ -19,6 +19,8 @@ public interface Constants {
 	public static final int LAYER_LEVERS = 5;
 	public static final int LAYER_MIN_COUNT = 5;
 	
+	// Lever tile
+	public static final int TILE_LEVER = 6;
 	
 	// Dynamic tiles
 	public static final int TILE_ICE_1_ID = 2;

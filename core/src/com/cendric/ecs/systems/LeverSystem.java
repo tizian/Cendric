@@ -2,8 +2,11 @@ package com.cendric.ecs.systems;
 
 import java.util.List;
 
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.cendric.Constants;
 import com.cendric.Resources;
 import com.cendric.controllers.Level;
 import com.cendric.ecs.Entity;
@@ -60,7 +63,20 @@ public class LeverSystem extends UpdateSystem {
 	}
 	
 	private void affectCells(List<Vector2> cells, boolean activate) {
+		if (cells.isEmpty()) return;
 		
+		TiledMapTileLayer layer = (TiledMapTileLayer) level.getTiledMap().getLayers().get(Constants.LAYER_COLLIDABLE);
+		
+		for (Vector2 v : cells) {
+			Cell cell = layer.getCell((int) v.x, (int) v.y);
+			if (cell == null) cell = new Cell();
+			if (activate) {
+				cell.setTile(level.getTiledMap().getTileSets().getTile(Constants.TILE_LEVER));
+			} else {
+				cell.setTile(null);
+			}
+		}
+		level.computeCollidableTiles();
 	}
 
 }
