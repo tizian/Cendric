@@ -85,7 +85,7 @@ public class WorldController {
 		currentLevel.updateEntityArray();
 		
 		// TODO Find better place, maybe separate class.
-		Entity player = currentLevel.getEntities().get(0);	// risky (?) assumption: Cendric is 1st entity in list
+		Entity player = currentLevel.getPlayer();
 		PositionComponent pos = (PositionComponent) player.getComponent(ComponentType.Position);
 		
 		game.camera.position.x = pos.x;

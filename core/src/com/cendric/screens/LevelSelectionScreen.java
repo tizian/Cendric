@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.cendric.CendricGame;
 import com.cendric.Constants;
 import com.cendric.Resources;
+import com.cendric.ecs.components.SpellStateComponent.SpellType;
 
 public class LevelSelectionScreen implements Screen {
 	
@@ -71,14 +72,17 @@ public class LevelSelectionScreen implements Screen {
 		if (selection == 1) {
 			drawCircle(game.batch, Resources.levelSlotSelected, left.x, left.y, 150);
 			game.batch.draw(Resources.cendricWalkingRight.getKeyFrame(stateTime, true), left.x - 32, left.y - 350);
+			game.batch.draw(Resources.getStaffEffectTexture(SpellType.FIRE, stateTime, false).getTexture(), left.x - 32, left.y - 350);
 		}
 		else if (selection == 2) {
 			drawCircle(game.batch, Resources.levelSlotSelected, center.x, center.y, 150);
 			game.batch.draw(Resources.cendricWalkingRight.getKeyFrame(stateTime, true), center.x - 32, center.y - 350);
+			game.batch.draw(Resources.getStaffEffectTexture(SpellType.FIRE, stateTime, false).getTexture(), center.x - 32, center.y - 350);
 		}
 		else if (selection == 3) {
 			drawCircle(game.batch, Resources.levelSlotSelected, right.x, right.y, 150);
 			game.batch.draw(Resources.cendricWalkingRight.getKeyFrame(stateTime, true), right.x - 32, right.y - 350);
+			game.batch.draw(Resources.getStaffEffectTexture(SpellType.FIRE, stateTime, false).getTexture(), right.x - 32, right.y - 350);
 		}
 		
 		Resources.font.setScale(7);

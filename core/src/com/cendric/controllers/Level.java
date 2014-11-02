@@ -57,6 +57,12 @@ public class Level implements Constants {
 		collidableTiles = new ArrayList<Rectangle>();
 		leverMap = new HashMap<String, Entity>();
 		
+		loadDynamicTiles();
+		computeCollidableTiles();
+		computeEvilTiles();
+		computeLevelRect();
+		loadLevers();
+		
 		Vector2 start = computePosition(LAYER_START_POS);
 		entities.add(EntityFactory.createCendric(start.x, start.y+5));
 
@@ -64,12 +70,6 @@ public class Level implements Constants {
 
 		Vector2 end = computePosition(LAYER_END_POS);
 		entities.add(EntityFactory.createGargoyle(end.x, end.y));
-		
-		loadDynamicTiles();
-		computeCollidableTiles();
-		computeEvilTiles();
-		computeLevelRect();
-		loadLevers();
 	}
 
 	public void updateEntityArray() {
@@ -81,6 +81,24 @@ public class Level implements Constants {
 
 	public List<Entity> getEntities() {
 		return entities;
+	}
+	
+	public Entity getPlayer() {
+		for (Entity e : entities) {
+			if (e.tag.equals("Cendric")) {
+				return e;
+			}
+		}
+		return null;
+	}
+	
+	public Entity getCursor() {
+		for (Entity e : entities) {
+			if (e.tag.equals("Cursor")) {
+				return e;
+			}
+		}
+		return null;
 	}
 
 	public void addEntity(Entity e) {

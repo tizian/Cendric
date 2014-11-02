@@ -23,7 +23,7 @@ public class GargoyleSystem extends UpdateSystem {
 		BoundingBoxComponent gargoyleBB = (BoundingBoxComponent) entity.getComponent(ComponentType.BoundingBox);
 		if (gargoyleBB == null) return;
 		
-		Entity player = level.getEntities().get(0);	// risky (?) assumption: Cendric is 1st entity in list
+		Entity player = level.getPlayer();
 		BoundingBoxComponent playerBB = (BoundingBoxComponent) player.getComponent(ComponentType.BoundingBox);
 		
 		if (playerBB.boundingBox.overlaps(gargoyleBB.boundingBox)) {

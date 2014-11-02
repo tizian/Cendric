@@ -35,7 +35,7 @@ public class CendricInputSystem extends UpdateSystem {
 		if (cp == null) return;
 		if (as == null) return;
 		
-		Entity cursor = level.getEntities().get(1);	// risky (?) assumption: cursor is 2nd entity in list
+		Entity cursor = level.getCursor();
 		PositionComponent cursorPos = (PositionComponent) cursor.getComponent(ComponentType.Position);
 		BoundingBoxComponent cursorBB = (BoundingBoxComponent) cursor.getComponent(ComponentType.BoundingBox);
 		
