@@ -57,20 +57,23 @@ public class LeverSystem extends UpdateSystem {
 			System.out.println("Hit Lever");
 			lc.switchActive();
 			tex.texture = Resources.getLeverTexture(lc.active);
-			affectCells(lc.affectedCells, lc.active);
+			affectCells(lc.affectedCells);
 			level.removeEntity(e);
 		}
 	}
 	
-	private void affectCells(List<Vector2> cells, boolean activate) {
+	private void affectCells(List<Vector2> cells) {
 		if (cells.isEmpty()) return;
 		
 		TiledMapTileLayer layer = (TiledMapTileLayer) level.getTiledMap().getLayers().get(Constants.LAYER_COLLIDABLE);
 		
 		for (Vector2 v : cells) {
 			Cell cell = layer.getCell((int) v.x, (int) v.y);
-			if (cell == null) cell = new Cell();
-			if (activate) {
+			if (cell == null) {
+				cell = new Cell();
+				layer.setCell((int) v.x, (int) v.y, cell);
+			}
+			if (cell.getTile() == null) {
 				cell.setTile(level.getTiledMap().getTileSets().getTile(Constants.TILE_LEVER));
 			} else {
 				cell.setTile(null);
