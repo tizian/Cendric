@@ -16,12 +16,13 @@ import com.cendric.Constants;
 import com.cendric.Resources;
 import com.cendric.ecs.Entity;
 import com.cendric.ecs.EntityFactory;
-import com.cendric.models.Lever;
+import com.cendric.ecs.components.ComponentType;
+import com.cendric.ecs.components.LeverComponent;
 
 /**
  * @author tiz, iro Model class for a level
  */
-public class Level {
+public class Level implements Constants {
 	public int ID;
 
 	protected boolean isComplete;
@@ -32,7 +33,7 @@ public class Level {
 
 	protected List<Rectangle> collidableTiles;
 	protected List<Rectangle> evilTiles;
-	protected Map<String, Lever> leverMap;
+	protected Map<String, Entity> leverMap;
 
 	protected List<Entity> entities;
 	protected List<Entity> toAdd;
@@ -42,9 +43,9 @@ public class Level {
 		this.ID = id;
 		isComplete = false;
 		tiledMap = Resources.getMapForLevel(id);
-		if (tiledMap.getLayers().getCount() < Constants.LAYER_MIN_COUNT) {
+		if (tiledMap.getLayers().getCount() < LAYER_MIN_COUNT) {
 			System.err.println("tiledMap for level " + ID
-					+ " must have at minimum " + Constants.LAYER_MIN_COUNT
+					+ " must have at minimum " + LAYER_MIN_COUNT
 					+ " layers!");
 		}
 
@@ -54,14 +55,14 @@ public class Level {
 
 		evilTiles = new ArrayList<Rectangle>();
 		collidableTiles = new ArrayList<Rectangle>();
-		leverMap = new HashMap<String, Lever>();
+		leverMap = new HashMap<String, Entity>();
 		
-		Vector2 start = computePosition(Constants.LAYER_START_POS);
+		Vector2 start = computePosition(LAYER_START_POS);
 		entities.add(EntityFactory.createCendric(start.x, start.y+5));
 
 		entities.add(EntityFactory.createCursor(start.y, start.x));
 
-		Vector2 end = computePosition(Constants.LAYER_END_POS);
+		Vector2 end = computePosition(LAYER_END_POS);
 		entities.add(EntityFactory.createGargoyle(end.x, end.y));
 		
 		loadDynamicTiles();
@@ -138,44 +139,43 @@ public class Level {
 		TiledMapTile tile = cell.getTile();
 		
 		// TODO Only want to know if it is a dynamic tile actually :-/
-		if (tile.getId() == Constants.TILE_ICE_1_ID || tile.getId() == Constants.TILE_ICE_2_ID || tile.getId() == Constants.TILE_FROZEN_WATER_ID || tile.getId() == Constants.TILE_WATER_ID) {
-			entities.add(EntityFactory.createDynamicTile(tile,column * 64f, row * 64f));
-			
+		if (DYNAMIC_TILES.contains(tile.getId())) {
+			entities.add(EntityFactory.createDynamicTile(tile, column * TILE_SIZE, row * TILE_SIZE));
 			cell.setTile(null);	// tile not actually part of map, it's an entity now
 		}
 		
-		
-		// TODO transform to entity factory
-//		if (cell.getTile().getProperties().containsKey("bouncer")) {
-//			Lever l = new Lever(column, row, this);
-//			leverMap.put((String) cell.getTile().getProperties().get("bouncer"), l);
-//			dynamicTiles.add(l);
-//		}
+		if (tile.getProperties().containsKey("lever")) {
+			Entity e = EntityFactory.createLever(column * TILE_SIZE, row * TILE_SIZE);
+			leverMap.put((String) cell.getTile().getProperties().get("lever"), e);
+			entities.add(e);
+			cell.setTile(null);
+		}
 	}
 	
 	public void loadLevers() {
-//		// check if we have a lever layer
-//		if (tiledMap.getLayers().getCount() < 6) return;
-//		
-//		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(
-//				Constants.LAYER_LEVERS);
-//		
-//		for (int column = 0; column < layer.getWidth(); column++) {
-//			for (int row = 0; row < layer.getHeight(); row++) {
-//				Cell cell = layer.getCell(column, row);
-//				if (cell != null && cell.getTile() != null) {
-//					if (cell.getTile().getProperties().containsKey("bouncer_id")) {
-//						String id = (String) cell.getTile().getProperties().get("bouncer_id");
-//						Lever l = leverMap.get(id);
-//						if (l == null) {
-//							System.err.println("No lever found for id " + id);
-//						} else {
-//							l.addCell(cell);
-//						}
-//					}
-//				}
-//			}
-//		}
+		//check if we have a lever layer
+		if (tiledMap.getLayers().getCount() < 6) return;
+		
+		TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(
+				Constants.LAYER_LEVERS);
+		
+		for (int column = 0; column < layer.getWidth(); column++) {
+			for (int row = 0; row < layer.getHeight(); row++) {
+			Cell cell = layer.getCell(column, row);
+				if (cell != null && cell.getTile() != null) {
+					if (cell.getTile().getProperties().containsKey("lever_id")) {
+						String id = (String) cell.getTile().getProperties().get("lever_id");
+					Entity e = leverMap.get(id);
+						if (e == null) {
+							System.err.println("No lever found for id " + id);
+						} else {
+							LeverComponent l = (LeverComponent) e.getComponent(ComponentType.Lever);
+							l.addCell(column, row);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -190,8 +190,8 @@ public class Level {
 			for (int row = 0; row < layer.getHeight(); row++) {
 				Cell cell = layer.getCell(column, row);
 				if (cell != null && cell.getTile() != null) {
-					return new Vector2(column * Constants.TILE_SIZE, row
-							* Constants.TILE_SIZE);
+					return new Vector2(column * TILE_SIZE, row
+							* TILE_SIZE);
 				}
 			}
 		}

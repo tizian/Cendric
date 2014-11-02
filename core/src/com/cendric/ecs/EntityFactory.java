@@ -9,6 +9,7 @@ import com.cendric.ecs.components.AnimationStateComponent;
 import com.cendric.ecs.components.BoundingBoxComponent;
 import com.cendric.ecs.components.CendricSpellsComponent;
 import com.cendric.ecs.components.DynamicTileComponent;
+import com.cendric.ecs.components.LeverComponent;
 import com.cendric.ecs.components.MassComponent;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.ecs.components.PositionComponent;
@@ -101,14 +102,31 @@ public class EntityFactory {
 		tex.texture = tile.getTextureRegion();
 		t.addComponent(tex);
 		
-		BoundingBoxComponent bb = new BoundingBoxComponent(new Rectangle(x, y, 64f, 64f));
+		BoundingBoxComponent bb = new BoundingBoxComponent(new Rectangle(x, y, Constants.TILE_SIZE, Constants.TILE_SIZE));
 		// TODO Constants.TILE_FROZEN_WATER_ID could have smaller bounding box
 		
 		if (tile.getId() == Constants.TILE_WATER_ID) {
 			bb.active = false;
 		}
 		t.addComponent(bb);
+
+		return t;
+	}
+	
+	public static Entity createLever(float x, float y) {
+		Entity t = new Entity("Lever");
 		
+		t.addComponent(new PositionComponent(x, y));
+		
+		TextureComponent tex = new TextureComponent();
+		tex.texture = Resources.getLeverTexture(true);
+		t.addComponent(tex);
+		
+		BoundingBoxComponent bb = new BoundingBoxComponent(new Rectangle(x - 8, y, Constants.TILE_SIZE + 16, Constants.TILE_SIZE * 2));
+		t.addComponent(bb);
+		
+		LeverComponent l = new LeverComponent();
+		t.addComponent(l);
 
 		return t;
 	}

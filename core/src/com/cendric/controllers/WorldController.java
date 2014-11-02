@@ -13,6 +13,7 @@ import com.cendric.ecs.systems.CendricCollisionSystem;
 import com.cendric.ecs.systems.CendricDeathSystem;
 import com.cendric.ecs.systems.CendricInputSystem;
 import com.cendric.ecs.systems.GargoyleSystem;
+import com.cendric.ecs.systems.LeverSystem;
 import com.cendric.ecs.systems.MovementSystem;
 import com.cendric.ecs.systems.SpellAnimationSystem;
 import com.cendric.ecs.systems.SpellCollisionSystem;
@@ -31,6 +32,7 @@ public class WorldController {
 	private CendricCollisionSystem cendricCollision;
 	private SpellCollisionSystem spellCollision;
 	private TileSpellCollisionSystem tileSpellCollision;
+	private LeverSystem leverSystem;
 	private CendricDeathSystem cendricDeath;
 	private MovementSystem movement;
 	private GargoyleSystem gargoyle;
@@ -46,6 +48,7 @@ public class WorldController {
 		spellAnimation = new SpellAnimationSystem();
 		
 		tileSpellCollision = new TileSpellCollisionSystem(level);
+		leverSystem = new LeverSystem(level);
 		cendricCollision = new CendricCollisionSystem(level);
 		spellCollision = new SpellCollisionSystem(level);
 		cendricDeath = new CendricDeathSystem(game, level);
@@ -68,6 +71,7 @@ public class WorldController {
 		acceleration.update(entities, delta);
 		
 		tileSpellCollision.update(entities, delta);
+		leverSystem.update(entities, delta);
 		spellCollision.update(entities, delta);
 		cendricCollision.update(entities, delta);
 		

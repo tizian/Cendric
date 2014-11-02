@@ -10,4 +10,5 @@ public enum ComponentType {
 	SpellState,
 	CendricSpells,
 	DynamicTile,
+	Lever,
 }

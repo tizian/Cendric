@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="50" tilewidth="64" tileheight="64">
- <tileset firstgid="1" name="level2_tileset" tilewidth="64" tileheight="64">
-  <image source="level2_tileset.png" width="256" height="640"/>
+ <tileset firstgid="1" name="standard_tileset" tilewidth="64" tileheight="64">
+  <image source="standard_tileset.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="9" name="level2_tileset" tilewidth="64" tileheight="64">
+  <image source="level2_tileset.png" width="256" height="256"/>
  </tileset>
  <layer name="Background" width="25" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt1j0KgDAMBeAOvYEWRQW9/ykNuGRJQHimUd/wLR3SP17TVkppRGQaxPjwHJOYE+z1TSponCiCfkdWsYHq6lr6HdnFAZoDWYsu1dF7bV9iZc3L4N2eb+XDyw17fj4Zs8j/Z7/zQPZpyx96K+8Mi3+HOEuAE5H6Zmo=
+   eJztl8EKgCAQRD14KykoqP//0rwItbSzWWrlengHG4RY3sDqjDEuA52nZ86TZwZ3pTwweEbmvHhWcFfKG98HOUL9o05JeQA5Qv2jTkl54xk20feSUO9yQL2rgat9lbKYuaG+aury3XnGoGmeAQt4+99KgnbFVKBd8QzO+ZRd4JzX2IWv8Icu1rxDpHobItrb8DjHXD7t51jSJw37Stsd6mIDYiFAlQ==
   </data>
  </layer>
  <layer name="Collidable" width="25" height="50">
   <data encoding="base64" compression="zlib">
-   eJztl1EKwCAIhmOw7tD9Lzp6CCQMtWxq9IFPC3+taZbSJQIZWOOZMAv+0I2s0Z/pbk7QyPSSZYqCDyrOoqRDaeQJs8BKNxqWZwSRxFHXrdxF0pwpDcyXtB6hBjc2jgZ2J0hy52jU7y8wjn8P/9wKkePHerNVvz5hhug1Rnuoubejmtw9A/REroMRHu5Ej3Ux0yOs3oo7kObvZRZuYD2fWs/1OcqPMztc9PgArpoDRQ==
+   eJztl0kOwCAIRUlv4ML7X7XpogkaCOCEGF/ijvBBy1CASwQyOj9Pw/FghW5kjfpNZ3OCRpZNukkDfEhxjtCQSFD2D+3xwEs3Gp5vhLHE8dn1zCJrzpIG5SuBrSaxhjY2jQY1Eyy5azQSlO+h8b/DN9dD5Pip3uzVr0/YIWoN7g5H3i1Xkyv2AEzkOuDYYSbuWBctPcLrX3EG1vx32YV/qJ4v2Wt9cvlpdofLOF5ydwZz
   </data>
  </layer>
  <layer name="Evil" width="25" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt1zEKACAIheGuUEND9z9oS1NEkPDK5P/gDRLkJGhKAICVasipZoxalB7QyyNznRdvL6j7e/2/bALgPmYRiMHDbqPyw+5guc/U95xFB+XyBwc=
+   eJzt17sKACAIRmHXGhp6/4dtaQqJFOzG+eAfJMhJUBEAgKY4YlWdiUYPrEo9Y52UtxOi+9/6f54EwH7MIvCHG3abKC/sDp77zBrvfWZJAw0UBjM=
   </data>
  </layer>
  <layer name="StartPos" width="25" height="50" visible="0">

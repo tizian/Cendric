@@ -208,6 +208,14 @@ public class Resources {
 		return levelMap.get(levelID);
 	}
 	
+	public static TextureRegion getLeverTexture(boolean active) {
+		if (active) {
+			return new TextureRegion(lever_active);
+		} else {
+			return new TextureRegion(lever_inactive);
+		}
+	}
+	
 	public static TextureRegion getSpellTexture(SpellType spellType, float stateTime) {
 		return spells.get(spellType).getKeyFrame(stateTime, true);
 	}
