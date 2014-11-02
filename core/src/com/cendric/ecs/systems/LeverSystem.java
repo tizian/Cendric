@@ -54,7 +54,6 @@ public class LeverSystem extends UpdateSystem {
 			spellBB.y = spellBB.y + mov.vy * dt;
 			
 			if (!spellBB.overlaps(leverBB)) continue;
-			System.out.println("Hit Lever");
 			lc.switchActive();
 			tex.texture = Resources.getLeverTexture(lc.active);
 			affectCells(lc.affectedCells);
