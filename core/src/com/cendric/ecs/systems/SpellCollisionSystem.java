@@ -42,6 +42,7 @@ public class SpellCollisionSystem extends UpdateSystem {
 			if (e.equals(entity)) continue;
 			if (e.tag.equals("Spell")) continue;	// TODO better handling for what collides with what
 			if (e.tag.equals("Cendric")) continue;
+			if (e.tag.equals("Cursor")) continue;
 			BoundingBoxComponent bbc = (BoundingBoxComponent) e.getComponent(ComponentType.BoundingBox);
 			if (bbc != null && bbc.active) {
 				collidables.add(bbc.boundingBox);
