@@ -122,7 +122,7 @@ public class EntityFactory {
 		tex.texture = Resources.getLeverTexture(true);
 		t.addComponent(tex);
 		
-		BoundingBoxComponent bb = new BoundingBoxComponent(new Rectangle(x - 8, y, Constants.TILE_SIZE + 16, Constants.TILE_SIZE * 2));
+		BoundingBoxComponent bb = new BoundingBoxComponent(new Rectangle(x + 10, y, Constants.TILE_SIZE - 20, Constants.TILE_SIZE));
 		t.addComponent(bb);
 		
 		LeverComponent l = new LeverComponent();
