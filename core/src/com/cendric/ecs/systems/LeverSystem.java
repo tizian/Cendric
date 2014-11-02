@@ -3,6 +3,7 @@ package com.cendric.ecs.systems;
 import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.cendric.Resources;
 import com.cendric.controllers.Level;
 import com.cendric.ecs.Entity;
@@ -11,6 +12,7 @@ import com.cendric.ecs.components.ComponentType;
 import com.cendric.ecs.components.LeverComponent;
 import com.cendric.ecs.components.MovementComponent;
 import com.cendric.ecs.components.SpellStateComponent;
+import com.cendric.ecs.components.SpellStateComponent.SpellType;
 import com.cendric.ecs.components.TextureComponent;
 
 public class LeverSystem extends UpdateSystem {
@@ -41,7 +43,7 @@ public class LeverSystem extends UpdateSystem {
 			SpellStateComponent sp = (SpellStateComponent) e.getComponent(ComponentType.SpellState);
 			BoundingBoxComponent bbc = (BoundingBoxComponent) e.getComponent(ComponentType.BoundingBox);
 			if (mov == null) continue;
-			if (sp == null) continue;
+			if (sp == null || sp.spellType != SpellType.MONEY) continue;
 			if (bbc == null || !bbc.active) continue;
 			
 			Rectangle spellBB = new Rectangle(bbc.boundingBox);
@@ -52,8 +54,12 @@ public class LeverSystem extends UpdateSystem {
 			System.out.println("Hit Lever");
 			lc.switchActive();
 			tex.texture = Resources.getLeverTexture(lc.active);
+			affectCells(lc.affectedCells, lc.active);
 			level.removeEntity(e);
 		}
+	}
+	
+	private void affectCells(List<Vector2> cells, boolean activate) {
 		
 	}
 

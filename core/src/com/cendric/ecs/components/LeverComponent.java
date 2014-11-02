@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 
 public class LeverComponent extends Component {
 
-	
 	public List<Vector2> affectedCells;
 	public boolean active;
 	
@@ -21,8 +20,8 @@ public class LeverComponent extends Component {
 		return ComponentType.Lever;
 	}
 	
-	public void addCell(float x, float y) {
-		affectedCells.add(new Vector2(x, y));
+	public void addCell(float col, float row) {
+		affectedCells.add(new Vector2(col, row));
 	}
 	
 	public void switchActive() {
