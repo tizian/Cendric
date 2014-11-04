@@ -43,10 +43,8 @@ public class EntityFactory {
 		Entity spell = new Entity("Spell");
 		
 		SpellStateComponent sp = new SpellStateComponent(type);
-		if (type == SpellType.ICE) {
-			sp.numberReflections = 1;
-		}
-		
+		sp.numberReflections = 1;
+	
 		spell.addComponent(sp);
 		spell.addComponent(new BoundingBoxComponent(new Rectangle(x+5, y+5, 20, 20)));
 		spell.addComponent(new PositionComponent(x, y));
